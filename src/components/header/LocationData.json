@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "name": "Hồ Chí Minh",
+    "code": "HoChiMinh"
+  },
+  {
+    "id": 2,
+    "name": "Hà Nội",
+    "code": "HaNoi"
+  },
+  {
+    "id": 3,
+    "name": "Đà Nẵng",
+    "code": "DaNang"
+  },
+  {
+    "id": 4,
+    "name": "Hải Phòng",
+    "code": "HaiPhong"
+  },
+  {
+    "id": 5,
+    "name": "Biên Hòa",
+    "code": "BienHoa"
+  },
+  {
+    "id": 6,
+    "name": "Nha Trang",
+    "code": "NhaTrang"
+  },
+  {
+    "id": 7,
+    "name": "Bình Dương",
+    "code": "PhanThie"
+  },
+  {
+    "id": 8,
+    "name": "Phan Thiết",
+    "code": "PhanThiet"
+  },
+  {
+    "id": 9,
+    "name": "Hạ Long",
+    "code": "HaLong"
+  },
+  {
+    "id": 10,
+    "name": "Cần Thơ",
+    "code": "CanTho"
+  },
+  {
+    "id": 11,
+    "name": "Vũng Tàu",
+    "code": "VungTau"
+  },
+  {
+    "id": 12,
+    "name": "Quy Nhơn",
+    "code": "QuyNhon"
+  },
+  {
+    "id": 13,
+    "name": "Huế",
+    "code": "Hue"
+  },
+  {
+    "id": 14,
+    "name": "Long Xuyên",
+    "code": "LongXuyen"
+  },
+  {
+    "id": 15,
+    "name": "Thái Nguyên",
+    "code": "ThaiNguyen"
+  },
+  {
+    "id": 16,
+    "name": "Buôn Ma Thuột",
+    "code": "BuonMaThuat"
+  },
+  {
+    "id": 17,
+    "name": "Bắc Giang",
+    "code": "BacGiang"
+  },
+  {
+    "id": 18,
+    "name": "Bến Tre",
+    "code": "BenTre"
+  },
+  {
+    "id": 19,
+    "name": "Việt Trì",
+    "code": "VietTri"
+  },
+  {
+    "id": 20,
+    "name": "Ninh Bình",
+    "code": "NinhBinh"
+  },
+  {
+    "id": 21,
+    "name": "Thái Bình",
+    "code": "ThaiBinh"
+  },
+  {
+    "id": 22,
+    "name": "Vinh",
+    "code": "Vinh"
+  },
+  {
+    "id": 23,
+    "name": "Bảo Lộc",
+    "code": "BaoLoc"
+  },
+  {
+    "id": 24,
+    "name": "Đà Lạt",
+    "code": "DaLat"
+  },
+  {
+    "id": 25,
+    "name": "Trà Vinh",
+    "code": "TraVinh"
+  },
+  {
+    "id": 26,
+    "name": "Yên Bái",
+    "code": "YenBai"
+  },
+  {
+    "id": 27,
+    "name": "Kiên Giang",
+    "code": "KienGiang"
+  },
+  {
+    "id": 28,
+    "name": "Vĩnh Long",
+    "code": "VinhLong"
+  },
+  {
+    "id": 29,
+    "name": "Cà Mau",
+    "code": "Ca Mau"
+  },
+  {
+    "id": 30,
+    "name": "Hậu Giang",
+    "code": "HauGiang"
+  },
+  {
+    "id": 31,
+    "name": "Tây Ninh",
+    "code": "TayNinh"
+  },
+  {
+    "id": 32,
+    "name": "Tuyên Quang",
+    "code": "TuyenQuang"
+  },
+  {
+    "id": 33,
+    "name": "Thanh Hóa",
+    "code": "ThanhHoa"
+  },
+  {
+    "id": 34,
+    "name": "Nam Định",
+    "code": "NamDinh"
+  },
+  {
+    "id": 35,
+    "name": "Hải Dương",
+    "code": "HaiDuong"
+  },
+  {
+    "id": 36,
+    "name": "Gia Lai",
+    "code": "GiaLai"
+  },
+  {
+    "id": 37,
+    "name": "Hà Tĩnh",
+    "code": "HaTinh"
+  },
+  {
+    "id": 38,
+    "name": "Phú Yên",
+    "code": "PhuYen"
+  },
+  {
+    "id": 39,
+    "name": "Bạc Liêu",
+    "code": "BacLieu"
+  },
+  {
+    "id": 40,
+    "name": "Long An",
+    "code": "LongAn"
+  },
+  {
+    "id": 41,
+    "name": "Đồng Hới",
+    "code": "DongHoi"
+  },
+  {
+    "id": 42,
+    "name": "Hà Nam",
+    "code": "HaNam"
+  },
+  {
+    "id": 43,
+    "name": "Bắc Ninh",
+    "code": "BacNinh"
+  },
+  {
+    "id": 44,
+    "name": "Quảng Trị",
+    "code": "QuangTri"
+  },
+  {
+    "id": 45,
+    "name": "Kon Tum",
+    "code": "KonTum"
+  },
+  {
+    "id": 46,
+    "name": "Sóc Trăng",
+    "code": "SocTrang"
+  },
+  {
+    "id": 47,
+    "name": "Sơn La",
+    "code": "SonLa"
+  },
+  {
+    "id": 48,
+    "name": "Lạng Sơn",
+    "code": "LangSon"
+  },
+  {
+    "id": 49,
+    "name": "Quảng Ngãi",
+    "code": "QuangNgai"
+  },
+  {
+    "id": 50,
+    "name": "Mỹ Tho",
+    "code": "MyTho"
+  },
+  {
+    "id": 51,
+    "name": "Đồng Tháp",
+    "code": "DongThap"
+  },
+  {
+    "id": 52,
+    "name": "Hưng Yên",
+    "code": "HungYen"
+  }
+]
