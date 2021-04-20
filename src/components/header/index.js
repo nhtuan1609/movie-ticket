@@ -191,13 +191,15 @@ export default function NavHeader(props) {
   };
 
   const handleSelectLocation = (event) => {
-    let locationIndex = LocationData.findIndex((location) => {
-      return location.code === event.currentTarget.id;
-    });
+    let selectedCode = event.target.dataset.id;
+    let selectedIndex = LocationData.findIndex(
+      (item) => item.code === selectedCode
+    );
 
-    if (locationIndex >= 0) {
-      setCurrentLocation(LocationData[locationIndex].name);
+    if (selectedIndex !== -1) {
+      setCurrentLocation(LocationData[selectedIndex].name);
     }
+
     setIsShowLocationList(false);
     setIsShowLocationListMobile(false);
   };
@@ -320,7 +322,7 @@ export default function NavHeader(props) {
                   <List className={classes.locationList}>
                     {LocationData.map((location, index) => (
                       <ListItem
-                        id={location.code}
+                        data-id={location.code}
                         key={index}
                         onClick={handleSelectLocation}
                         className={classes.locationListItem}
