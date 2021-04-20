@@ -365,5 +365,5 @@ NavHeader.propTypes = {
 NavHeader.defaultProps = {
   isLogin: false,
   currentLocation: 'Hồ Chí Minh',
-  handleSelectLocation: undefined,
+  setCurrentLocation: undefined,
 };

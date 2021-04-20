@@ -134,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     height: '36px',
-    minWidth: '120px',
+    minWidth: '140px',
     padding: '0 10px',
     borderRadius: '4px',
     cursor: 'pointer',

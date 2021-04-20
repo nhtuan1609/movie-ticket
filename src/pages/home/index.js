@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@material-ui/core';
 
 import NavHeader from '../../components/header';
+import MyCarousel from '../../components/carousel';
 
 export default function HomePage() {
   const [currentLocation, setCurrentLocation] = React.useState('Hồ Chí Minh');
@@ -15,6 +16,7 @@ export default function HomePage() {
         setCurrentLocation={setCurrentLocation}
       />
       <Box marginTop='60px'></Box>
+      <MyCarousel />
       <Box
         id='lich-chieu'
         style={{ height: '1000px', backgroundColor: 'red', opacity: '0.3' }}
