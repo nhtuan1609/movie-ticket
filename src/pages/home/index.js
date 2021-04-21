@@ -1,16 +1,17 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
+import { Box, Container } from '@material-ui/core';
 
 import NavHeader from '../../components/header';
 import MyCarousel from '../../components/carousel';
-import HoomTool from '../../components/home-tool';
+import HomeTool from '../../components/home-tool';
+import MovieCardSlider from '../../components/movie-list';
 
 export default function HomePage() {
   const [currentLocation, setCurrentLocation] = React.useState('Hồ Chí Minh');
   const isLogin = false;
 
   return (
-    <Box>
+    <div>
       <NavHeader
         isLogin={isLogin}
         currentLocation={currentLocation}
@@ -19,24 +20,28 @@ export default function HomePage() {
       <Box marginTop='60px'></Box>
       <MyCarousel />
       <Box position='relative'>
-        <HoomTool />
+        <HomeTool />
       </Box>
-      <Box
+      <div
         id='lich-chieu'
-        style={{ height: '1000px', backgroundColor: 'red', opacity: '0.3' }}
-      ></Box>
-      <Box
+        style={{ height: '2000px', backgroundColor: 'white' }}
+      >
+        <Container maxWidth='md' style={{ marginTop: '100px' }}>
+          <MovieCardSlider />
+        </Container>
+      </div>
+      <div
         id='cum-rap'
         style={{ height: '1000px', backgroundColor: 'yellow', opacity: '0.3' }}
-      ></Box>
-      <Box
+      ></div>
+      <div
         id='tin-tuc'
         style={{ height: '1000px', backgroundColor: 'green', opacity: '0.3' }}
-      ></Box>
-      <Box
+      ></div>
+      <div
         id='ung-dung'
         style={{ height: '1000px', backgroundColor: 'blue', opacity: '0.3' }}
-      ></Box>
-    </Box>
+      ></div>
+    </div>
   );
 }

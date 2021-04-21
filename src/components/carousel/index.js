@@ -8,7 +8,6 @@ import Slider from 'react-slick';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Backdrop } from '@material-ui/core';
 import LinkMui from '@material-ui/core/Link';
-import Box from '@material-ui/core/Box';
 import CloseIcon from '@material-ui/icons/Close';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
@@ -52,13 +51,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '40px !important',
     color: 'white',
   },
-  carouselArrowButton: {
+  sliderArrowButton: {
     position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%)',
     zIndex: '1',
     backgroundColor: 'transparent',
-    color: '#333',
+    color: '#bbb',
+    opacity: '0.6',
     width: '100px',
     height: '100%',
     transition: 'color linear 0.2s, background-color linear 0.2s',
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: 'rgba(0, 0, 0, 0.2)',
     },
   },
-  carouselDotClass: {
+  sliderDotClass: {
     bottom: '13%',
     '& li.slick-active button::before': {
       color: theme.palette.primary.main,
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  carouselTrailerContainer: {
+  modalContent: {
     position: 'absolute',
     top: '60px',
     left: '50%',
@@ -90,11 +90,11 @@ const useStyles = makeStyles((theme) => ({
     outline: 'none !important',
     [theme.breakpoints.up('md')]: {
       top: '50%',
-      left: '50%',
+      left: 'calc(50% - 8px)',
       transform: 'translate(-50%, -50%)',
     },
   },
-  carouselTrailerCloseButtonContainer: {
+  modalCloseButtonContainer: {
     position: 'absolute',
     top: '0',
     left: '50%',
@@ -118,18 +118,18 @@ const useStyles = makeStyles((theme) => ({
       transform: 'translate(50%, -50%)',
     },
   },
-  carouselCloseButton: {
+  modalCloseButton: {
     fontSize: '30px',
     color: 'white',
   },
-  carouselVideoContainer: {
+  modalTrailerContainer: {
     position: 'relative',
     paddingTop: '56.25%',
     height: '100px',
     width: '100vw',
     maxWidth: '900px',
   },
-  carouselVideo: {
+  modalTrailer: {
     position: 'absolute',
     top: '0',
     left: '0',
@@ -145,7 +145,7 @@ export default function MyCarousel(props) {
   const [trailerSrc, setTrailerSrc] = useState('');
   const [isShowPlayBtn, setIsShowPlayBtn] = useState(false);
 
-  const handleOnLickPlayButton = (index) => () => {
+  const handleOnLickPlayButton = (index) => (event) => {
     let currentFilm = filmList[index];
     setTrailerSrc(currentFilm.trailerSrc.concat('?autoplay=1'));
     setIsShowTrailerVideo(true);
@@ -163,34 +163,32 @@ export default function MyCarousel(props) {
     setIsShowPlayBtn(false);
   };
 
-  const caroueslSlide = filmList.map((item, index) => {
-    return (
-      <Box key={index} className={classes.carouselItem}>
+  const renderItem = (dataList) =>
+    dataList.map((item, index) => (
+      <div className={classes.carouselItem} key={index}>
         <LinkMui href='/'>
-          <Box
-            component='img'
+          <img
             className={classes.carouselItemBackground}
             src={item.backgroundSrc}
             alt={item.name}
           />
         </LinkMui>
         {isShowPlayBtn && (
-          <Box
+          <div
             onClick={handleOnLickPlayButton(index)}
             className={classes.carouselPlayButtonContainer}
           >
             <PlayArrowIcon className={classes.carouselPlayButton} />
-          </Box>
+          </div>
         )}
-      </Box>
-    );
-  });
+      </div>
+    ));
 
   function MyPrevArrow(props) {
     const { onClick } = props;
     return (
       <NavigateBeforeIcon
-        className={classes.carouselArrowButton}
+        className={classes.sliderArrowButton}
         style={{
           left: '0',
         }}
@@ -203,7 +201,7 @@ export default function MyCarousel(props) {
     const { onClick } = props;
     return (
       <NavigateNextIcon
-        className={classes.carouselArrowButton}
+        className={classes.sliderArrowButton}
         style={{
           right: '0',
         }}
@@ -212,7 +210,7 @@ export default function MyCarousel(props) {
     );
   }
 
-  const caroueslSetting = {
+  const sliderSetting = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -221,13 +219,13 @@ export default function MyCarousel(props) {
     arrows: true,
     nextArrow: <MyNextArrow />,
     prevArrow: <MyPrevArrow />,
-    dotsClass: `slick-dots ${classes.carouselDotClass}`,
+    dotsClass: `slick-dots ${classes.sliderDotClass}`,
   };
 
   return (
     <div onMouseEnter={OpenIsShowPlayBtn} onMouseLeave={CloseIsShowPlayBtn}>
       {/* Slider Film list */}
-      <Slider {...caroueslSetting}>{caroueslSlide}</Slider>
+      <Slider {...sliderSetting}>{renderItem(filmList)}</Slider>
       {/* Trailer */}
       <Modal
         open={isShowTrailerVideo}
@@ -239,25 +237,25 @@ export default function MyCarousel(props) {
         }}
       >
         {/* Trailer container */}
-        <Box className={classes.carouselTrailerContainer}>
+        <div className={classes.modalContent}>
           {/* Close trailer button */}
-          <Box
+          <div
             onClick={closeIsShowTrailerVideo}
-            className={classes.carouselTrailerCloseButtonContainer}
+            className={classes.modalCloseButtonContainer}
           >
-            <CloseIcon className={classes.carouselCloseButton} />
-          </Box>
+            <CloseIcon className={classes.modalCloseButton} />
+          </div>
           {/* Trailer video */}
-          <Box className={classes.carouselVideoContainer}>
+          <div className={classes.modalTrailerContainer}>
             <iframe
-              className={classes.carouselVideo}
+              className={classes.modalTrailer}
               src={trailerSrc}
               title='YouTube video player'
               frameBorder='0'
               allowFullScreen
             ></iframe>
-          </Box>
-        </Box>
+          </div>
+        </div>
       </Modal>
     </div>
   );

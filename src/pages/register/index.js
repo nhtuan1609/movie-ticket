@@ -237,20 +237,20 @@ export default function LoginPage() {
   };
 
   return (
-    <Box className={classes.loginBackground}>
+    <div className={classes.loginBackground}>
       {/* Container */}
-      <Box className={classes.formContainer}>
+      <div className={classes.formContainer}>
         {/* Form header */}
-        <Box className={classes.formHeader}>
-          <Box className={classes.headerButton}>Đăng Ký</Box>
+        <div className={classes.formHeader}>
+          <div className={classes.headerButton}>Đăng Ký</div>
           <Link className={classes.headerButtonPrimary} to='/dang-nhap/'>
             Đăng Nhập
           </Link>
-        </Box>
+        </div>
         {/* Form body */}
-        <Box className={classes.formBodyContainer}>
+        <div className={classes.formBodyContainer}>
           {/* User name */}
-          <Box className={classes.formBodyGroup}>
+          <div className={classes.formBodyGroup}>
             <TextField
               onChange={onUserNameChange}
               className={classes.formBodyGroupInput}
@@ -259,13 +259,13 @@ export default function LoginPage() {
               value={userName}
             />
             {userNameErrorMsg && (
-              <Box className={classes.formBodyErrorMessage}>
+              <div className={classes.formBodyErrorMessage}>
                 Tên đăng nhập phải có ít nhất 8 ký tự!
-              </Box>
+              </div>
             )}
-          </Box>
+          </div>
           {/* Password */}
-          <Box className={classes.formBodyGroup}>
+          <div className={classes.formBodyGroup}>
             <TextField
               onChange={onUserPasswordChange}
               className={classes.formBodyGroupInput}
@@ -275,13 +275,13 @@ export default function LoginPage() {
               value={userPassword}
             />
             {userPasswordErrorMsg && (
-              <Box className={classes.formBodyErrorMessage}>
+              <div className={classes.formBodyErrorMessage}>
                 Mật khẩu phải có ít nhất 8 ký tự!
-              </Box>
+              </div>
             )}
-          </Box>
+          </div>
           {/* Password Confirm*/}
-          <Box className={classes.formBodyGroup}>
+          <div className={classes.formBodyGroup}>
             <TextField
               onChange={onUserPasswordConfirmChange}
               className={classes.formBodyGroupInput}
@@ -291,13 +291,13 @@ export default function LoginPage() {
               value={userPasswordConfirm}
             />
             {userPasswordConfirmErrorMsg && (
-              <Box className={classes.formBodyErrorMessage}>
+              <div className={classes.formBodyErrorMessage}>
                 Mật khẩu xác nhận không đúng!
-              </Box>
+              </div>
             )}
-          </Box>
+          </div>
           {/* Policy */}
-          <Box className={classes.formBodyPolicyContainer}>
+          <div className={classes.formBodyPolicyContainer}>
             Bằng việc đăng ký, bạn đã đồng ý với TIX về{' '}
             <LinkMui className={classes.formBodyPolicyLink} href='#'>
               Điều khoản dịch vụ
@@ -306,36 +306,36 @@ export default function LoginPage() {
             <LinkMui className={classes.formBodyPolicyLink} href='#'>
               Chính sách bảo mật
             </LinkMui>
-          </Box>
+          </div>
           {/* Main button */}
-          <Box className={classes.formBodyButtonContainer}>
+          <div className={classes.formBodyButtonContainer}>
             <Link className={classes.formBodyButtonLink} to='/'>
               <MainButton>TRỞ LẠI</MainButton>
             </Link>
             <MainButtonPrimary onClick={handleRegisterButton}>
               ĐĂNG KÝ
             </MainButtonPrimary>
-          </Box>
-        </Box>
+          </div>
+        </div>
         {/* Form footer */}
-        <Box className={classes.formFooterList}>
+        <div className={classes.formFooterList}>
           {/* SMS button */}
           <Box className={classes.formFooterItem} bgcolor='#13a10d'>
             <SmsIcon style={{ color: 'white' }} />
-            <Box className={classes.formFooterItemLabel}>SMS</Box>
+            <div className={classes.formFooterItemLabel}>SMS</div>
           </Box>
           {/* Facebook button */}
           <Box className={classes.formFooterItem} bgcolor='#314b86'>
             <FacebookIcon style={{ color: 'white' }} />
-            <Box className={classes.formFooterItemLabel}>Facebook</Box>
+            <div className={classes.formFooterItemLabel}>Facebook</div>
           </Box>
           {/* Google button */}
           <Box className={classes.formFooterItem} bgcolor='#f04747'>
             <EmailIcon style={{ color: 'white' }} />
-            <Box className={classes.formFooterItemLabel}>Google</Box>
+            <div className={classes.formFooterItemLabel}>Google</div>
           </Box>
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 }

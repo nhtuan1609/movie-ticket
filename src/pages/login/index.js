@@ -221,20 +221,20 @@ export default function LoginPage() {
   };
 
   return (
-    <Box className={classes.loginBackground}>
+    <div className={classes.loginBackground}>
       {/* Container */}
-      <Box className={classes.formContainer}>
+      <div className={classes.formContainer}>
         {/* Form header */}
-        <Box className={classes.formHeader}>
-          <Box className={classes.headerButton}>Đăng Nhập</Box>
+        <div className={classes.formHeader}>
+          <div className={classes.headerButton}>Đăng Nhập</div>
           <Link className={classes.headerButtonPrimary} to='/dang-ky/'>
             Đăng Ký
           </Link>
-        </Box>
+        </div>
         {/* Form body */}
-        <Box className={classes.formBodyContainer}>
+        <div className={classes.formBodyContainer}>
           {/* User name */}
-          <Box className={classes.formBodyGroup}>
+          <div className={classes.formBodyGroup}>
             <TextField
               onChange={onUserNameChange}
               className={classes.formBodyGroupInput}
@@ -243,13 +243,13 @@ export default function LoginPage() {
               value={userName}
             />
             {userNameErrorMsg && (
-              <Box className={classes.formBodyErrorMessage}>
+              <div className={classes.formBodyErrorMessage}>
                 Vui lòng nhập tên đăng nhập!
-              </Box>
+              </div>
             )}
-          </Box>
+          </div>
           {/* Password */}
-          <Box className={classes.formBodyGroup}>
+          <div className={classes.formBodyGroup}>
             <TextField
               onChange={onUserPasswordChange}
               className={classes.formBodyGroupInput}
@@ -259,50 +259,50 @@ export default function LoginPage() {
               value={userPassword}
             />
             {userPasswordErrorMsg && (
-              <Box className={classes.formBodyErrorMessage}>
+              <div className={classes.formBodyErrorMessage}>
                 Vui lòng nhập mật khẩu!
-              </Box>
+              </div>
             )}
-          </Box>
+          </div>
           {/* Support */}
-          <Box className={classes.formBodySupport}>
+          <div className={classes.formBodySupport}>
             <LinkMui className={classes.formBodySupportLinkPrimary} href='#'>
               Quên mật khẩu
             </LinkMui>
-            <Box className={classes.verticalSeparate}></Box>
+            <div className={classes.verticalSeparate}></div>
             <LinkMui className={classes.formBodySupportLink} href='#'>
               Cần trợ giúp
             </LinkMui>
-          </Box>
+          </div>
           {/* Main button */}
-          <Box className={classes.formBodyButtonContainer}>
+          <div className={classes.formBodyButtonContainer}>
             <Link className={classes.formBodyButtonLink} to='/'>
               <MainButton>TRỞ LẠI</MainButton>
             </Link>
             <MainButtonPrimary onClick={handleLoginButton}>
               ĐĂNG NHẬP
             </MainButtonPrimary>
-          </Box>
-        </Box>
+          </div>
+        </div>
         {/* Form footer */}
-        <Box className={classes.formFooterList}>
+        <div className={classes.formFooterList}>
           {/* SMS button */}
           <Box className={classes.formFooterItem} bgcolor='#13a10d'>
             <SmsIcon style={{ color: 'white' }} />
-            <Box className={classes.formFooterItemLabel}>SMS</Box>
+            <div className={classes.formFooterItemLabel}>SMS</div>
           </Box>
           {/* Facebook button */}
           <Box className={classes.formFooterItem} bgcolor='#314b86'>
             <FacebookIcon style={{ color: 'white' }} />
-            <Box className={classes.formFooterItemLabel}>Facebook</Box>
+            <div className={classes.formFooterItemLabel}>Facebook</div>
           </Box>
           {/* Google button */}
           <Box className={classes.formFooterItem} bgcolor='#f04747'>
             <EmailIcon style={{ color: 'white' }} />
-            <Box className={classes.formFooterItemLabel}>Google</Box>
+            <div className={classes.formFooterItemLabel}>Google</div>
           </Box>
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 }

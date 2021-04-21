@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.primary.main,
     },
   },
-  locationListContainer: {
+  modalContent: {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -161,8 +161,6 @@ export default function MobileMenu(props) {
     <Fragment>
       {/* Mobile menu */}
       <Modal
-        aria-labelledby='transition-modal-title'
-        aria-describedby='transition-modal-description'
         open={isShowMobileMenu}
         onClose={toggleIsShowMobileMenu}
         closeAfterTransition
@@ -178,17 +176,16 @@ export default function MobileMenu(props) {
           unmountOnExit
           timeout={300}
         >
-          <Box className={classes.mobileMenuContainer}>
+          <div className={classes.mobileMenuContainer}>
             {/* Mobile menu header */}
-            <Box className={classes.mobileMenuHeader}>
+            <div className={classes.mobileMenuHeader}>
               {/* User infor */}
-              <Box>
+              <div>
                 {isLogin && (
                   <Box position='relative'>
-                    <Box
+                    <div
                       onClick={toggleIsShowLoginMenu}
                       className={classes.userLoginLink}
-                      to='/ca-nhan/'
                     >
                       <Avatar
                         className={classes.userLoginAvatar}
@@ -198,23 +195,23 @@ export default function MobileMenu(props) {
                       <span className={classes.userLoginName}>
                         {userInfor.name}
                       </span>
-                    </Box>
+                    </div>
                     {isLoginMenu && (
                       <ClickAwayListener onClickAway={toggleIsShowLoginMenu}>
-                        <Box className={classes.userLoginMenuList}>
+                        <div className={classes.userLoginMenuList}>
                           <Link
                             to='/ca-nhan/'
                             className={classes.userLoginMenuItem}
                           >
                             Thông tin cá nhân
                           </Link>
-                          <Box
+                          <div
                             onClick={handleOnClickLogout}
                             className={classes.userLoginMenuItem}
                           >
                             Đăng xuất
-                          </Box>
-                        </Box>
+                          </div>
+                        </div>
                       </ClickAwayListener>
                     )}
                   </Box>
@@ -229,13 +226,13 @@ export default function MobileMenu(props) {
                     <span className={classes.userLoginName}>Đăng Nhập</span>
                   </Link>
                 )}
-              </Box>
+              </div>
               {/* Go back button */}
               <ArrowForwardIosIcon
                 onClick={toggleIsShowMobileMenu}
                 className={classes.returnIcon}
               />
-            </Box>
+            </div>
             {/* Main menu */}
             <List className={classes.mobileMenuList}>
               <ListItem className={classes.mobileMenuItem}>
@@ -275,21 +272,19 @@ export default function MobileMenu(props) {
                 </LinkMui>
               </ListItem>
               <ListItem className={classes.mobileMenuItem}>
-                <Box
+                <div
                   onClick={toggleIsShowLocationListMobile}
                   className={classes.mobileMenuItemLink}
                 >
                   {currentLocation}
-                </Box>
+                </div>
               </ListItem>
             </List>
-          </Box>
+          </div>
         </Slide>
       </Modal>
       {/* Location list */}
       <Modal
-        aria-labelledby='transition-modal-title'
-        aria-describedby='transition-modal-description'
         open={isShowLocationListMobile}
         onClose={toggleIsShowLocationListMobile}
         closeAfterTransition
@@ -298,11 +293,11 @@ export default function MobileMenu(props) {
           timeout: 0,
         }}
       >
-        <Box className={classes.locationListContainer}>
+        <div className={classes.modalContent}>
           <List className={classes.locationList}>
             {LocationData.map((location, index) => (
               <ListItem
-                id={location.code}
+                data-id={location.code}
                 key={index}
                 onClick={handleSelectLocation}
                 className={classes.locationListItem}
@@ -311,7 +306,7 @@ export default function MobileMenu(props) {
               </ListItem>
             ))}
           </List>
-        </Box>
+        </div>
       </Modal>
     </Fragment>
   );

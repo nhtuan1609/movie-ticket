@@ -1,21 +1,21 @@
 import React from 'react';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
 import KeyboardArrowDownOutlinedIcon from '@material-ui/icons/KeyboardArrowDownOutlined';
 import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
 
 import {
   FilmListData,
   CinemaListData,
   DateListData,
   SessionListData,
-} from './Data.json';
+} from './SelectionData.json';
 
 import SelectionList from './SelectionList';
 
 const useStyles = makeStyles((theme) => ({
-  homeTool: {
+  homeToolContainer: {
     position: 'absolute',
     top: '0',
     left: '50%',
@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme) => ({
     height: '80px',
     transform: 'translate(-50%, -50%)',
     backgroundColor: 'white',
-    zIndex: '1',
     borderRadius: '4px',
     alignItems: 'center',
     justifyContent: 'center',
     padding: '0 10px',
-    boxShadow: '2px 2px 10px 2px rgba(0, 0, 0, 0.3)',
+    boxShadow: '2px 2px 6px 2px rgba(0, 0, 0, 0.1)',
+    zIndex: '1',
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
@@ -66,7 +66,7 @@ const BuyTicketButton = withStyles({
     border: 0,
     color: 'white',
     height: '40px',
-    width: '146px',
+    width: '100%',
     '&:hover': {
       background: '#fb4226',
     },
@@ -168,7 +168,7 @@ export default function HomeTool() {
     }
   };
 
-  const getNameFromCode = (listData, code) => {
+  const decodeCodeToName = (listData, code) => {
     let itemIndex = listData.findIndex((item) => item.code === code);
     let name = 'None value';
     if (itemIndex !== -1) {
@@ -194,14 +194,16 @@ export default function HomeTool() {
   };
 
   return (
-    <Box className={classes.homeTool}>
-      <Box
+    <Container maxWidth='md' className={classes.homeToolContainer}>
+      <div
         onClick={toggleIsShowFilmList}
         className={classes.homeToolGroup}
         style={{ width: '30%' }}
       >
         <span className={classes.homeToolGroupLabel}>
-          {currentFilm === '' ? 'Phim' : getNameFromCode(filmList, currentFilm)}
+          {currentFilm === ''
+            ? 'Phim'
+            : decodeCodeToName(filmList, currentFilm)}
         </span>
         <KeyboardArrowDownOutlinedIcon className={classes.dropDownIcon} />
         {isShowFilmList && (
@@ -212,14 +214,14 @@ export default function HomeTool() {
             minWidth={'600px'}
           />
         )}
-      </Box>
-      <Box className={classes.verticalSeparate}></Box>
-      <Box onClick={toggleIsShowCinemaList} className={classes.homeToolGroup}>
-        <Box className={classes.homeToolGroupLabel}>
+      </div>
+      <div className={classes.verticalSeparate}></div>
+      <div onClick={toggleIsShowCinemaList} className={classes.homeToolGroup}>
+        <div className={classes.homeToolGroupLabel}>
           {currentCinema === ''
             ? 'Rạp'
-            : getNameFromCode(cinemaList, currentCinema)}
-        </Box>
+            : decodeCodeToName(cinemaList, currentCinema)}
+        </div>
         <KeyboardArrowDownOutlinedIcon className={classes.dropDownIcon} />
         {isShowCinemaList && (
           <SelectionList
@@ -229,14 +231,14 @@ export default function HomeTool() {
             minWidth={'200px'}
           />
         )}
-      </Box>
-      <Box className={classes.verticalSeparate}></Box>
-      <Box onClick={toggleIsShowDateList} className={classes.homeToolGroup}>
-        <Box className={classes.homeToolGroupLabel}>
+      </div>
+      <div className={classes.verticalSeparate}></div>
+      <div onClick={toggleIsShowDateList} className={classes.homeToolGroup}>
+        <div className={classes.homeToolGroupLabel}>
           {currentDate === ''
             ? 'Ngày xem'
-            : getNameFromCode(dateList, currentDate)}
-        </Box>
+            : decodeCodeToName(dateList, currentDate)}
+        </div>
         <KeyboardArrowDownOutlinedIcon className={classes.dropDownIcon} />
         {isShowDateList && (
           <SelectionList
@@ -246,14 +248,14 @@ export default function HomeTool() {
             minWidth={'200px'}
           />
         )}
-      </Box>
-      <Box className={classes.verticalSeparate}></Box>
-      <Box onClick={toggleIsShowSessionList} className={classes.homeToolGroup}>
-        <Box className={classes.homeToolGroupLabel}>
+      </div>
+      <div className={classes.verticalSeparate}></div>
+      <div onClick={toggleIsShowSessionList} className={classes.homeToolGroup}>
+        <div className={classes.homeToolGroupLabel}>
           {currentSession === ''
             ? 'Suất chiếu'
-            : getNameFromCode(sessionList, currentSession)}
-        </Box>
+            : decodeCodeToName(sessionList, currentSession)}
+        </div>
         <KeyboardArrowDownOutlinedIcon className={classes.dropDownIcon} />
         {isShowSessionList && (
           <SelectionList
@@ -263,11 +265,11 @@ export default function HomeTool() {
             minWidth={'200px'}
           />
         )}
-      </Box>
-      <Box className={classes.verticalSeparate}></Box>
-      <Box onClick={handleBuyTicket} className={classes.homeToolGroup}>
+      </div>
+      <div className={classes.verticalSeparate}></div>
+      <div onClick={handleBuyTicket} className={classes.homeToolGroup}>
         <BuyTicketButton>MUA VÉ NGAY</BuyTicketButton>
-      </Box>
-    </Box>
+      </div>
+    </Container>
   );
 }

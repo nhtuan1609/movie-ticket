@@ -252,15 +252,14 @@ export default function NavHeader(props) {
           </ListItem>
         </List>
         {/* Sub menu */}
-        <Box className={classes.subMenuList}>
+        <div className={classes.subMenuList}>
           {/* User infor */}
-          <Box>
+          <div>
             {isLogin && (
               <Box position='relative'>
-                <Box
+                <div
                   onClick={toggleIsShowLoginMenu}
                   className={classes.userLoginLink}
-                  to='/ca-nhan/'
                 >
                   <Avatar
                     className={classes.userLoginAvatar}
@@ -270,23 +269,23 @@ export default function NavHeader(props) {
                   <span className={classes.userLoginName}>
                     {userInfor.name}
                   </span>
-                </Box>
+                </div>
                 {isLoginMenu && (
                   <ClickAwayListener onClickAway={toggleIsShowLoginMenu}>
-                    <Box className={classes.userLoginMenuList}>
+                    <div className={classes.userLoginMenuList}>
                       <Link
                         to='/ca-nhan/'
                         className={classes.userLoginMenuItem}
                       >
                         Thông tin cá nhân
                       </Link>
-                      <Box
+                      <div
                         onClick={handleOnClickLogout}
                         className={classes.userLoginMenuItem}
                       >
                         Đăng xuất
-                      </Box>
-                    </Box>
+                      </div>
+                    </div>
                   </ClickAwayListener>
                 )}
               </Box>
@@ -301,24 +300,22 @@ export default function NavHeader(props) {
                 <span className={classes.userLoginName}>Đăng Nhập</span>
               </Link>
             )}
-          </Box>
+          </div>
           {/* Separate */}
-          <Box className={classes.verticalSeparate}></Box>
+          <div className={classes.verticalSeparate}></div>
           {/* Location infor */}
-          <Box
+          <div
             className={classes.locationInforContainer}
             onClick={toggleIsShowLocationList}
           >
             <LocationOnOutlinedIcon className={classes.locationIcon} />
-            <Box component='span' className={classes.locationLabel}>
-              {currentLocation}
-            </Box>
+            <span className={classes.locationLabel}>{currentLocation}</span>
             <KeyboardArrowDownOutlinedIcon
               className={classes.locationDropDownIcon}
             />
             {isShowLocationList && (
               <ClickAwayListener onClickAway={toggleIsShowLocationList}>
-                <Box className={classes.locationListContainer}>
+                <div className={classes.locationListContainer}>
                   <List className={classes.locationList}>
                     {LocationData.map((location, index) => (
                       <ListItem
@@ -331,13 +328,13 @@ export default function NavHeader(props) {
                       </ListItem>
                     ))}
                   </List>
-                </Box>
+                </div>
               </ClickAwayListener>
             )}
-          </Box>
-        </Box>
+          </div>
+        </div>
         {/* Mobile menu */}
-        <Box className={classes.mobileMenu}>
+        <div className={classes.mobileMenu}>
           <MenuIcon
             onClick={toggleIsShowMobileMenu}
             className={classes.mobileMenuIcon}
@@ -352,7 +349,7 @@ export default function NavHeader(props) {
             toggleIsShowLocationListMobile={toggleIsShowLocationListMobile}
             handleSelectLocation={handleSelectLocation}
           />
-        </Box>
+        </div>
       </Toolbar>
     </AppBar>
   );

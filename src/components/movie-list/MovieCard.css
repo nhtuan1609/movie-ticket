@@ -1,0 +1,23 @@
+.movie-card__hover-modal {
+  visibility: hidden;
+}
+
+.movie-card__play-button {
+  visibility: hidden;
+}
+
+.movie-card__infor {
+  visibility: unset;
+}
+
+.movie-card__buy-button {
+  visibility: hidden;
+}
+
+.movie-card:hover .hover-display {
+  visibility: unset;
+}
+
+.movie-card:hover .hover-hidden {
+  visibility: hidden;
+}
