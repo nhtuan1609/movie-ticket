@@ -22,10 +22,7 @@ export default function HomePage() {
       <Box position='relative'>
         <HomeTool />
       </Box>
-      <div
-        id='lich-chieu'
-        style={{ height: '2000px', backgroundColor: 'white' }}
-      >
+      <div id='lich-chieu' style={{ backgroundColor: 'white' }}>
         <Container maxWidth='md' style={{ marginTop: '100px' }}>
           <MovieCardSlider />
         </Container>
