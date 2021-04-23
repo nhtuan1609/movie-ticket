@@ -13,6 +13,8 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
+import './index.css';
+
 const useStyles = makeStyles((theme) => ({
   carouselItem: {
     position: 'relative',
@@ -143,7 +145,6 @@ export default function MyCarousel(props) {
   const { filmList } = props;
   const [isShowTrailerVideo, setIsShowTrailerVideo] = useState(false);
   const [trailerSrc, setTrailerSrc] = useState('');
-  const [isShowPlayBtn, setIsShowPlayBtn] = useState(false);
 
   const handleOnLickPlayButton = (index) => (event) => {
     let currentFilm = filmList[index];
@@ -153,14 +154,6 @@ export default function MyCarousel(props) {
 
   const closeIsShowTrailerVideo = () => {
     setIsShowTrailerVideo(false);
-  };
-
-  const OpenIsShowPlayBtn = () => {
-    setIsShowPlayBtn(true);
-  };
-
-  const CloseIsShowPlayBtn = () => {
-    setIsShowPlayBtn(false);
   };
 
   const renderItem = (dataList) =>
@@ -173,14 +166,12 @@ export default function MyCarousel(props) {
             alt={item.name}
           />
         </LinkMui>
-        {isShowPlayBtn && (
-          <div
-            onClick={handleOnLickPlayButton(index)}
-            className={classes.carouselPlayButtonContainer}
-          >
-            <PlayArrowIcon className={classes.carouselPlayButton} />
-          </div>
-        )}
+        <div
+          onClick={handleOnLickPlayButton(index)}
+          className={`carousel__play-button hover-display ${classes.carouselPlayButtonContainer}`}
+        >
+          <PlayArrowIcon className={classes.carouselPlayButton} />
+        </div>
       </div>
     ));
 
@@ -223,7 +214,7 @@ export default function MyCarousel(props) {
   };
 
   return (
-    <div onMouseEnter={OpenIsShowPlayBtn} onMouseLeave={CloseIsShowPlayBtn}>
+    <div className={'carousel-container'}>
       {/* Slider Film list */}
       <Slider {...sliderSetting}>{renderItem(filmList)}</Slider>
       {/* Trailer */}

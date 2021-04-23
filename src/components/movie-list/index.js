@@ -82,7 +82,7 @@ export default function MovieCardSlider() {
       renderData = listData.slice(0, limitItem);
     }
     return renderData.map((item, index) => (
-      <div style={{ width: width }}>
+      <div style={{ width: width }} key={index}>
         <MovieCard key={index} movieItem={item} />
       </div>
     ));

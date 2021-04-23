@@ -1,0 +1,7 @@
+.carousel__play-button {
+  display: none !important;
+}
+
+.carousel-container:hover .hover-display {
+  display: block !important;
+}

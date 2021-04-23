@@ -73,9 +73,9 @@ export default function SelectionList(props) {
 }
 
 SelectionList.prototype = {
-  toggleIsShowSelectionList: PropTypes.func.isRequired,
-  DataSelectionList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  handleSelectItem: PropTypes.func.isRequired,
+  toggleIsShowSelectionList: PropTypes.func,
+  DataSelectionList: PropTypes.arrayOf(PropTypes.object),
+  handleSelectItem: PropTypes.func,
   minWidth: PropTypes.string,
 };
 

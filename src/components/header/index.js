@@ -196,7 +196,7 @@ export default function NavHeader(props) {
       (item) => item.code === selectedCode
     );
 
-    if (selectedIndex !== -1) {
+    if (selectedIndex !== -1 && setCurrentLocation !== undefined) {
       setCurrentLocation(LocationData[selectedIndex].name);
     }
 
@@ -356,9 +356,9 @@ export default function NavHeader(props) {
 }
 
 NavHeader.propTypes = {
-  isLogin: PropTypes.bool.isRequired,
-  currentLocation: PropTypes.string.isRequired,
-  setCurrentLocation: PropTypes.func.isRequired,
+  isLogin: PropTypes.bool,
+  currentLocation: PropTypes.string,
+  setCurrentLocation: PropTypes.func,
 };
 
 NavHeader.defaultProps = {

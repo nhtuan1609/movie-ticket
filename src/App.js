@@ -7,6 +7,7 @@ import theme from './theme';
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
+import FilmInforPage from './pages/film-infor';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
             <Route path='/' exact component={Home} />
             <Route path='/dang-nhap' exact component={Login} />
             <Route path='/dang-ky' exact component={Register} />
+            <Route path='/thong-tin' exact component={FilmInfor} />
           </Switch>
         </div>
       </Router>
@@ -34,4 +36,8 @@ function Login() {
 
 function Register() {
   return <RegisterPage />;
+}
+
+function FilmInfor() {
+  return <FilmInforPage />;
 }

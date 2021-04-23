@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Backdrop } from '@material-ui/core';
 import LinkMui from '@material-ui/core/Link';
 import CloseIcon from '@material-ui/icons/Close';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import Rating from '@material-ui/lab/Rating';
-import Button from '@material-ui/core/Button';
 
-import './MovieCard.css';
+import './FilmCard.css';
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
     backgroundColor: 'white',
-    margin: '0 10px 40px 10px',
+    borderRadius: '4px',
+    overflow: 'hidden',
   },
   cardHeader: {
     position: 'relative',
@@ -66,83 +65,6 @@ const useStyles = makeStyles((theme) => ({
     transform: 'translate(-50%, -50%)',
     fontSize: '26px !important',
     color: 'white',
-  },
-  cardRatePointContainer: {
-    width: '54px',
-    height: '40px',
-    backgroundColor: 'rgba(54, 67, 87, 0.8)',
-    position: 'absolute',
-    top: '12px',
-    right: '12px',
-    borderRadius: '4px',
-    textAlign: 'center',
-  },
-  cardRatePoint: {
-    fontSize: '20px',
-    fontWeight: '500',
-    color: 'white',
-    height: '20px',
-    lineHeight: '20px',
-    margin: '2px 0 4px 0',
-  },
-  cardRateStar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '10px',
-  },
-  cardBody: {
-    position: 'relative',
-  },
-  cardInforContainer: {
-    paddingTop: '10px',
-  },
-  cardNameFilm: {
-    width: '100%',
-    height: '50px',
-    color: theme.palette.textColor.main,
-    fontSize: '18px',
-    fontWeight: '600',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  cardAgeTypeAll: {
-    minWidth: '34px',
-    lineHeight: '24px',
-    textAlign: 'center',
-    backgroundColor: 'rgb(0,172,77)',
-    color: 'white',
-    fontSize: '16px',
-    fontWeight: '600',
-    padding: '0 4px',
-    borderRadius: '4px',
-    marginRight: '6px',
-    marginTop: '0px',
-    float: 'left',
-  },
-  cardAgeTypeSpecial: {
-    minWidth: '34px',
-    lineHeight: '24px',
-    textAlign: 'center',
-    backgroundColor: theme.palette.primary.main,
-    color: 'white',
-    fontSize: '16px',
-    fontWeight: '600',
-    padding: '0 4px',
-    borderRadius: '4px',
-    marginRight: '6px',
-    marginTop: '0px',
-    float: 'left',
-  },
-  cardInforFilm: {
-    color: theme.palette.textColor.light,
-    fontSize: '12px',
-    fontWeight: '500',
-  },
-  cardBuyButton: {
-    position: 'absolute',
-    top: '10px',
-    left: '0',
   },
   modalContent: {
     position: 'absolute',
@@ -200,29 +122,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BuyTicketButton = withStyles({
-  root: {
-    backgroundColor: '#f43f24',
-    borderRadius: '4px',
-    border: 0,
-    color: 'white',
-    height: '46px',
-    width: '100%',
-    cursor: 'pointer',
-    '&:hover': {
-      backgroundColor: '#f43f24',
-    },
-  },
-  label: {
-    textTransform: 'capitalize',
-    fontSize: '18px',
-    fontWeight: '500',
-  },
-})(Button);
-
-export default function MovieCard(props) {
+export default function FilmCard(props) {
   const classes = useStyles();
-  const { movieItem } = props;
+  const { filmItem } = props;
   const [isShowTrailerVideo, setIsShowTrailerVideo] = useState(false);
 
   const openIsShowTrailerVideo = () => {
@@ -233,27 +135,6 @@ export default function MovieCard(props) {
     setIsShowTrailerVideo(false);
   };
 
-  const renderTypeFilm = () => {
-    const ageAllow = Math.floor(Math.random() * 4);
-    switch (ageAllow) {
-      case 1:
-        return <span className={classes.cardAgeTypeSpecial}>C13</span>;
-      case 2:
-        return <span className={classes.cardAgeTypeSpecial}>C16</span>;
-      case 3:
-        return <span className={classes.cardAgeTypeSpecial}>C18</span>;
-      default:
-        return <span className={classes.cardAgeTypeAll}>P</span>;
-    }
-  };
-
-  const renderFilmInfor = () => {
-    const filmTime = (90 + Math.random() * 30).toFixed(0);
-    const filmIMDb = (6 + Math.random() * 4.0).toFixed(1);
-    const content = `${filmTime} Phút - ${filmIMDb} IMDb`;
-    return <div className={classes.cardInforFilm}>{content}</div>;
-  };
-
   return (
     <div className={`movie-card ${classes.cardContainer}`}>
       {/* Card header */}
@@ -261,8 +142,8 @@ export default function MovieCard(props) {
         <div className={classes.cardImageContainer}>
           <img
             className={classes.cardImage}
-            src={movieItem.hinhAnh}
-            alt={movieItem.tenPhim}
+            src={filmItem.hinhAnh}
+            alt={filmItem.tenPhim}
           ></img>
         </div>
         <LinkMui
@@ -275,37 +156,6 @@ export default function MovieCard(props) {
         >
           <PlayArrowIcon className={classes.cardPlayButton} />
         </div>
-        <div className={classes.cardRatePointContainer}>
-          <div className={classes.cardRatePoint}>{movieItem.danhGia}</div>
-          <Rating
-            name='half-rating-read'
-            defaultValue={movieItem.danhGia / 2.0}
-            precision={0.5}
-            readOnly
-            classes={{
-              root: classes.cardRateStar,
-            }}
-          />
-        </div>
-      </div>
-      {/* Card body */}
-      <div className={classes.cardBody}>
-        {/* Card infor */}
-        <div
-          className={`movie-card__infor hover-hidden ${classes.cardInforContainer}`}
-        >
-          <div className={classes.cardNameFilm}>
-            {renderTypeFilm()}
-            {movieItem.tenPhim}
-          </div>
-          {renderFilmInfor()}
-        </div>
-        {/* Buy button */}
-        <BuyTicketButton
-          className={`movie-card__buy-button hover-display ${classes.cardBuyButton}`}
-        >
-          MUA VÉ
-        </BuyTicketButton>
       </div>
       {/* Trailer */}
       <Modal
@@ -330,7 +180,7 @@ export default function MovieCard(props) {
           <div className={classes.modalTrailerContainer}>
             <iframe
               className={classes.modalTrailer}
-              src={movieItem.trailer.concat('?autoplay=1')}
+              src={filmItem.trailer.concat('?autoplay=1')}
               title='YouTube video player'
               frameBorder='0'
               allowFullScreen
@@ -342,8 +192,8 @@ export default function MovieCard(props) {
   );
 }
 
-MovieCard.propTypes = {
-  movieItem: PropTypes.shape({
+FilmCard.propTypes = {
+  filmItem: PropTypes.shape({
     tenPhim: PropTypes.string,
     trailer: PropTypes.string,
     hinhAnh: PropTypes.string,
@@ -351,8 +201,8 @@ MovieCard.propTypes = {
   }),
 };
 
-MovieCard.defaultProps = {
-  movieItem: {
+FilmCard.defaultProps = {
+  filmItem: {
     maPhim: 1315,
     tenPhim: 'Lừa Đểu Gặp Lừa Đảo',
     biDanh: 'lua-deu-gap-lua-dao',

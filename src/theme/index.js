@@ -6,6 +6,7 @@ const theme = createMuiTheme({
       main: '#fb4226',
     },
     textColor: {
+      white: '#eee',
       light: '#888',
       main: '#333',
       dark: '#000',
