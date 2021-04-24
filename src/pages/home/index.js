@@ -5,6 +5,7 @@ import NavHeader from '../../components/header';
 import MyCarousel from '../../components/carousel';
 import HomeTool from '../../components/home-tool';
 import MovieCardSlider from '../../components/movie-list';
+import MyFooter from '../../components/footer';
 
 export default function HomePage() {
   const [currentLocation, setCurrentLocation] = React.useState('Hồ Chí Minh');
@@ -39,6 +40,7 @@ export default function HomePage() {
         id='ung-dung'
         style={{ height: '1000px', backgroundColor: 'blue', opacity: '0.3' }}
       ></div>
+      <MyFooter />
     </div>
   );
 }
