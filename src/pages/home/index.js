@@ -16,6 +16,18 @@ export default function HomePage() {
   if (movieList.length === 0) return <p>Loading..</p>;
   console.log(movieList);
 
+  let breakDate = new Date('2020-01-01T00:00:00');
+
+  var movieRelease = movieList.filter((item, index) => {
+    let itemDate = new Date(item.ngayKhoiChieu);
+    return itemDate > breakDate;
+  });
+
+  var movieUpcoming = movieList.filter((item, index) => {
+    let itemDate = new Date(item.ngayKhoiChieu);
+    return itemDate <= breakDate;
+  });
+
   return (
     <div>
       <MyCarousel />
@@ -23,8 +35,11 @@ export default function HomePage() {
         <HomeTool />
       </Box>
       <div id='lich-chieu' style={{ backgroundColor: 'white' }}>
-        <Container maxWidth='md' style={{ marginTop: '100px' }}>
-          <MovieCardSlider movieList={movieList} />
+        <Container maxWidth='md'>
+          <MovieCardSlider
+            movieRelease={movieRelease}
+            movieUpcoming={movieUpcoming}
+          />
         </Container>
       </div>
       <div

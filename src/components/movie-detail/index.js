@@ -5,22 +5,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Tabs, Tab } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import TabFilmInfor from './TabFilmInfor';
+import MovieInfor from './MovieInfor';
 
 const useStyles = makeStyles((theme) => ({
   container: {
     position: 'relative',
   },
   tabHeader: {
-    position: 'absolute',
-    top: '-70px',
-    left: '50%',
-    height: '40px',
     width: '100%',
-    transform: 'translateX(-50%)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: '40px',
+    paddingBottom: '20px',
   },
   tabHeaderItem: {
     color: theme.palette.textColor.white,
@@ -34,6 +31,15 @@ const useStyles = makeStyles((theme) => ({
     },
     '&.Mui-selected': {
       fontSize: '20px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '12px',
+      '&:hover': {
+        fontSize: '14px',
+      },
+      '&.Mui-selected': {
+        fontSize: '14px',
+      },
     },
   },
   tabBody: {
@@ -54,9 +60,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TabControl(props) {
+export default function MovieDetail(props) {
   const classes = useStyles();
-  const { filmItem } = props;
+  const { movieItem } = props;
   const [currentTabId, setCurrentTabId] = React.useState(1);
 
   const handleChangeTab = (event, newId) => {
@@ -67,7 +73,7 @@ export default function TabControl(props) {
     const tabLabel = ['Lịch Chiếu', 'Thông Tin', 'Đánh Giá'];
     switch (currentTabId) {
       case 1:
-        return <TabFilmInfor filmItem={filmItem} />;
+        return <MovieInfor movieItem={movieItem} />;
       default:
         return (
           <div className={classes.tabEmpty}>
@@ -97,8 +103,8 @@ export default function TabControl(props) {
   );
 }
 
-TabControl.propTypes = {
-  filmItem: PropTypes.shape({
+MovieDetail.propTypes = {
+  movieItem: PropTypes.shape({
     ngayKhoiChieu: PropTypes.string,
     daoDien: PropTypes.string,
     dienVien: PropTypes.string,
@@ -109,8 +115,8 @@ TabControl.propTypes = {
   }),
 };
 
-TabControl.defaultProps = {
-  filmItem: {
+MovieDetail.defaultProps = {
+  movieItem: {
     ngayKhoiChieu: '',
     daoDien: 'Simon McQuoid',
     dienVien: 'Jessica McNamee',

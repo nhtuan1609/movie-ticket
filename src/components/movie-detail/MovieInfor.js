@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import dateFormat from 'date-format';
 
 const useStyles = makeStyles((theme) => ({
   inforContainer: {
@@ -27,9 +28,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TabFilmInfor(props) {
+export default function MovieInfor(props) {
   const classes = useStyles();
-  const { filmItem } = props;
+  const { movieItem } = props;
 
   return (
     <Grid container>
@@ -37,42 +38,42 @@ export default function TabFilmInfor(props) {
         <div className={classes.inforContainer}>
           <p className={classes.inforLabel}>Ngày công chiếu</p>
           <p className={classes.inforContent}>
-            {filmItem.ngayKhoiChieu.slice(0, 10)}
+            {dateFormat('dd.MM.yyyy', new Date(movieItem.ngayKhoiChieu))}
           </p>
         </div>
         <div className={classes.inforContainer}>
           <p className={classes.inforLabel}>Đạo diễn</p>
-          <p className={classes.inforContent}>{filmItem.daoDien}</p>
+          <p className={classes.inforContent}>{movieItem.daoDien}</p>
         </div>
         <div className={classes.inforContainer}>
           <p className={classes.inforLabel}>Diễn viên</p>
-          <p className={classes.inforContent}>{filmItem.dienVien}</p>
+          <p className={classes.inforContent}>{movieItem.dienVien}</p>
         </div>
         <div className={classes.inforContainer}>
           <p className={classes.inforLabel}>Thể Loại</p>
-          <p className={classes.inforContent}>{filmItem.theLoai}</p>
+          <p className={classes.inforContent}>{movieItem.theLoai}</p>
         </div>
         <div className={classes.inforContainer}>
           <p className={classes.inforLabel}>Định dạng</p>
-          <p className={classes.inforContent}>{filmItem.dinhDang}</p>
+          <p className={classes.inforContent}>{movieItem.dinhDang}</p>
         </div>
         <div className={classes.inforContainer}>
           <p className={classes.inforLabel}>Quốc Gia SX</p>
-          <p className={classes.inforContent}>{filmItem.quocGia}</p>
+          <p className={classes.inforContent}>{movieItem.quocGia}</p>
         </div>
       </Grid>
       <Grid item md={6} xs={12}>
         <div className={classes.plotContainer}>
           <p className={classes.inforLabel}>Nội dung</p>
-          <p className={classes.inforContent}>{filmItem.moTa}</p>
+          <p className={classes.inforContent}>{movieItem.moTa}</p>
         </div>
       </Grid>
     </Grid>
   );
 }
 
-TabFilmInfor.propTypes = {
-  filmItem: PropTypes.shape({
+MovieInfor.propTypes = {
+  movieItem: PropTypes.shape({
     ngayKhoiChieu: PropTypes.string,
     daoDien: PropTypes.string,
     dienVien: PropTypes.string,
@@ -83,8 +84,8 @@ TabFilmInfor.propTypes = {
   }),
 };
 
-TabFilmInfor.defaultProps = {
-  filmItem: {
+MovieInfor.defaultProps = {
+  movieItem: {
     ngayKhoiChieu: '',
     daoDien: 'Simon McQuoid',
     dienVien: 'Jessica McNamee',

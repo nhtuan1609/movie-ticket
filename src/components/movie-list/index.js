@@ -1,180 +1,116 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import Slider from 'react-slick';
+import { makeStyles } from '@material-ui/core/styles';
+import { Tabs, Tab } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-
-import './index.css';
-import MovieCard from './MovieCard';
+import MovieSlider from './MovieSlider';
 
 const useStyles = makeStyles((theme) => ({
-  sliderArrowButton: {
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    zIndex: '1',
-    backgroundColor: 'transparent',
-    color: '#bbb',
-    opacity: '0.6',
-    width: '100px',
-    height: '100%',
-    transition: 'color linear 0.2s, background-color linear 0.2s',
-    cursor: 'pointer',
-    '&:hover': {
-      color: theme.palette.primary.main,
-    },
+  container: {
+    position: 'relative',
   },
-  sliderDotClass: {
-    bottom: '13%',
-    '& li.slick-active button::before': {
-      color: theme.palette.primary.main,
+  tabHeader: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: '80px',
+    paddingBottom: '40px',
+  },
+  tabHeaderItem: {
+    color: theme.palette.textColor.main,
+    fontSize: '20px',
+    fontWeight: '500',
+    lineHeight: '40px',
+    textTransform: 'capitalize',
+    transition: 'font-size 0.3s',
+    '&:hover': {
+      fontSize: '22px',
     },
-    '& li': {
-      margin: '0 2px',
-      '& button::before': {
-        fontSize: '14px',
-        color: 'white',
-        opacity: 0.8,
+    '&.Mui-selected': {
+      fontSize: '22px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '18px',
+      '&:hover': {
+        fontSize: '16px',
+      },
+      '&.Mui-selected': {
+        fontSize: '16px',
       },
     },
   },
-  listContainer: {
+  tabBody: {
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
-  listLoadMoreButton: {
-    width: '400px',
-    marginTop: '40px',
+  tabEmpty: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    paddingTop: '30px',
+    fontSize: '18px',
+    fontWeight: '500',
+    color: theme.palette.textColor.main,
   },
 }));
 
 export default function MovieCardSlider(props) {
   const classes = useStyles();
-  const { movieList } = props;
-  const [limitItem, setLimitItem] = React.useState(3);
+  const { movieRelease, movieUpcoming } = props;
+  const [currentTabId, setCurrentTabId] = React.useState(0);
 
-  const handleLoadMoreItems = (maxItem = 0) => () => {
-    let setValue = limitItem;
-    if (limitItem < maxItem) {
-      setValue = limitItem + 3;
-    } else if (limitItem > maxItem) {
-      setValue = maxItem;
-    }
-
-    if (setValue !== limitItem) {
-      setLimitItem(setValue);
-    }
+  const handleChangeTab = (event, newId) => {
+    setCurrentTabId(newId);
   };
 
-  const renderItem = (listData, limitItem = 0, width = 'unset') => {
-    let renderData = listData;
-    if (limitItem > 0 && limitItem <= listData.length) {
-      renderData = listData.slice(0, limitItem);
-    }
-    return renderData.map((item, index) => (
-      <div style={{ width: width }} key={index}>
-        <MovieCard key={index} movieItem={item} />
+  const renderTab = (currentTabId) => {
+    const tabLabel = ['Đang Chiếu', 'Sắp Chiếu'];
+    const loadingTab = () => (
+      <div className={classes.tabEmpty}>
+        <CircularProgress />
+        <div>{tabLabel[currentTabId]}...</div>
       </div>
-    ));
-  };
-
-  function MyPrevArrow(props) {
-    const { onClick } = props;
-    return (
-      <NavigateBeforeIcon
-        className={classes.sliderArrowButton}
-        style={{
-          left: '-100px',
-          top: '380px',
-        }}
-        onClick={onClick}
-      />
     );
-  }
 
-  function MyNextArrow(props) {
-    const { onClick } = props;
-    return (
-      <NavigateNextIcon
-        className={classes.sliderArrowButton}
-        style={{
-          right: '-100px',
-          top: '380px',
-        }}
-        onClick={onClick}
-      />
-    );
-  }
-
-  const sliderSetting = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    rows: 2,
-    slidesPerRow: 4,
-    nextArrow: <MyNextArrow />,
-    prevArrow: <MyPrevArrow />,
-    dotsClass: `slick-dots ${classes.sliderDotClass}`,
-    responsive: [
-      {
-        breakpoint: 960,
-        settings: {
-          rows: 2,
-          slidesPerRow: 2,
-        },
-      },
-    ],
+    switch (currentTabId) {
+      case 0:
+        if (movieRelease.length > 0) {
+          return <MovieSlider movieList={movieRelease} />;
+        } else {
+          return loadingTab();
+        }
+      case 1:
+        if (movieUpcoming.length > 0) {
+          return <MovieSlider movieList={movieUpcoming} />;
+        } else {
+          return loadingTab();
+        }
+      default:
+        return loadingTab();
+    }
   };
-
-  const LoadMoreButton = withStyles({
-    root: {
-      backgroundColor: '#888',
-      borderRadius: '4px',
-      border: 0,
-      color: 'white',
-      height: '46px',
-      width: '100%',
-      cursor: 'pointer',
-      '&:hover': {
-        backgroundColor: '#f43f24',
-      },
-    },
-    label: {
-      textTransform: 'capitalize',
-      fontSize: '18px',
-      fontWeight: '500',
-    },
-  })(Button);
 
   return (
-    <Fragment>
-      <Slider className={'movie-slider'} {...sliderSetting}>
-        {renderItem(movieList)}
-      </Slider>
-      <div className={classes.listContainer}>
-        {renderItem(movieList, limitItem, '96%')}
-        <div
-          onClick={handleLoadMoreItems(movieList.length)}
-          className={classes.listLoadMoreButton}
+    <div>
+      <div className={classes.tabHeader}>
+        <Tabs
+          value={currentTabId}
+          indicatorColor='primary'
+          textColor='primary'
+          onChange={handleChangeTab}
         >
-          <LoadMoreButton>Xem Thêm</LoadMoreButton>
-        </div>
+          <Tab className={classes.tabHeaderItem} label='Đang Chiếu' />
+          <Tab className={classes.tabHeaderItem} label='Sắp Chiếu' />
+        </Tabs>
       </div>
-    </Fragment>
+      {renderTab(currentTabId)}
+    </div>
   );
 }
 

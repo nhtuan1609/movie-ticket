@@ -7,7 +7,7 @@ import LinkMui from '@material-ui/core/Link';
 import CloseIcon from '@material-ui/icons/Close';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
-import './FilmCard.css';
+import './MovieCard.css';
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
@@ -124,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FilmCard(props) {
   const classes = useStyles();
-  const { filmItem } = props;
+  const { movieItem } = props;
   const [isShowTrailerVideo, setIsShowTrailerVideo] = useState(false);
 
   const openIsShowTrailerVideo = () => {
@@ -142,13 +142,13 @@ export default function FilmCard(props) {
         <div className={classes.cardImageContainer}>
           <img
             className={classes.cardImage}
-            src={filmItem.hinhAnh}
-            alt={filmItem.tenPhim}
+            src={movieItem.hinhAnh}
+            alt={movieItem.tenPhim}
           ></img>
         </div>
         <LinkMui
           className={`movie-card__hover-modal hover-display ${classes.cardHoverModal}`}
-          href={`/movie/${filmItem.maPhim}`}
+          href={`/movie/${movieItem.maPhim}`}
         ></LinkMui>
         <div
           onClick={openIsShowTrailerVideo}
@@ -180,7 +180,7 @@ export default function FilmCard(props) {
           <div className={classes.modalTrailerContainer}>
             <iframe
               className={classes.modalTrailer}
-              src={filmItem.trailer.concat('?autoplay=1')}
+              src={movieItem.trailer.concat('?autoplay=1')}
               title='YouTube video player'
               frameBorder='0'
               allowFullScreen
@@ -193,7 +193,7 @@ export default function FilmCard(props) {
 }
 
 FilmCard.propTypes = {
-  filmItem: PropTypes.shape({
+  movieItem: PropTypes.shape({
     tenPhim: PropTypes.string,
     trailer: PropTypes.string,
     hinhAnh: PropTypes.string,
@@ -202,7 +202,7 @@ FilmCard.propTypes = {
 };
 
 FilmCard.defaultProps = {
-  filmItem: {
+  movieItem: {
     maPhim: 1315,
     tenPhim: 'Lừa Đểu Gặp Lừa Đảo',
     biDanh: 'lua-deu-gap-lua-dao',
