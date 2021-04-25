@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { List, ListItem } from '@material-ui/core';
 import { Modal, Backdrop, Slide } from '@material-ui/core';
@@ -199,12 +198,12 @@ export default function MobileMenu(props) {
                     {isLoginMenu && (
                       <ClickAwayListener onClickAway={toggleIsShowLoginMenu}>
                         <div className={classes.userLoginMenuList}>
-                          <Link
-                            to='/ca-nhan/'
+                          <LinkMui
+                            href='/personal/'
                             className={classes.userLoginMenuItem}
                           >
                             Thông tin cá nhân
-                          </Link>
+                          </LinkMui>
                           <div
                             onClick={handleOnClickLogout}
                             className={classes.userLoginMenuItem}
@@ -217,14 +216,14 @@ export default function MobileMenu(props) {
                   </Box>
                 )}
                 {!isLogin && (
-                  <Link className={classes.userLoginLink} to='/dang-nhap/'>
+                  <LinkMui className={classes.userLoginLink} href='/login/'>
                     <Avatar
                       className={classes.userLoginAvatar}
                       alt='User avatar'
                       src={'/assets/img/user/default_avatar.png'}
                     />
                     <span className={classes.userLoginName}>Đăng Nhập</span>
-                  </Link>
+                  </LinkMui>
                 )}
               </div>
               {/* Go back button */}

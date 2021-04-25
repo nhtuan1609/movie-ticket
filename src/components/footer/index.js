@@ -2,6 +2,7 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, Hidden } from '@material-ui/core';
+import LinkMui from '@material-ui/core/Link';
 
 import { cooporateLogo } from './CooporateLogo.json';
 
@@ -87,13 +88,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MyFooter() {
+export default function Footer() {
   const classes = useStyles();
 
   const renderCooporateLogo = (cooporateLogo, indexStart, indexEnd) => (
-    <Grid md={12} container>
+    <Grid item md={12} container>
       {cooporateLogo.slice(indexStart, indexEnd).map((item, index) => (
-        <Grid item>
+        <Grid item key={index}>
           <img
             className={classes.footerCooporateLogo}
             src={item.src}
@@ -115,21 +116,21 @@ export default function MyFooter() {
             </Grid>
             <Hidden smDown>
               <Grid item md={6} container direction='column'>
-                <a className={classes.footerContentLink} href='/'>
+                <LinkMui className={classes.footerContentLink} href='#'>
                   FAQ
-                </a>
-                <a className={classes.footerContentLink} href='/'>
+                </LinkMui>
+                <LinkMui className={classes.footerContentLink} href='#'>
                   Brand Guidelines
-                </a>
+                </LinkMui>
               </Grid>
             </Hidden>
             <Grid item md={6} container direction='column'>
-              <a className={classes.footerContentLink} href='/'>
+              <LinkMui className={classes.footerContentLink} href='#'>
                 Thỏa thuận sử dụng
-              </a>
-              <a className={classes.footerContentLink} href='/'>
+              </LinkMui>
+              <LinkMui className={classes.footerContentLink} href='#'>
                 Chính sách bảo mật
-              </a>
+              </LinkMui>
             </Grid>
           </Grid>
           <Hidden smDown>
@@ -150,22 +151,22 @@ export default function MyFooter() {
               <span className={classes.footerGroupLabel}>MOBILE APP</span>
               <Grid item md={12} container>
                 <Grid item>
-                  <a href='/'>
+                  <LinkMui href='#'>
                     <img
                       className={classes.footerSocialLogo}
-                      src='./assets/img/social/apple-logo.png'
+                      src='/assets/img/social/apple-logo.png'
                       alt='apple-logo'
                     ></img>
-                  </a>
+                  </LinkMui>
                 </Grid>
                 <Grid item>
-                  <a href='/'>
+                  <LinkMui href='#'>
                     <img
                       className={classes.footerSocialLogo}
-                      src='./assets/img/social/android-logo.png'
+                      src='/assets/img/social/android-logo.png'
                       alt='apple-logo'
                     ></img>
-                  </a>
+                  </LinkMui>
                 </Grid>
               </Grid>
             </Grid>
@@ -173,22 +174,22 @@ export default function MyFooter() {
               <span className={classes.footerGroupLabel}>SOCIAL</span>
               <Grid item md={12} container>
                 <Grid item>
-                  <a href='/'>
+                  <LinkMui href='#'>
                     <img
                       className={classes.footerSocialLogo}
-                      src='./assets/img/social/facebook-logo.png'
+                      src='/assets/img/social/facebook-logo.png'
                       alt='apple-logo'
                     ></img>
-                  </a>
+                  </LinkMui>
                 </Grid>
                 <Grid item>
-                  <a href='/'>
+                  <LinkMui href='#'>
                     <img
                       className={classes.footerSocialLogo}
-                      src='./assets/img/social/zalo-logo.png'
+                      src='/assets/img/social/zalo-logo.png'
                       alt='apple-logo'
                     ></img>
-                  </a>
+                  </LinkMui>
                 </Grid>
               </Grid>
             </Grid>
@@ -205,7 +206,7 @@ export default function MyFooter() {
           <Grid item md={2} container className={classes.mdDownCenter}>
             <img
               className={classes.footerCompanyLogo}
-              src='./assets/img/social/zion-logo.jpg'
+              src='/assets/img/social/zion-logo.jpg'
               alt='zion-logo'
             ></img>
           </Grid>
@@ -237,9 +238,12 @@ export default function MyFooter() {
             <Grid item xs={12}>
               <span className={classes.footerGroupContentLight}>
                 Email:{' '}
-                <a className={classes.footerEmail} href='mailto:support@tix.vn'>
+                <LinkMui
+                  className={classes.footerEmail}
+                  href='mailto:support@tix.vn'
+                >
                   support@tix.vn
-                </a>
+                </LinkMui>
               </span>
             </Grid>
           </Grid>
@@ -247,7 +251,7 @@ export default function MyFooter() {
             {' '}
             <img
               className={classes.footerConfirmLogo}
-              src='./assets/img/social/bocongthuong-logo.png'
+              src='/assets/img/social/bocongthuong-logo.png'
               alt='bocongthuong-logo'
             ></img>
           </Grid>

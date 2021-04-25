@@ -2,83 +2,83 @@
   "cooporateLogo": [
     {
       "name": "123go",
-      "src": "./assets/img/cooporate_logo/123go.png"
+      "src": "/assets/img/cooporate_logo/123go.png"
     },
     {
       "name": "agribank",
-      "src": "./assets/img/cooporate_logo/agribank.png"
+      "src": "/assets/img/cooporate_logo/agribank.png"
     },
     {
       "name": "bhd",
-      "src": "./assets/img/cooporate_logo/bhd.png"
+      "src": "/assets/img/cooporate_logo/bhd.png"
     },
     {
       "name": "bt",
-      "src": "./assets/img/cooporate_logo/bt.jpg"
+      "src": "/assets/img/cooporate_logo/bt.jpg"
     },
     {
       "name": "cgv",
-      "src": "./assets/img/cooporate_logo/cgv.png"
+      "src": "/assets/img/cooporate_logo/cgv.png"
     },
     {
       "name": "cinestar",
-      "src": "./assets/img/cooporate_logo/cinestar.png"
+      "src": "/assets/img/cooporate_logo/cinestar.png"
     },
     {
       "name": "cnx",
-      "src": "./assets/img/cooporate_logo/cnx.jpg"
+      "src": "/assets/img/cooporate_logo/cnx.jpg"
     },
     {
       "name": "dcine",
-      "src": "./assets/img/cooporate_logo/dcine.png"
+      "src": "/assets/img/cooporate_logo/dcine.png"
     },
     {
       "name": "dongdacinema",
-      "src": "./assets/img/cooporate_logo/dongdacinema.png"
+      "src": "/assets/img/cooporate_logo/dongdacinema.png"
     },
     {
       "name": "galaxycine",
-      "src": "./assets/img/cooporate_logo/galaxycine.png"
+      "src": "/assets/img/cooporate_logo/galaxycine.png"
     },
     {
       "name": "ivb",
-      "src": "./assets/img/cooporate_logo/ivb.png"
+      "src": "/assets/img/cooporate_logo/ivb.png"
     },
     {
       "name": "laban",
-      "src": "./assets/img/cooporate_logo/laban.png"
+      "src": "/assets/img/cooporate_logo/laban.png"
     },
     {
       "name": "lotte",
-      "src": "./assets/img/cooporate_logo/lotte.png"
+      "src": "/assets/img/cooporate_logo/lotte.png"
     },
     {
       "name": "megags",
-      "src": "./assets/img/cooporate_logo/megags.png"
+      "src": "/assets/img/cooporate_logo/megags.png"
     },
     {
       "name": "payoo",
-      "src": "./assets/img/cooporate_logo/payoo.jpg"
+      "src": "/assets/img/cooporate_logo/payoo.jpg"
     },
     {
       "name": "startlight",
-      "src": "./assets/img/cooporate_logo/startlight.png"
+      "src": "/assets/img/cooporate_logo/startlight.png"
     },
     {
       "name": "touch",
-      "src": "./assets/img/cooporate_logo/touch.png"
+      "src": "/assets/img/cooporate_logo/touch.png"
     },
     {
       "name": "vcb",
-      "src": "./assets/img/cooporate_logo/vcb.png"
+      "src": "/assets/img/cooporate_logo/vcb.png"
     },
     {
       "name": "viettinbank",
-      "src": "./assets/img/cooporate_logo/viettinbank.png"
+      "src": "/assets/img/cooporate_logo/viettinbank.png"
     },
     {
       "name": "zalopay",
-      "src": "./assets/img/cooporate_logo/zalopay.png"
+      "src": "/assets/img/cooporate_logo/zalopay.png"
     }
   ]
 }

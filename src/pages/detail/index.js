@@ -4,11 +4,9 @@ import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core';
 import { Container, Grid } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Rating from '@material-ui/lab/Rating';
 
-import NavHeader from '../../components/header';
 import FilmCard from './FilmCard';
 import TabControl from './TabControl';
 
@@ -198,8 +196,6 @@ const BuyTicketButton = withStyles({
 export default function FilmInfor(props) {
   const classes = useStyles();
   const { filmItem } = props;
-  const [currentLocation, setCurrentLocation] = React.useState('Hồ Chí Minh');
-  const isLogin = false;
 
   const renderTypeFilm = () => {
     const ageAllow = Math.floor(Math.random() * 4);
@@ -229,83 +225,72 @@ export default function FilmInfor(props) {
   };
 
   return (
-    <div>
-      <NavHeader
-        isLogin={isLogin}
-        currentLocation={currentLocation}
-        setCurrentLocation={setCurrentLocation}
-      />
-      <Box marginTop='60px'></Box>
-      {/* Film infor page */}
-      <div className={classes.Container} id='thong-tin'>
-        {/* Background */}
-        <div className={classes.BackgroundContainer}>
-          <img
-            className={classes.Background}
-            src={filmItem.hinhAnh}
-            alt={filmItem.tenPhim}
-          ></img>
-          <div className={classes.BackgroundGradiant}></div>
-        </div>
-        {/* Main infor */}
-        <Container maxWidth='md' className={classes.filmInforMain}>
-          <Grid container>
-            {/* Film card */}
-            <Grid item md={3} sm={4} xs={6}>
-              <div className={classes.filmCard}>
-                <FilmCard filmItem={filmItem} />
-              </div>
-            </Grid>
-            {/* Film name */}
-            <Grid item md={6} sm={4} xs={6}>
-              <div className={classes.filmDetail}>
-                <div className={classes.filmDetailDate}>
-                  {filmItem.ngayKhoiChieu.slice(0, 10)}
-                </div>
-                <div className={classes.filmDetailName}>
-                  {renderTypeFilm()}
-                  {filmItem.tenPhim}
-                </div>
-                {renderFilmDetailInfor()}
-                <div className={classes.filmDetailButton}>
-                  <BuyTicketButton>Mua Vé</BuyTicketButton>
-                </div>
-              </div>
-            </Grid>
-            {/* Film rate */}
-            <Grid item md={3} sm={4} xs={12}>
-              <div className={classes.filmRate}>
-                <div className={classes.filmRatePointContainer}>
-                  <CircularProgress
-                    className={classes.filmRatePointCircle}
-                    variant='determinate'
-                    value={filmItem.danhGia * 10}
-                  />
-                  <div className={classes.filmRatePoint}>
-                    {filmItem.danhGia}
-                  </div>
-                </div>
-                <Rating
-                  name='half-rating-read'
-                  defaultValue={filmItem.danhGia / 2.0}
-                  precision={0.5}
-                  readOnly
-                  classes={{
-                    root: classes.cardRateStar,
-                  }}
-                />
-                <div className={classes.filmRateHistory}>
-                  {renderFilmRateHistory()}
-                </div>
-              </div>
-            </Grid>
-          </Grid>
-        </Container>
-        {/* Sub infor */}
-        <Container maxWidth='md' className={classes.filmInforSub}>
-          <TabControl filmItem={filmItem} />
-        </Container>
+    <div className={classes.Container}>
+      {/* Background */}
+      <div className={classes.BackgroundContainer}>
+        <img
+          className={classes.Background}
+          src={filmItem.hinhAnh}
+          alt={filmItem.tenPhim}
+        ></img>
+        <div className={classes.BackgroundGradiant}></div>
       </div>
+      {/* Main infor */}
+      <Container maxWidth='md' className={classes.filmInforMain}>
+        <Grid container>
+          {/* Film card */}
+          <Grid item md={3} sm={4} xs={6}>
+            <div className={classes.filmCard}>
+              <FilmCard filmItem={filmItem} />
+            </div>
+          </Grid>
+          {/* Film name */}
+          <Grid item md={6} sm={4} xs={6}>
+            <div className={classes.filmDetail}>
+              <div className={classes.filmDetailDate}>
+                {filmItem.ngayKhoiChieu.slice(0, 10)}
+              </div>
+              <div className={classes.filmDetailName}>
+                {renderTypeFilm()}
+                {filmItem.tenPhim}
+              </div>
+              {renderFilmDetailInfor()}
+              <div className={classes.filmDetailButton}>
+                <BuyTicketButton>Mua Vé</BuyTicketButton>
+              </div>
+            </div>
+          </Grid>
+          {/* Film rate */}
+          <Grid item md={3} sm={4} xs={12}>
+            <div className={classes.filmRate}>
+              <div className={classes.filmRatePointContainer}>
+                <CircularProgress
+                  className={classes.filmRatePointCircle}
+                  variant='determinate'
+                  value={filmItem.danhGia * 10}
+                />
+                <div className={classes.filmRatePoint}>{filmItem.danhGia}</div>
+              </div>
+              <Rating
+                name='half-rating-read'
+                defaultValue={filmItem.danhGia / 2.0}
+                precision={0.5}
+                readOnly
+                classes={{
+                  root: classes.cardRateStar,
+                }}
+              />
+              <div className={classes.filmRateHistory}>
+                {renderFilmRateHistory()}
+              </div>
+            </div>
+          </Grid>
+        </Grid>
+      </Container>
+      {/* Sub infor */}
+      <Container maxWidth='md' className={classes.filmInforSub}>
+        <TabControl filmItem={filmItem} />
+      </Container>
     </div>
   );
 }

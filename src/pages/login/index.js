@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import LinkMui from '@material-ui/core/Link';
@@ -11,7 +10,6 @@ import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
   loginBackground: {
-    width: '100vw',
     height: '100vh',
     display: 'flex',
     justifyContent: 'center',
@@ -227,9 +225,9 @@ export default function LoginPage() {
         {/* Form header */}
         <div className={classes.formHeader}>
           <div className={classes.headerButton}>Đăng Nhập</div>
-          <Link className={classes.headerButtonPrimary} to='/dang-ky/'>
+          <LinkMui className={classes.headerButtonPrimary} href='/register/'>
             Đăng Ký
-          </Link>
+          </LinkMui>
         </div>
         {/* Form body */}
         <div className={classes.formBodyContainer}>
@@ -276,9 +274,9 @@ export default function LoginPage() {
           </div>
           {/* Main button */}
           <div className={classes.formBodyButtonContainer}>
-            <Link className={classes.formBodyButtonLink} to='/'>
+            <LinkMui className={classes.formBodyButtonLink} href='/'>
               <MainButton>TRỞ LẠI</MainButton>
-            </Link>
+            </LinkMui>
             <MainButtonPrimary onClick={handleLoginButton}>
               ĐĂNG NHẬP
             </MainButtonPrimary>

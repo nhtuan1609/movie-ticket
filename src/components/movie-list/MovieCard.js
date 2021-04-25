@@ -267,7 +267,7 @@ export default function MovieCard(props) {
         </div>
         <LinkMui
           className={`movie-card__hover-modal hover-display ${classes.cardHoverModal}`}
-          href='/'
+          href={`/movie/${movieItem.maPhim}`}
         ></LinkMui>
         <div
           onClick={openIsShowTrailerVideo}
