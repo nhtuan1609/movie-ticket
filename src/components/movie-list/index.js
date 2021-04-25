@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -10,7 +11,6 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 import './index.css';
-import { movieList } from './MovieListData.json';
 import MovieCard from './MovieCard';
 
 const useStyles = makeStyles((theme) => ({
@@ -59,8 +59,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MovieCardSlider() {
+export default function MovieCardSlider(props) {
   const classes = useStyles();
+  const { movieList } = props;
   const [limitItem, setLimitItem] = React.useState(3);
 
   const handleLoadMoreItems = (maxItem = 0) => () => {
@@ -165,7 +166,7 @@ export default function MovieCardSlider() {
         {renderItem(movieList)}
       </Slider>
       <div className={classes.listContainer}>
-        {renderItem(movieList, limitItem, '500px')}
+        {renderItem(movieList, limitItem, '96%')}
         <div
           onClick={handleLoadMoreItems(movieList.length)}
           className={classes.listLoadMoreButton}
@@ -176,3 +177,24 @@ export default function MovieCardSlider() {
     </Fragment>
   );
 }
+
+MovieCardSlider.propTypes = {
+  movieList: PropTypes.arrayOf(PropTypes.object),
+};
+
+MovieCardSlider.defaultProps = {
+  movieList: [
+    {
+      maPhim: 4125,
+      tenPhim: 'Ròm',
+      biDanh: 'rom',
+      trailer: 'https://www.youtube.com/watch?v=XRm1P7oGpMQ',
+      hinhAnh: 'http://movie0706.cybersoft.edu.vn/hinhanh/rom_gp02.jpg',
+      moTa:
+        'Lấy bối cảnh từ một khu chung cư cũ đang chờ giải tỏa tại Sài Gòn, Ròm kể câu chuyện về cuộc sống của những người dân lao động nơi đây. Họ đều chơi số đề với hy vọng kiếm được một khoản tiền lớn để đổi đời. Ròm là cậu bé làm “cò đề” để kiếm sống qua ngày, chuyên tư vấn cho người dân những con số may mắn để họ có cơ may trúng đề. Một hôm cậu giúp bà già kia trúng đề lớn nên được mọi người tin tưởng nhưng sau nhiều lần thua cậu bị người dân mất tin tưởng',
+      maNhom: 'GP02',
+      ngayKhoiChieu: '2020-10-11T00:00:00',
+      danhGia: 10,
+    },
+  ],
+};

@@ -279,7 +279,8 @@ export default function MovieCard(props) {
           <div className={classes.cardRatePoint}>{movieItem.danhGia}</div>
           <Rating
             name='half-rating-read'
-            defaultValue={movieItem.danhGia / 2.0}
+            defaultValue={0}
+            value={Math.round(movieItem.danhGia) / 2}
             precision={0.5}
             readOnly
             classes={{
@@ -344,9 +345,14 @@ export default function MovieCard(props) {
 
 MovieCard.propTypes = {
   movieItem: PropTypes.shape({
+    maPhim: PropTypes.string,
     tenPhim: PropTypes.string,
+    biDanh: PropTypes.string,
     trailer: PropTypes.string,
     hinhAnh: PropTypes.string,
+    moTa: PropTypes.string,
+    maNhom: PropTypes.string,
+    ngayKhoiChieu: PropTypes.string,
     danhGia: PropTypes.number,
   }),
 };

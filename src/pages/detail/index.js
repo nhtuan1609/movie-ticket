@@ -1,11 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 
 import { makeStyles, withStyles } from '@material-ui/core';
 import { Container, Grid } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import Rating from '@material-ui/lab/Rating';
+import { useSelector, useDispatch } from 'react-redux';
+import MovieAction from '../../redux/action/movie';
+import { useParams } from 'react-router-dom';
 
 import FilmCard from './FilmCard';
 import TabControl from './TabControl';
@@ -193,9 +195,15 @@ const BuyTicketButton = withStyles({
   },
 })(Button);
 
-export default function FilmInfor(props) {
+export default function FilmInfor() {
   const classes = useStyles();
-  const { filmItem } = props;
+  const movieDetail = useSelector((state) => state.movie.detail);
+  const { movieId: maPhim } = useParams();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(MovieAction.fetchDetail({ maPhim }));
+  }, [dispatch, maPhim]);
+  console.log({ movieDetail: movieDetail });
 
   const renderTypeFilm = () => {
     const ageAllow = Math.floor(Math.random() * 4);
@@ -230,8 +238,8 @@ export default function FilmInfor(props) {
       <div className={classes.BackgroundContainer}>
         <img
           className={classes.Background}
-          src={filmItem.hinhAnh}
-          alt={filmItem.tenPhim}
+          src={movieDetail.hinhAnh}
+          alt={movieDetail.tenPhim}
         ></img>
         <div className={classes.BackgroundGradiant}></div>
       </div>
@@ -241,18 +249,18 @@ export default function FilmInfor(props) {
           {/* Film card */}
           <Grid item md={3} sm={4} xs={6}>
             <div className={classes.filmCard}>
-              <FilmCard filmItem={filmItem} />
+              <FilmCard filmItem={movieDetail} />
             </div>
           </Grid>
           {/* Film name */}
           <Grid item md={6} sm={4} xs={6}>
             <div className={classes.filmDetail}>
               <div className={classes.filmDetailDate}>
-                {filmItem.ngayKhoiChieu.slice(0, 10)}
+                {movieDetail.ngayKhoiChieu.slice(0, 10)}
               </div>
               <div className={classes.filmDetailName}>
                 {renderTypeFilm()}
-                {filmItem.tenPhim}
+                {movieDetail.tenPhim}
               </div>
               {renderFilmDetailInfor()}
               <div className={classes.filmDetailButton}>
@@ -267,13 +275,16 @@ export default function FilmInfor(props) {
                 <CircularProgress
                   className={classes.filmRatePointCircle}
                   variant='determinate'
-                  value={filmItem.danhGia * 10}
+                  value={movieDetail.danhGia * 10}
                 />
-                <div className={classes.filmRatePoint}>{filmItem.danhGia}</div>
+                <div className={classes.filmRatePoint}>
+                  {movieDetail.danhGia}
+                </div>
               </div>
               <Rating
                 name='half-rating-read'
-                defaultValue={filmItem.danhGia / 2.0}
+                defaultValue={0}
+                value={Math.round(movieDetail.danhGia) / 2}
                 precision={0.5}
                 readOnly
                 classes={{
@@ -289,38 +300,8 @@ export default function FilmInfor(props) {
       </Container>
       {/* Sub infor */}
       <Container maxWidth='md' className={classes.filmInforSub}>
-        <TabControl filmItem={filmItem} />
+        <TabControl filmItem={movieDetail} />
       </Container>
     </div>
   );
 }
-
-FilmInfor.propTypes = {
-  filmItem: PropTypes.shape({
-    maPhim: PropTypes.number,
-    tenPhim: PropTypes.string,
-    biDanh: PropTypes.string,
-    trailer: PropTypes.string,
-    hinhAnh: PropTypes.string,
-    moTa: PropTypes.string,
-    maNhom: PropTypes.string,
-    ngayKhoiChieu: PropTypes.string,
-    danhGia: PropTypes.number,
-  }),
-};
-
-FilmInfor.defaultProps = {
-  filmItem: {
-    maPhim: 1315,
-    tenPhim: 'Lừa Đểu Gặp Lừa Đảo',
-    biDanh: 'lua-deu-gap-lua-dao',
-    trailer: 'https://www.youtube.com/embed/T36HGZagV5w',
-    hinhAnh:
-      'http://movie0706.cybersoft.edu.vn/hinhanh/lua-deu-gap-lua-dao_gp02.jpg',
-    moTa:
-      'Lừa Đểu Gặp Lừa Đảo xoay quanh lần gặp gỡ "oan gia" giữa siêu lừa đảo Tower cùng cô nàng bị lừa tình Ina, cả 2 sẽ cùng hợp tác trong phi vụ "lừa lại tên lừa đểu" Petch - tên bạn trai bội bạc của Ina bằng những chiêu trò lừa đảo không hồi kết.',
-    maNhom: 'GP02',
-    ngayKhoiChieu: '2021-02-24T00:00:00',
-    danhGia: 10,
-  },
-};
