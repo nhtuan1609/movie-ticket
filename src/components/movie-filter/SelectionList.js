@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   dropMenuContainer: {
@@ -41,6 +42,17 @@ const useStyles = makeStyles((theme) => ({
       color: 'white',
     },
   },
+  tabEmpty: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    paddingTop: '30px',
+    paddingBottom: '30px',
+    fontSize: '16px',
+    fontWeight: '500',
+    color: theme.palette.textColor.main,
+  },
 }));
 
 export default function SelectionList(props) {
@@ -52,20 +64,33 @@ export default function SelectionList(props) {
     minWidth,
   } = props;
 
+  const renderList = (DataSelectionList, handleSelectItem) => {
+    if (DataSelectionList.length === 0) {
+      return (
+        <div className={classes.tabEmpty}>
+          <CircularProgress />
+          <div>Loading...</div>
+        </div>
+      );
+    } else {
+      return DataSelectionList.map((item, index) => (
+        <ListItem
+          onClick={handleSelectItem}
+          key={index}
+          data-id={item.code}
+          className={classes.dropDownMenuItem}
+        >
+          {item.name}
+        </ListItem>
+      ));
+    }
+  };
+
   return (
     <ClickAwayListener onClickAway={toggleIsShowSelectionList}>
       <div className={classes.dropMenuContainer} style={{ minWidth: minWidth }}>
         <List className={classes.dropDownMenuList}>
-          {DataSelectionList.map((item, index) => (
-            <ListItem
-              onClick={handleSelectItem}
-              key={index}
-              data-id={item.code}
-              className={classes.dropDownMenuItem}
-            >
-              {item.name}
-            </ListItem>
-          ))}
+          {renderList(DataSelectionList, handleSelectItem)}
         </List>
       </div>
     </ClickAwayListener>

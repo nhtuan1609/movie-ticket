@@ -1,18 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import KeyboardArrowDownOutlinedIcon from '@material-ui/icons/KeyboardArrowDownOutlined';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-
-import {
-  FilmListData,
-  CinemaListData,
-  DateListData,
-  SessionListData,
-} from './SelectionData.json';
+import { useSelector, useDispatch } from 'react-redux';
 
 import SelectionList from './SelectionList';
+import MovieAction from '../../redux/action/movie';
 
 const useStyles = makeStyles((theme) => ({
   homeToolContainer: {
@@ -76,37 +71,29 @@ const BuyTicketButton = withStyles({
   },
 })(Button);
 
-export default function HomeTool() {
+export default function MovieFilter(props) {
   const classes = useStyles();
+  const { movieList } = props;
+
   const [isShowFilmList, setIsShowFilmList] = React.useState(false);
   const [isShowCinemaList, setIsShowCinemaList] = React.useState(false);
   const [isShowDateList, setIsShowDateList] = React.useState(false);
   const [isShowSessionList, setIsShowSessionList] = React.useState(false);
 
-  const [currentFilm, setCurrentFilm] = React.useState('');
+  const [currentMovie, setCurrentMovie] = React.useState('');
   const [currentCinema, setCurrentCinema] = React.useState('');
   const [currentDate, setCurrentDate] = React.useState('');
   const [currentSession, setCurrentSession] = React.useState('');
 
-  const filmList = FilmListData;
-  const [cinemaList, setCinemaList] = React.useState([
-    {
-      code: '',
-      name: 'Vui lòng chọn phim',
-    },
-  ]);
-  const [dateList, setDateList] = React.useState([
-    {
-      code: '',
-      name: 'Vui lòng chọn rạp',
-    },
-  ]);
-  const [sessionList, setSessionList] = React.useState([
-    {
-      code: '',
-      name: 'Vui lòng chọn ngày',
-    },
-  ]);
+  const movieDetail = useSelector((state) => state.movie.detail);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      MovieAction.fetchDetail({
+        maPhim: currentMovie,
+      })
+    );
+  }, [dispatch, currentMovie]);
 
   const toggleIsShowFilmList = () => {
     setIsShowFilmList(!isShowFilmList);
@@ -125,29 +112,19 @@ export default function HomeTool() {
   };
 
   const handleSelectFilm = (event) => {
-    let filmCode = event.target.dataset.id;
-    setCurrentFilm(filmCode);
-
+    let movieCode = event.target.dataset.id;
+    setCurrentMovie(movieCode);
     setCurrentCinema('');
-    setCinemaList(CinemaListData);
-
     setCurrentDate('');
-    setDateList([{ code: '', name: 'Vui lòng chọn rạp' }]);
-
     setCurrentSession('');
-    setSessionList([{ code: '', name: 'Vui lòng chọn ngày' }]);
   };
 
   const handleSelectCinema = (event) => {
-    if (currentFilm !== '') {
+    if (currentMovie !== '') {
       let cinemaCode = event.target.dataset.id;
       setCurrentCinema(cinemaCode);
-
       setCurrentDate('');
-      setDateList(DateListData);
-
       setCurrentSession('');
-      setSessionList([{ code: '', name: 'Vui lòng chọn ngày' }]);
     }
   };
 
@@ -155,9 +132,7 @@ export default function HomeTool() {
     if (currentCinema !== '') {
       let dateCode = event.target.dataset.id;
       setCurrentDate(dateCode);
-
       setCurrentSession('');
-      setSessionList(SessionListData);
     }
   };
 
@@ -174,23 +149,103 @@ export default function HomeTool() {
     if (itemIndex !== -1) {
       name = listData[itemIndex].name;
     }
-
     return name;
   };
 
   const handleBuyTicket = () => {
     if (
-      currentFilm !== '' &&
+      currentMovie !== '' &&
       currentCinema !== '' &&
       currentDate !== '' &&
       currentSession !== ''
     ) {
       console.log('Buy Ticket:');
-      console.log('Film Code: ', currentFilm);
+      console.log('Film Code: ', currentMovie);
       console.log('Cinema Code:', currentCinema);
       console.log('Date Code: ', currentDate);
       console.log('Session Code: ', currentSession);
     }
+  };
+
+  const filterMovieNameList = (movieList) =>
+    movieList.map((item, index) => ({
+      name: item.tenPhim,
+      code: item.maPhim.toString(),
+    }));
+
+  const filterCinemaList = (movieDetail, currentMovie) => {
+    if (currentMovie === '') {
+      return [{ code: '', name: 'Vui lòng chọn ngày' }];
+    } else if (movieDetail.maPhim !== JSON.parse(currentMovie)) {
+      return [];
+    }
+
+    let schedule = movieDetail.lichChieu;
+    let cinemaListRaw = schedule.map((item, index) => ({
+      name: item.thongTinRap.tenCumRap,
+      code: item.thongTinRap.maRap.toString(),
+    }));
+
+    let cinemaList = cinemaListRaw.filter(
+      (item, index, self) =>
+        self.findIndex((itemSelf) => itemSelf.name === item.name) === index
+    );
+
+    return cinemaList;
+  };
+
+  const filterDateList = (movieDetail, currentMovie, currentCinema) => {
+    if (currentCinema === '') {
+      return [{ code: '', name: 'Vui lòng chọn ngày' }];
+    } else if (movieDetail.maPhim !== JSON.parse(currentMovie)) {
+      return [];
+    }
+
+    let schedule = movieDetail.lichChieu;
+    let scheduleCinemaFiltered = schedule.filter((item, index) => {
+      return item.thongTinRap.maRap.toString() === currentCinema;
+    });
+
+    let dateListRaw = scheduleCinemaFiltered.map((item, index) => ({
+      name: item.ngayChieuGioChieu.slice(0, 10),
+      code: item.ngayChieuGioChieu.slice(0, 10),
+    }));
+
+    let dateList = dateListRaw.filter(
+      (item, index, self) =>
+        self.findIndex((itemSelf) => itemSelf.name === item.name) === index
+    );
+
+    return dateList;
+  };
+
+  const filterSessionList = (
+    movieDetail,
+    currentMovie,
+    currentCinema,
+    currentDate
+  ) => {
+    if (currentDate === '') {
+      return [{ code: '', name: 'Vui lòng chọn ngày' }];
+    } else if (movieDetail.maPhim !== JSON.parse(currentMovie)) {
+      return [];
+    }
+
+    let schedule = movieDetail.lichChieu;
+    let scheduleCinemaFilter = schedule.filter((item, index) => {
+      return item.thongTinRap.maRap.toString() === currentCinema;
+    });
+
+    let scheduleDateFilter = scheduleCinemaFilter.filter((item, index) => {
+      return item.ngayChieuGioChieu.slice(0, 10) === currentDate;
+    });
+
+    let sessionList = scheduleDateFilter.map((item, index) => ({
+      name: item.ngayChieuGioChieu.slice(11, 20),
+      code: item.ngayChieuGioChieu.slice(11, 20),
+    }));
+
+    return sessionList;
   };
 
   return (
@@ -201,17 +256,17 @@ export default function HomeTool() {
         style={{ width: '30%' }}
       >
         <span className={classes.homeToolGroupLabel}>
-          {currentFilm === ''
+          {currentMovie === ''
             ? 'Phim'
-            : decodeCodeToName(filmList, currentFilm)}
+            : decodeCodeToName(filterMovieNameList(movieList), currentMovie)}
         </span>
         <KeyboardArrowDownOutlinedIcon className={classes.dropDownIcon} />
         {isShowFilmList && (
           <SelectionList
             toggleIsShowSelectionList={toggleIsShowFilmList}
-            DataSelectionList={filmList}
+            DataSelectionList={filterMovieNameList(movieList)}
             handleSelectItem={handleSelectFilm}
-            minWidth={'600px'}
+            minWidth={'300px'}
           />
         )}
       </div>
@@ -220,13 +275,16 @@ export default function HomeTool() {
         <div className={classes.homeToolGroupLabel}>
           {currentCinema === ''
             ? 'Rạp'
-            : decodeCodeToName(cinemaList, currentCinema)}
+            : decodeCodeToName(
+                filterCinemaList(movieDetail, currentMovie),
+                currentCinema
+              )}
         </div>
         <KeyboardArrowDownOutlinedIcon className={classes.dropDownIcon} />
         {isShowCinemaList && (
           <SelectionList
             toggleIsShowSelectionList={toggleIsShowCinemaList}
-            DataSelectionList={cinemaList}
+            DataSelectionList={filterCinemaList(movieDetail, currentMovie)}
             handleSelectItem={handleSelectCinema}
             minWidth={'200px'}
           />
@@ -237,15 +295,22 @@ export default function HomeTool() {
         <div className={classes.homeToolGroupLabel}>
           {currentDate === ''
             ? 'Ngày xem'
-            : decodeCodeToName(dateList, currentDate)}
+            : decodeCodeToName(
+                filterDateList(movieDetail, currentMovie, currentCinema),
+                currentDate
+              )}
         </div>
         <KeyboardArrowDownOutlinedIcon className={classes.dropDownIcon} />
         {isShowDateList && (
           <SelectionList
             toggleIsShowSelectionList={toggleIsShowDateList}
-            DataSelectionList={dateList}
+            DataSelectionList={filterDateList(
+              movieDetail,
+              currentMovie,
+              currentCinema
+            )}
             handleSelectItem={handleSelectDate}
-            minWidth={'200px'}
+            minWidth={'100px'}
           />
         )}
       </div>
@@ -254,15 +319,28 @@ export default function HomeTool() {
         <div className={classes.homeToolGroupLabel}>
           {currentSession === ''
             ? 'Suất chiếu'
-            : decodeCodeToName(sessionList, currentSession)}
+            : decodeCodeToName(
+                filterSessionList(
+                  movieDetail,
+                  currentMovie,
+                  currentCinema,
+                  currentDate
+                ),
+                currentSession
+              )}
         </div>
         <KeyboardArrowDownOutlinedIcon className={classes.dropDownIcon} />
         {isShowSessionList && (
           <SelectionList
             toggleIsShowSelectionList={toggleIsShowSessionList}
-            DataSelectionList={sessionList}
+            DataSelectionList={filterSessionList(
+              movieDetail,
+              currentMovie,
+              currentCinema,
+              currentDate
+            )}
             handleSelectItem={handleSelectSession}
-            minWidth={'200px'}
+            minWidth={'80px'}
           />
         )}
       </div>

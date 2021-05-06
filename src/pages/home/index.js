@@ -3,7 +3,7 @@ import { Box, Container } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 
 import MyCarousel from '../../components/carousel';
-import HomeTool from '../../components/home-tool';
+import MovieFilter from '../../components/movie-filter';
 import MovieCardSlider from '../../components/movie-list';
 import MovieAction from '../../redux/action/movie';
 
@@ -32,7 +32,7 @@ export default function HomePage() {
     <div>
       <MyCarousel />
       <Box position='relative'>
-        <HomeTool />
+        <MovieFilter movieList={movieList} />
       </Box>
       <div id='lich-chieu' style={{ backgroundColor: 'white' }}>
         <Container maxWidth='md'>
