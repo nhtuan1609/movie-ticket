@@ -1,4 +1,10 @@
-import { Detail, Home, Login, Register } from '../pages';
+import {
+  Home,
+  Login,
+  Register,
+  MovieDetailPage,
+  CinemaDetailPage,
+} from '../pages';
 
 export const mainRouter = [
   {
@@ -19,6 +25,11 @@ export const mainRouter = [
   {
     path: '/movie/:movieId',
     exact: false,
-    Component: Detail,
+    Component: MovieDetailPage,
+  },
+  {
+    path: '/cinema/:cinemaId',
+    exact: false,
+    Component: CinemaDetailPage,
   },
 ];

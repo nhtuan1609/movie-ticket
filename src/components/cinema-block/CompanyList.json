@@ -1,0 +1,179 @@
+{
+  "companyList": [
+    {
+      "code": "0001",
+      "name": "BHD Star",
+      "logoSrc": "/assets/img/cooporate_logo/bhd.png",
+      "cinemaList": [
+        {
+          "code": "0001-01",
+          "company": "BHD Star",
+          "location": "Bitexco",
+          "address": "L3-Bitexco Icon 68, 2 Hải Triều, Q.1",
+          "imageSrc": "/assets/img/cinema/bhd-star/bhd-star-bitexco.png"
+        },
+        {
+          "code": "0001-02",
+          "company": "BHD Star",
+          "location": "Vincom Thảo Điền",
+          "address": "L5-Megamall, 159 XL Hà Nội, Q.2",
+          "imageSrc": "/assets/img/cinema/bhd-star/bhd-star-vincom-thao-dien.png"
+        },
+        {
+          "code": "0001-03",
+          "company": "BHD Star",
+          "location": "Vincom 3/2",
+          "address": "L5-Vincom 3/2, 3C Đường 3/2, Q.10",
+          "imageSrc": "/assets/img/cinema/bhd-star/bhd-star-vincom-3-2.png"
+        },
+        {
+          "code": "0001-04",
+          "company": "BHD Star",
+          "location": "Phạm Hùng",
+          "address": "L4-Satra Phạm Hùng, C6/27 Phạm Hùng, Bình Chánh",
+          "imageSrc": "/assets/img/cinema/bhd-star/bhd-star-pham-hung.png"
+        },
+        {
+          "code": "0001-05",
+          "company": "BHD Star",
+          "location": "Vincom Quang Trung",
+          "address": "B1-Vincom QT, 190 Quang Trung, Gò Vấp",
+          "imageSrc": "/assets/img/cinema/bhd-star/bhd-star-vincom-quang-trung.png"
+        },
+        {
+          "code": "0001-06",
+          "company": "BHD Star",
+          "location": "Vincom Lê Văn Việt",
+          "address": "L4-Vincom Plaza, 50 Lê Văn Việt, Q.9",
+          "imageSrc": "/assets/img/cinema/bhd-star/bhd-star-vincom-le-van-viet.png"
+        }
+      ]
+    },
+    {
+      "code": "0002",
+      "name": "Lotte",
+      "logoSrc": "/assets/img/cooporate_logo/lotte.png",
+      "cinemaList": [
+        {
+          "code": "0002-01",
+          "company": "Lotte",
+          "location": "Thủ Đức",
+          "address": "L2-Joy Citipoint, KCX Linh Trung, Thủ Đức",
+          "imageSrc": "/assets/img/cinema/lotte/lotte-cinema-thu-duc.jpg"
+        },
+        {
+          "code": "0002-02",
+          "company": "Lotte",
+          "location": "Cộng Hòa",
+          "address": "L4-Pico Plaza, 20 Cộng Hòa, Tân Bình",
+          "imageSrc": "/assets/img/cinema/lotte/lotte-cinema-cong-hoa.jpg"
+        },
+        {
+          "code": "0002-03",
+          "company": "Lotte",
+          "location": "Cantavil",
+          "address": "L7-Cantavil Premier, Xa Lộ Hà Nội, Q.2",
+          "imageSrc": "/assets/img/cinema/lotte/lotte-cinema-cantavil.jpg"
+        },
+        {
+          "code": "0002-04",
+          "company": "Lotte",
+          "location": "Phú Thọ",
+          "address": "L4-Lotte Mart Phú Thọ, Q.11",
+          "imageSrc": "/assets/img/cinema/lotte/lotte-cinema-phu-tho.jpg"
+        },
+        {
+          "code": "0002-05",
+          "company": "Lotte",
+          "location": "Nam Sài Gòn",
+          "address": "L3-Lotte Mart NSG, 469 Nguyễn Hữu Thọ, Q.7",
+          "imageSrc": "/assets/img/cinema/lotte/lotte-cinema-nam-sai-gon.jpg"
+        },
+        {
+          "code": "0002-06",
+          "company": "Lotte",
+          "location": "Gò Vấp",
+          "address": "L3-Lotte Mart, 242 Nguyễn Văn Lượng, Gò Vấp",
+          "imageSrc": "/assets/img/cinema/lotte/lotte-cinema-go-vap.jpg"
+        }
+      ]
+    },
+    {
+      "code": "0003",
+      "name": "CNS",
+      "logoSrc": "/assets/img/cooporate_logo/cinestar.png",
+      "cinemaList": [
+        {
+          "code": "0003-01",
+          "company": "CNS",
+          "location": "Hai Bà Trưng",
+          "address": "135 Hai Bà Trưng, Bến Nghé, Q.1",
+          "imageSrc": "/assets/img/cinema/cinestar/cinestar-hai-ba-trung.jpg"
+        },
+        {
+          "code": "0003-02",
+          "company": "CNS",
+          "location": "Quốc Thanh",
+          "address": "271 Nguyễn Trãi, Q.1",
+          "imageSrc": "/assets/img/cinema/cinestar/cinestar-quoc-thanh.jpg"
+        }
+      ]
+    },
+    {
+      "code": "0004",
+      "name": "Beta Cinemas",
+      "logoSrc": "/assets/img/cooporate_logo/bt.jpg",
+      "cinemaList": [
+        {
+          "code": "0004-01",
+          "company": "Beta Cinemas",
+          "location": "Quang Trung",
+          "address": "645 Quang Trung, Phường 11, Gò Vấp, Thành phố Hồ Chí Minh",
+          "imageSrc": "/assets/img/cinema/beta-cinemas/beta-cinemas-quang-trung.png"
+        }
+      ]
+    },
+    {
+      "code": "0005",
+      "name": "DDC",
+      "logoSrc": "/assets/img/cooporate_logo/dongdacinema.png",
+      "cinemaList": [
+        {
+          "code": "0005-01",
+          "company": "DDC",
+          "location": "Đống Đa",
+          "address": "890 Trần Hưng Đạo, Q.5",
+          "imageSrc": "/assets/img/cinema/ddc/ddc-dong-da.jpg"
+        }
+      ]
+    },
+    {
+      "code": "0006",
+      "name": "MegaGS",
+      "logoSrc": "/assets/img/cooporate_logo/megags.png",
+      "cinemaList": [
+        {
+          "code": "0006-01",
+          "company": "MegaGS",
+          "location": "Cao Thắng",
+          "address": "19 Cao Thắng, Q.3",
+          "imageSrc": "/assets/img/cinema/mega-gs/mega-gs-cao-thang.jpg"
+        }
+      ]
+    },
+    {
+      "code": "0007",
+      "name": "DCine",
+      "logoSrc": "/assets/img/cooporate_logo/dcine.png",
+      "cinemaList": [
+        {
+          "code": "0006-01",
+          "company": "DCine",
+          "location": "Bến Thành",
+          "address": "6 Mạc Đĩnh Chi, Bến Nghé, Quận 1, Hồ Chí Minh",
+          "imageSrc": "/assets/img/cinema/dcine/dcine-ben-thanh.png"
+        }
+      ]
+    }
+  ]
+}

@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmInfor() {
+export default function MovieDetailPage() {
   const classes = useStyles();
   const movieDetail = useSelector((state) => state.movie.detail);
   const { movieId: maPhim } = useParams();

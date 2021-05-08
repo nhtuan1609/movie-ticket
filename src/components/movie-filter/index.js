@@ -181,7 +181,7 @@ export default function MovieFilter(props) {
     }
 
     let schedule = movieDetail.lichChieu;
-    let cinemaListRaw = schedule.map((item, index) => ({
+    let cinemaListRaw = schedule.map((item) => ({
       name: item.thongTinRap.tenCumRap,
       code: item.thongTinRap.maRap.toString(),
     }));

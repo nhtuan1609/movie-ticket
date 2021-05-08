@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import MyCarousel from '../../components/carousel';
 import MovieFilter from '../../components/movie-filter';
 import MovieCardSlider from '../../components/movie-list';
+import CinemaBlock from '../../components/cinema-block';
 import MovieAction from '../../redux/action/movie';
 
 export default function HomePage() {
@@ -14,7 +15,6 @@ export default function HomePage() {
     dispatch(MovieAction.fetchList());
   }, [dispatch]);
   if (movieList.length === 0) return <p>Loading..</p>;
-  console.log(movieList);
 
   let breakDate = new Date('2020-01-01T00:00:00');
 
@@ -34,7 +34,7 @@ export default function HomePage() {
       <Box position='relative'>
         <MovieFilter movieList={movieList} />
       </Box>
-      <div id='lich-chieu' style={{ backgroundColor: 'white' }}>
+      <div id='lich-chieu'>
         <Container maxWidth='md'>
           <MovieCardSlider
             movieRelease={movieRelease}
@@ -42,10 +42,9 @@ export default function HomePage() {
           />
         </Container>
       </div>
-      <div
-        id='cum-rap'
-        style={{ height: '1000px', backgroundColor: 'yellow', opacity: '0.3' }}
-      ></div>
+      <div id='cum-rap'>
+        <CinemaBlock />
+      </div>
       <div
         id='tin-tuc'
         style={{ height: '1000px', backgroundColor: 'green', opacity: '0.3' }}
