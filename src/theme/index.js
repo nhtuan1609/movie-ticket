@@ -7,6 +7,7 @@ const theme = createMuiTheme({
     },
     textColor: {
       white: '#eee',
+      bright: '#ccc',
       light: '#888',
       main: '#333',
       dark: '#000',

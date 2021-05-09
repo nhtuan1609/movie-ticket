@@ -1,0 +1,161 @@
+{
+  "filmNewList": [
+    {
+      "code": "0001",
+      "title": "Ấn định chắc nịch ngày khởi chiếu 16.04, Lý Hải tung clip Lật Mặt: 48H đậm chất",
+      "description": "Trước thềm khởi chiếu 16.04 này, Lý Hải bất ngờ tung clip rượt đuổi gay cấn thót tim fans hâm mộ.",
+      "like": 43,
+      "comment": 24,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2021/03/an-dinh-chac-nich-ngay-khoi-chieu-16-04-ly-hai-tung-clip-lat-mat-48h-dam-chat-fast-furious-mien-song-nuoc-16170881088272.png",
+      "link": "https://tix.vn/goc-dien-anh/7965-an-dinh-chac-nich-ngay-khoi-chieu-16-04-ly-hai-tung-clip-lat-mat-48h-dam-chat"
+    },
+    {
+      "code": "0002",
+      "title": "[MORTAL KOMBAT: CUỘC CHIẾN SINH TỬ] -  GỌI TÊN NHỮNG PHIM ĐIỆN ẢNH NỔI TIẾNG ĐƯỢC CHUYỂN THỂ TỪ CÁC TỰA GAME ĐÌNH ĐÁM",
+      "description": "Bên cạnh những kịch bản gốc mới mẻ và đầy bất ngờ, Hollywood cũng không thiếu những tác phẩm đình đám được chuyển thể từ tiểu thuyết, phim hoạt hình, hay thậm chí là cả trò chơi điện tử.",
+      "like": 38,
+      "comment": 34,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2021/03/mortal-kombat-cuoc-chien-sinh-tu-goi-ten-nhung-phim-dien-anh-noi-tieng-duoc-chuyen-the-tu-cac-tua-game-dinh-dam-16170160290762.png",
+      "link": "https://tix.vn/goc-dien-anh/7964-mortal-kombat-cuoc-chien-sinh-tu-goi-ten-nhung-phim-dien-anh-noi-tieng-duoc-chuyen-the-tu-cac-tua-game-dinh-dam"
+    },
+    {
+      "code": "0003",
+      "title": "PROMISING YOUNG WOMAN | Bông hồng nước Anh Carey Mulligan và màn trả thù đàn ông để đời",
+      "description": "Đề cử giải Oscar danh giá vừa gọi tên Carey Mulligan ở hạng mục nữ chính xuất sắc nhất cho vai diễn \"đẫm máu\" nhất sự nghiệp của cô trong phim Promising Young Woman (tựa Việt: Cô Gái Trẻ Hứa Hẹn).",
+      "like": 34,
+      "comment": 21,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2021/03/promising-young-woman-bong-hong-nuoc-anh-carey-mulligan-va-man-tra-thu-dan-ong-de-doi-16166710855522.png",
+      "link": "https://tix.vn/goc-dien-anh/7963-promising-young-woman-bong-hong-nuoc-anh-carey-mulligan-va-man-tra-thu-dan-ong-de-doi"
+    },
+    {
+      "code": "0004",
+      "title": "VỪA ĐẸP LẠI VỪA TÀI NĂNG, DÀN SAO NAM CỦA PHIM “BÀN TAY DIỆT QUỶ” ĐẢM BẢO ĐỐN TIM HỘI CHỊ EM",
+      "description": "Quy tụ 3 nam tài tử vừa điển trai, vừa được đánh giá cao về năng lực diễn xuất là Park Seo Joon, Woo Do Hwan và Choi Woo Sik, tác phẩm kinh dị – hành động “Bàn Tay Diệt Quỷ” hứa hẹn sẽ làm cho hội chị em phải mê mẩn vào tháng tới.",
+      "like": 34,
+      "comment": 21,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2021/03/vua-dep-lai-vua-tai-nang-dan-sao-nam-cua-phim-ban-tay-diet-quy-dam-bao-don-tim-hoi-chi-em-16165783843676.png",
+      "link": "https://tix.vn/goc-dien-anh/7962-vua-dep-lai-vua-tai-nang-dan-sao-nam-cua-phim-ban-tay-diet-quy-dam-bao-don-tim-hoi-chi-em"
+    },
+    {
+      "code": "0005",
+      "title": "Khai trương rạp xịn giá ngon, chuẩn xì-tai Sài Gòn",
+      "description": "Rạp Beta Cinemas Quang Trung tọa lạc tại số 645 Quang Trung, Phường 11, Quận Gò Vấp, Thành phố Hồ Chí Minh là điểm đến lý tưởng cho các tín đồ “đam mê điện ảnh nhưng vẫn không quên sống ảo”.",
+      "like": 21,
+      "comment": 12,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2021/01/khai-truong-rap-xin-gia-ngon-chuan-xi-tai-sai-gon-16115477671555.jpg",
+      "link": "https://tix.vn/goc-dien-anh/7961-khai-truong-rap-xin-gia-ngon-chuan-xi-tai-sai-gon"
+    },
+    {
+      "code": "0006",
+      "title": "“Bóc tem” tổ hợp giải trí mới toanh của giới Hà Thành",
+      "description": "Beta Cinemas Giải Phóng sở hữu phong cách khác với bất kỳ rạp chiếu phim nào bạn từng thấy, với không gian phá cách, tông màu cực kỳ bắt mắt và đặc biệt là góc checkin “xịn xò”, hứa hẹn mang đến những bức ảnh “sống ảo” để đời.",
+      "like": 11,
+      "comment": 16,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2020/11/boc-tem-to-hop-giai-tri-moi-toanh-cua-gioi-ha-thanh-16056939435004.png",
+      "link": "https://tix.vn/goc-dien-anh/7960-boc-tem-to-hop-giai-tri-moi-toanh-cua-gioi-ha-thanh"
+    },
+    {
+      "code": "0007",
+      "title": "Tiệc Trăng Máu chính thức cán mốc 100 tỷ chỉ sau 2 tuần công chiếu",
+      "description": "Sau 2 tuần ra mắt, Tiệc Trăng Máu chính thức gia nhập câu lạc bộ phim điện ảnh đạt 100 tỷ đồng doanh thu phòng vé.",
+      "like": 13,
+      "comment": 19,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2020/11/tiec-trang-mau-chinh-thuc-can-moc-100-ty-chi-sau-2-tuan-cong-chieu-16043751284117.png",
+      "link": "https://tix.vn/goc-dien-anh/7957-tiec-trang-mau-chinh-thuc-can-moc-100-ty-chi-sau-2-tuan-cong-chieu"
+    },
+    {
+      "code": "0008",
+      "title": "NGÔ THANH VÂN CHÍNH THỨC KHỞI ĐỘNG CUỘC THI THIẾT KẾ TRANG PHỤC CHO SIÊU ANH HÙNG ĐẦU TIÊN CỦA VIỆT NAM – VINAMAN",
+      "description": "VINAMAN là dự án phim siêu anh hùng do nữ diễn viên - Nhà sản xuất Ngô Thanh Vân bắt tay thực hiện cùng đạo diễn Việt Max.",
+      "like": 11,
+      "comment": 5,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2020/10/ngo-thanh-van-chinh-thuc-khoi-dong-cuoc-thi-thiet-ke-trang-phuc-cho-sieu-anh-hung-dau-tien-cua-viet-nam-vinaman-16041584850247.jpg",
+      "link": "https://tix.vn/goc-dien-anh/7956-ngo-thanh-van-chinh-thuc-khoi-dong-cuoc-thi-thiet-ke-trang-phuc-cho-sieu-anh-hung-dau-tien-cua-viet-nam-vinaman"
+    },
+    {
+      "code": "0009",
+      "title": "[ANTEBELLUM] - 4 lý do không thể bỏ lỡ siêu phẩm kinh dị Antebellum: Bẫy Thực Tại Kinh Hoàng",
+      "description": "Không đi theo lối mòn máu me, hù dọa mà đầu tư khai thác những mảng tối của xã hội trên nền một câu chuyện kinh dị, có sự tham gia của nhà sản xuất đã làm nên thành công của loạt tác phẩm ấn tượng “Get Out”, “Us” hay “BlacKkKlansman”, và còn nhiều lý do khác khiến người yêu phim không thể bỏ lỡ Ante.",
+      "like": 15,
+      "comment": 7,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2020/11/antebellum-4-ly-do-khong-the-bo-lo-sieu-pham-kinh-di-antebellum-bay-thuc-tai-kinh-hoang-16045678023913.png",
+      "link": "https://tix.vn/goc-dien-anh/7953-antebellum-4-ly-do-khong-the-bo-lo-sieu-pham-kinh-di-antebellum-bay-thuc-tai-kinh-hoang"
+    },
+    {
+      "code": "0010",
+      "title": "Dàn mỹ nhân trong thế giới điện ảnh của quái kiệt Christopher Nolan",
+      "description": "Làng phim đương đại những năm qua chứng kiến sự lên ngôi của cái tên Christopher Nolan, được biết tới như một trong những đạo diễn thiên tài với khả năng tạo ra siêu phẩm bạc tỉ chất lượng.",
+      "like": 12,
+      "comment": 2,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2020/08/da-n-my-nhan-trong-the-gio-i-die-n-a-nh-cu-a-qua-i-kie-t-christopher-nolan-15970503918450.png",
+      "link": "https://tix.vn/goc-dien-anh/7951-da-n-my-nhan-trong-the-gio-i-die-n-a-nh-cu-a-qua-i-kie-t-christopher-nolan"
+    },
+    {
+      "code": "0011",
+      "title": "Truy Cùng Giết Tận - Cuộc tái ngộ của hai 'ông hoàng phòng vé' xứ Hàn",
+      "description": "Sau 7 năm kể từ New World – bộ phim đạt thành tích hơn 4.68 triệu vé, hai tên tuổi lão làng trong làng điện ảnh Hàn Quốc mới tiếp tục tái hợp trong Truy Cùng Giết Tận – một bộ phim hành động siêu “nặng đô”.",
+      "like": 21,
+      "comment": 3,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2020/08/truy-cung-giet-tan-cuoc-tai-ngo-cua-hai-ong-hoang-phong-ve-xu-han-15966122361852.png",
+      "link": "https://tix.vn/goc-dien-anh/7950-truy-cung-giet-tan-cuoc-tai-ngo-cua-hai-ong-hoang-phong-ve-xu-han"
+    }
+  ],
+  "reviewNewList": [
+    {
+      "code": "0001",
+      "title": "Review: Tàn Tích Quỷ Ám (Relic) - Ba thế hệ và mối liên kết",
+      "description": "Điểm nhấn của phim kinh dị năm 2020 chính là Tàn Tích Quỷ Ám.",
+      "like": 32,
+      "comment": 21,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2020/08/review-tan-tich-quy-am-relic-ba-the-he-va-moi-lien-ket-15965255784224.png",
+      "link": "https://tix.vn/review/7947-review-tan-tich-quy-am-relic-ba-the-he-va-moi-lien-ket"
+    },
+    {
+      "code": "0002",
+      "title": "Review: Dinh Thự Oan Khuất (Ghost Of War)",
+      "description": "Tuy là một bộ phim có chất lượng tốt, nhưng có vẻ Dinh Thự Oan Khuất vẫn chưa đủ để đem khán giả trở lại phòng vé!",
+      "like": 32,
+      "comment": 21,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2020/08/review-dinh-thu-oan-khuat-ghost-of-war-15965120886610.png",
+      "link": "https://tix.vn/review/7946-review-dinh-thu-oan-khuat-ghost-of-war"
+    },
+    {
+      "code": "0003",
+      "title": "‘BlacKkKlansman’ - cốc nước lạnh để người Mỹ thức tỉnh",
+      "description": "Tác phẩm nhận đề cử Phim truyện xuất sắc tại Oscar 2019 của đạo diễn Spike Lee là một lát cắt nữa về nạn phân biệt chủng tộc - nỗi đau gây nhức nhối nước Mỹ cho tới tận hôm nay.",
+      "like": 21,
+      "comment": 3,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2020/06/blackkklansman-coc-nuoc-lanh-de-nguoi-my-thuc-tinh-15910862294165.png",
+      "link": "https://tix.vn/review/7924-blackkklansman-coc-nuoc-lanh-de-nguoi-my-thuc-tinh"
+    },
+    {
+      "code": "0004",
+      "title": "American Sniper - Chính nghĩa hay phi nghĩa?",
+      "description": "American Sniper khắc họa một tay súng bắn tỉa “huyền thoại” của Hải quân Mỹ với 4 lần tham chiến ở Trung Đông. Câu chuyện phim chậm rãi đưa người xem qua từng thời khắc khác nhau của Kyle, từ thửa nhỏ, thiếu niên, rồi gia nhập quân đội, rồi tham chiến. Từng khoảnh khắc bắt đầu nhẹ nhàng...",
+      "like": 4,
+      "comment": 0,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2020/05/american-sniper-chinh-nghia-hay-phi-nghia-15905660338111.png",
+      "link": "https://tix.vn/review/7918-american-sniper-chinh-nghia-hay-phi-nghia"
+    }
+  ],
+  "promoteNewList": [
+    {
+      "code": "0001",
+      "title": "TIX 1K/VÉ NGẠI CHI GIÁ VÉ",
+      "description": "Đồng giá 1k/vé cả tuần tất cả các rạp trên TIX + Nhận thêm 02 voucher thanh toán ZaloPay thả ga.",
+      "like": 32,
+      "comment": 21,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2020/11/tix-1k-ve-ngai-chi-gia-ve-16045662877511.jpg",
+      "link": "https://tix.vn/khuyen-mai/7955-tix-1k-ve-ngai-chi-gia-ve"
+    },
+    {
+      "code": "0002",
+      "title": "ĐỒNG GIÁ 1K/VÉ KHI MUA VÉ QUA TIX",
+      "description": "ĐỒNG GIÁ 1K/VÉ KHI MUA VÉ QUA TIX Hành trình tìm Ròm và Phúc chỉ với 1k cả tuần + nhận thêm 02 voucher khi đặt vé qua TIX.",
+      "like": 4,
+      "comment": 0,
+      "imageSrc": "https://s3img.vcdn.vn/123phim/2020/09/dong-gia-1k-ve-khi-mua-ve-qua-tix-16010092946804.png",
+      "link": "https://tix.vn/khuyen-mai/7954-dong-gia-1k-ve-khi-mua-ve-qua-tix"
+    }
+  ]
+}

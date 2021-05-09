@@ -119,7 +119,7 @@ export default function MovieCardSlider(props) {
       },
     },
     label: {
-      textTransform: 'capitalize',
+      textTransform: 'upcase',
       fontSize: '18px',
       fontWeight: '500',
     },

@@ -179,7 +179,10 @@ export default function CinemaSchedule(props) {
 
     let today = new Date();
     setCurrentDateCode(today.toJSON().slice(0, 10));
-    slider.scrollLeft = 0;
+
+    if (slider !== null) {
+      slider.scrollLeft = 0;
+    }
   };
 
   const handleSelectDate = (dateCode) => (event) => {

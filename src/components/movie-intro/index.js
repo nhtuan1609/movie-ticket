@@ -139,7 +139,7 @@ const BuyTicketButton = withStyles({
     },
   },
   label: {
-    textTransform: 'capitalize',
+    textTransform: 'upcase',
     fontSize: '16px',
     fontWeight: '500',
   },

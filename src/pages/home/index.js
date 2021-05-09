@@ -6,6 +6,8 @@ import MyCarousel from '../../components/carousel';
 import MovieFilter from '../../components/movie-filter';
 import MovieCardSlider from '../../components/movie-list';
 import CinemaBlock from '../../components/cinema-block';
+import NewBlock from '../../components/new-block';
+
 import MovieAction from '../../redux/action/movie';
 
 export default function HomePage() {
@@ -45,10 +47,9 @@ export default function HomePage() {
       <div id='cum-rap'>
         <CinemaBlock />
       </div>
-      <div
-        id='tin-tuc'
-        style={{ height: '1000px', backgroundColor: 'green', opacity: '0.3' }}
-      ></div>
+      <div id='tin-tuc'>
+        <NewBlock />
+      </div>
       <div
         id='ung-dung'
         style={{ height: '1000px', backgroundColor: 'blue', opacity: '0.3' }}
