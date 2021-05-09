@@ -52,7 +52,7 @@ CinemaCard.propTypes = {
     company: PropTypes.string,
     location: PropTypes.string,
     address: PropTypes.string,
-    imageSrc: PropTypes.number,
+    imageSrc: PropTypes.string,
   }),
 };
 

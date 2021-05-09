@@ -345,7 +345,7 @@ export default function MovieCard(props) {
 
 MovieCard.propTypes = {
   movieItem: PropTypes.shape({
-    maPhim: PropTypes.string,
+    maPhim: PropTypes.number,
     tenPhim: PropTypes.string,
     biDanh: PropTypes.string,
     trailer: PropTypes.string,

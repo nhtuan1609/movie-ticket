@@ -103,6 +103,54 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: 'inset 0 0 6px rgb(0 0 0 / 30%)',
     },
   },
+  pickDayContainer: {
+    whiteSpace: 'nowrap',
+    height: '86px',
+    borderBottom: `1px solid ${theme.palette.borderColor.light}`,
+    overflowX: 'scroll',
+    overflowY: 'hidden',
+    '&::-webkit-scrollbar': {
+      width: '4px',
+      height: '4px',
+      backgroundColor: '#e8e3e3',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      borderRadius: '10px',
+      boxShadow: 'inset 0 0 6px rgb(0 0 0 / 30%)',
+    },
+  },
+  pickDayItem: {
+    display: 'inline-block',
+    width: '82px',
+    height: '82px',
+    textAlign: 'center',
+    fontSize: '16px',
+    fontWeight: '500',
+    color: theme.palette.textColor.light,
+    cursor: 'pointer',
+    userSelect: 'none',
+  },
+  pickDayItemHightlight: {
+    display: 'inline-block',
+    width: '82px',
+    height: '82px',
+    textAlign: 'center',
+    fontSize: '16px',
+    fontWeight: '500',
+    color: theme.palette.primary.main,
+    cursor: 'pointer',
+    userSelect: 'none',
+  },
+  pickDayItemDay: {
+    fontSize: '16px',
+    marginTop: '16px',
+    marginBottom: '0',
+  },
+  pickDayItemDate: {
+    fontSize: '22px',
+    marginTop: '0',
+    marginBottom: '16px',
+  },
   movieListNotify: {
     fontSize: '16px',
     fontWeight: '500',
@@ -121,10 +169,21 @@ export default function CinemaSchedule(props) {
   const [currentCinemaCode, setCurrentCinemaCode] = React.useState(
     cinemaItem.code
   );
+  const [currentDateCode, setCurrentDateCode] = React.useState(() => {
+    let today = new Date();
+    return today.toJSON().slice(0, 10);
+  });
 
-  const handleSelectCinema = (cinemaCode) => (event) => {
+  const handleSelectCinema = (cinemaCode) => () => {
     setCurrentCinemaCode(cinemaCode);
-    console.log(cinemaCode);
+
+    let today = new Date();
+    setCurrentDateCode(today.toJSON().slice(0, 10));
+    slider.scrollLeft = 0;
+  };
+
+  const handleSelectDate = (dateCode) => (event) => {
+    setCurrentDateCode(dateCode);
   };
 
   const renderCinemaList = (
@@ -189,6 +248,86 @@ export default function CinemaSchedule(props) {
     );
   };
 
+  const renderPickDay = (currentDateCode, handleSelectDate) => {
+    const dayOfWeek = [
+      'Chủ nhật',
+      'Thứ 2',
+      'Thứ 3',
+      'Thứ 4',
+      'Thứ 5',
+      'Thứ 6',
+      'Thứ 7',
+    ];
+    let today = new Date();
+    let dateList = [];
+    for (var i = 0; i < 14; i++) {
+      let jsonDate = today.toJSON().slice(0, 10);
+      dateList.push(jsonDate);
+      today.setDate(today.getDate() + 1);
+    }
+
+    const getVNDay = (dateString) => {
+      let date = new Date(dateString);
+      return dayOfWeek[date.getDay()];
+    };
+
+    const getDate = (dateString) => {
+      let date = new Date(dateString);
+      let dateNumber = date.getDate();
+      if (dateNumber < 10) {
+        return '0'.concat(dateNumber.toString());
+      } else {
+        return dateNumber.toString();
+      }
+    };
+
+    return (
+      <div className={classes.pickDayContainer} id='pick-day'>
+        {dateList.map((item, index) => (
+          <div
+            className={
+              item === currentDateCode
+                ? classes.pickDayItemHightlight
+                : classes.pickDayItem
+            }
+            onClick={handleSelectDate(item)}
+            key={index}
+          >
+            <p className={classes.pickDayItemDay}>{getVNDay(item)}</p>
+            <p className={classes.pickDayItemDate}>{getDate(item)}</p>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  // Drag and scroll for pick day control
+  const slider = document.querySelector('#pick-day');
+  let isMouseDown = false;
+  let startX;
+  let scrollLeft;
+
+  if (slider !== null) {
+    slider.addEventListener('mousedown', (event) => {
+      isMouseDown = true;
+      startX = event.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener('mouseleave', () => {
+      isMouseDown = false;
+    });
+    slider.addEventListener('mouseup', () => {
+      isMouseDown = false;
+    });
+    slider.addEventListener('mousemove', (event) => {
+      if (!isMouseDown) return;
+      event.preventDefault();
+      const x = event.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 1;
+      slider.scrollLeft = scrollLeft - walk;
+    });
+  }
+
   return (
     <Container maxWidth='md'>
       <div className={classes.cinemaBlockContainer}>
@@ -196,6 +335,7 @@ export default function CinemaSchedule(props) {
           {renderCinemaList(companyItem, currentCinemaCode, handleSelectCinema)}
         </div>
         <div className={classes.movieList}>
+          {renderPickDay(currentDateCode, handleSelectDate)}
           {renderMovieList(companyItem, currentCinemaCode)}
         </div>
       </div>
