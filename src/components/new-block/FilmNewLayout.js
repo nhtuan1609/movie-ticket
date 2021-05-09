@@ -24,32 +24,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const LoadMoreButton = withStyles({
+  root: {
+    backgroundColor: 'transparent',
+    borderRadius: '4px',
+    border: '1px solid #aaa',
+    color: '#aaa',
+    height: '36px',
+    width: '120px',
+    cursor: 'pointer',
+    '&:hover': {
+      border: 'none',
+      backgroundColor: '#f43f24',
+      color: 'white',
+    },
+  },
+  label: {
+    textTransform: 'upcase',
+    fontSize: '14px',
+    fontWeight: '500',
+  },
+})(Button);
+
 export default function FilmNewLayout(props) {
   const classes = useStyles();
   const { newList } = props;
   const [maxNewDisplay, setMaxNewDisplay] = React.useState(8);
-
-  const LoadMoreButton = withStyles({
-    root: {
-      backgroundColor: 'transparent',
-      borderRadius: '4px',
-      border: '1px solid #aaa',
-      color: '#aaa',
-      height: '36px',
-      width: '120px',
-      cursor: 'pointer',
-      '&:hover': {
-        border: 'none',
-        backgroundColor: '#f43f24',
-        color: 'white',
-      },
-    },
-    label: {
-      textTransform: 'upcase',
-      fontSize: '14px',
-      fontWeight: '500',
-    },
-  })(Button);
 
   const handleLoadMoreButton = () => {
     if (newList.length > maxNewDisplay) {
