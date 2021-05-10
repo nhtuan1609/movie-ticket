@@ -2,11 +2,12 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { companyList } from './CompanyList.json';
 
 const useStyles = makeStyles((theme) => ({
   cinemaBlockContainer: {
     backgroundColor: 'white',
-    height: '600px',
+    height: '700px',
     borderRadius: '4px',
     border: `1px solid ${theme.palette.borderColor.light}`,
     display: 'none',
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
-  cinemaList: {
+  companyList: {
     float: 'left',
     width: '30%',
     height: '100%',
@@ -29,65 +30,52 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: 'inset 0 0 6px rgb(0 0 0 / 30%)',
     },
   },
-  cinemaItemContainer: {
+  companyItem: {
     width: '100%',
+    height: '90px',
     display: 'flex',
     flexDirection: 'column',
     padding: '0 18px',
     cursor: 'pointer',
     '&:hover': {
-      '& div': {
+      '& img': {
+        opacity: '1',
+      },
+      '& p': {
         opacity: '1',
       },
     },
   },
-  cinemaItemContainerHighlight: {
+  companyItemHightligh: {
     width: '100%',
+    height: '90px',
     display: 'flex',
     flexDirection: 'column',
     padding: '0 18px',
     cursor: 'pointer',
-    '& div': {
+    '& img': {
+      opacity: '1',
+    },
+    '& p': {
       opacity: '1',
     },
   },
-  cinemaItem: {
-    marginTop: '14px',
-    marginBottom: '14px',
-    opacity: '0.6',
+  companyItemWrap: {
+    display: 'flex',
+    alignItems: 'center',
+    height: '100%',
   },
-  cinemaItemImage: {
-    float: 'left',
+  companyItemLogo: {
     width: '50px',
     height: '50px',
-    marginTop: '4px',
+    opacity: '0.6',
   },
-  cinemaItemInfor: {
-    marginLeft: '60px',
-  },
-  cinemaItemInforName: {
+  companyItemName: {
+    marginLeft: '10px',
     fontSize: '16px',
     fontWeight: '500',
     color: theme.palette.textColor.main,
-  },
-  cinemaItemInforNameHighlight: {
-    fontSize: '16px',
-    fontWeight: '500',
-    color: theme.palette.primary.main,
-  },
-  cinemaItemInforAddress: {
-    display: 'block',
-    width: '100%',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    fontSize: '14px',
-    color: theme.palette.textColor.light,
-  },
-  cinemaItemLink: {
-    textDecoration: 'none',
-    color: theme.palette.primary.main,
-    fontSize: '14px',
+    opacity: '0.6',
   },
   movieList: {
     float: 'left',
@@ -164,19 +152,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CinemaSchedule(props) {
+export default function CinemaSchedule() {
   const classes = useStyles();
-  const { companyItem, cinemaItem } = props;
-  const [currentCinemaCode, setCurrentCinemaCode] = React.useState(
-    cinemaItem.code
-  );
+  const [currentCompanyCode, setCurrentCompanyCode] = React.useState('0001');
   const [currentDateCode, setCurrentDateCode] = React.useState(() => {
     let today = new Date();
     return today.toJSON().slice(0, 10);
   });
 
-  const handleSelectCinema = (cinemaCode) => () => {
-    setCurrentCinemaCode(cinemaCode);
+  const handleSelectCompany = (companyCode) => () => {
+    setCurrentCompanyCode(companyCode);
 
     let today = new Date();
     setCurrentDateCode(today.toJSON().slice(0, 10));
@@ -191,48 +176,29 @@ export default function CinemaSchedule(props) {
     setCurrentDateCode(dateCode);
   };
 
-  const renderCinemaList = (
-    companyItem,
-    currentCinemaCode,
-    handleSelectCinema
+  const renderCompanyList = (
+    companyList,
+    currentCompanyCode,
+    handleSelectCompany
   ) => {
-    let firstCinemaItem = companyItem.cinemaList.find((item) => {
-      return item.code === currentCinemaCode;
-    });
-    let othersCinemaItem = companyItem.cinemaList.filter(
-      (item) => item.code !== currentCinemaCode
-    );
-
-    let cinemaList = [firstCinemaItem, ...othersCinemaItem];
-
-    return cinemaList.map((item, index) => {
+    return companyList.map((item, index) => {
       return (
         <div
           className={
-            item.code === currentCinemaCode
-              ? classes.cinemaItemContainerHighlight
-              : classes.cinemaItemContainer
+            item.code === currentCompanyCode
+              ? classes.companyItemHightligh
+              : classes.companyItem
           }
           key={index}
-          onClick={handleSelectCinema(item.code)}
+          onClick={handleSelectCompany(item.code)}
         >
-          <div className={classes.cinemaItem}>
+          <div className={classes.companyItemWrap}>
             <img
-              className={classes.cinemaItemImage}
-              src={item.imageSrc}
+              className={classes.companyItemLogo}
+              src={item.logoSrc}
               alt={item.name}
             ></img>
-            <div className={classes.cinemaItemInfor}>
-              <span className={classes.cinemaItemInforName}>
-                <span className={classes.cinemaItemInforNameHighlight}>
-                  {item.company}
-                </span>
-                - {item.location}
-              </span>
-              <span className={classes.cinemaItemInforAddress}>
-                {item.address}
-              </span>
-            </div>
+            <p className={classes.companyItemName}>{item.name}</p>
           </div>
           <div className={classes.horizontalSeparate}></div>
         </div>
@@ -240,16 +206,9 @@ export default function CinemaSchedule(props) {
     });
   };
 
-  const renderMovieList = (companyItem, currentCinemaCode) => {
-    let currentCinemaItem = companyItem.cinemaList.find(
-      (item) => item.code === currentCinemaCode
-    );
-
+  const renderMovieList = () => {
     return (
-      <p className={classes.movieListNotify}>
-        {currentCinemaItem.company} - {currentCinemaItem.location} hiện tại
-        không có suất chiếu
-      </p>
+      <p className={classes.movieListNotify}>Hiện tại không có suất chiếu</p>
     );
   };
 
@@ -309,12 +268,16 @@ export default function CinemaSchedule(props) {
   return (
     <Container maxWidth='md'>
       <div className={classes.cinemaBlockContainer}>
-        <div className={classes.cinemaList}>
-          {renderCinemaList(companyItem, currentCinemaCode, handleSelectCinema)}
+        <div className={classes.companyList}>
+          {renderCompanyList(
+            companyList,
+            currentCompanyCode,
+            handleSelectCompany
+          )}
         </div>
         <div className={classes.movieList}>
           {renderPickDay(currentDateCode, handleSelectDate)}
-          {renderMovieList(companyItem, currentCinemaCode)}
+          {renderMovieList()}
         </div>
       </div>
     </Container>

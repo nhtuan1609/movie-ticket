@@ -6,10 +6,12 @@ import { Tabs, Tab } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import MovieInfor from './MovieInfor';
+import MovieSchedule from './MovieSchedule';
 
 const useStyles = makeStyles((theme) => ({
   container: {
     position: 'relative',
+    paddingTop: '20px',
   },
   tabHeader: {
     width: '100%',
@@ -72,6 +74,8 @@ export default function MovieDetail(props) {
   const renderTab = (currentTabId) => {
     const tabLabel = ['Lịch Chiếu', 'Thông Tin', 'Đánh Giá'];
     switch (currentTabId) {
+      case 0:
+        return <MovieSchedule />;
       case 1:
         return <MovieInfor movieItem={movieItem} />;
       default:
@@ -85,7 +89,7 @@ export default function MovieDetail(props) {
   };
 
   return (
-    <div className={classes.container}>
+    <div className={classes.container} id='movie-detail'>
       <div className={classes.tabHeader}>
         <Tabs
           value={currentTabId}

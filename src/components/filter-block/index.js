@@ -10,7 +10,7 @@ import SelectionList from './SelectionList';
 import MovieAction from '../../redux/action/movie';
 
 const useStyles = makeStyles((theme) => ({
-  homeToolContainer: {
+  filterContainer: {
     position: 'absolute',
     top: '0',
     left: '50%',
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
     },
   },
-  homeToolGroup: {
+  filterGroup: {
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     height: '60px',
     padding: '0 10px',
   },
-  homeToolGroupLabel: {
+  filterGroupLabel: {
     color: theme.palette.textColor.main,
     fontSize: '14px',
     fontWeight: '500',
@@ -71,7 +71,7 @@ const BuyTicketButton = withStyles({
   },
 })(Button);
 
-export default function MovieFilter(props) {
+export default function FilterBlock(props) {
   const classes = useStyles();
   const { movieList } = props;
 
@@ -249,13 +249,13 @@ export default function MovieFilter(props) {
   };
 
   return (
-    <Container maxWidth='md' className={classes.homeToolContainer}>
+    <Container maxWidth='md' className={classes.filterContainer}>
       <div
         onClick={toggleIsShowFilmList}
-        className={classes.homeToolGroup}
+        className={classes.filterGroup}
         style={{ width: '30%' }}
       >
-        <span className={classes.homeToolGroupLabel}>
+        <span className={classes.filterGroupLabel}>
           {currentMovie === ''
             ? 'Phim'
             : decodeCodeToName(filterMovieNameList(movieList), currentMovie)}
@@ -271,8 +271,8 @@ export default function MovieFilter(props) {
         )}
       </div>
       <div className={classes.verticalSeparate}></div>
-      <div onClick={toggleIsShowCinemaList} className={classes.homeToolGroup}>
-        <div className={classes.homeToolGroupLabel}>
+      <div onClick={toggleIsShowCinemaList} className={classes.filterGroup}>
+        <div className={classes.filterGroupLabel}>
           {currentCinema === ''
             ? 'Rạp'
             : decodeCodeToName(
@@ -291,8 +291,8 @@ export default function MovieFilter(props) {
         )}
       </div>
       <div className={classes.verticalSeparate}></div>
-      <div onClick={toggleIsShowDateList} className={classes.homeToolGroup}>
-        <div className={classes.homeToolGroupLabel}>
+      <div onClick={toggleIsShowDateList} className={classes.filterGroup}>
+        <div className={classes.filterGroupLabel}>
           {currentDate === ''
             ? 'Ngày xem'
             : decodeCodeToName(
@@ -315,8 +315,8 @@ export default function MovieFilter(props) {
         )}
       </div>
       <div className={classes.verticalSeparate}></div>
-      <div onClick={toggleIsShowSessionList} className={classes.homeToolGroup}>
-        <div className={classes.homeToolGroupLabel}>
+      <div onClick={toggleIsShowSessionList} className={classes.filterGroup}>
+        <div className={classes.filterGroupLabel}>
           {currentSession === ''
             ? 'Suất chiếu'
             : decodeCodeToName(
@@ -345,7 +345,7 @@ export default function MovieFilter(props) {
         )}
       </div>
       <div className={classes.verticalSeparate}></div>
-      <div onClick={handleBuyTicket} className={classes.homeToolGroup}>
+      <div onClick={handleBuyTicket} className={classes.filterGroup}>
         <BuyTicketButton>MUA VÉ NGAY</BuyTicketButton>
       </div>
     </Container>

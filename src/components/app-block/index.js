@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appButton: {
+    display: 'block',
     textDecoration: 'none !important',
     width: '100%',
     [theme.breakpoints.up('sm')]: {

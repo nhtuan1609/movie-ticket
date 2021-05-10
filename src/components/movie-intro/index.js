@@ -43,6 +43,10 @@ const useStyles = makeStyles((theme) => ({
   movieInforButton: {
     marginTop: '30px',
   },
+  movieInforButtonLink: {
+    textDecoration: 'none',
+    color: theme.palette.textColor.white,
+  },
   movieAgeTypeAll: {
     minWidth: '34px',
     lineHeight: '22px',
@@ -196,7 +200,9 @@ export default function MovieIntro(props) {
           </div>
           {renderMovieLength()}
           <div className={classes.movieInforButton}>
-            <BuyTicketButton>Mua Vé</BuyTicketButton>
+            <a className={classes.movieInforButtonLink} href='#movie-detail'>
+              <BuyTicketButton>Mua Vé</BuyTicketButton>
+            </a>
           </div>
         </div>
       </Grid>

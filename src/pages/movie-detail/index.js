@@ -71,7 +71,6 @@ export default function MovieDetailPage() {
     dispatch(MovieAction.fetchDetail({ maPhim }));
   }, [dispatch, maPhim]);
   if (movieDetail.maPhim !== JSON.parse(maPhim)) return <p>Loading..</p>;
-  console.log({ movieDetail: movieDetail });
 
   return (
     <div className={classes.Container}>

@@ -6,11 +6,15 @@ import Container from '@material-ui/core/Container';
 import { companyList } from './CompanyList.json';
 
 const useStyles = makeStyles((theme) => ({
-  cinemaBlockContainer: {
-    height: '1000px',
-    backgroundColor: 'white',
+  containerPadding: {
     paddingTop: '100px',
     paddingBottom: '60px',
+  },
+  cinemaBlockContainer: {
+    height: '800px',
+    backgroundColor: 'white',
+    borderRadius: '4px',
+    border: `1px solid ${theme.palette.borderColor.light}`,
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'block',
@@ -20,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     float: 'left',
     width: '92px',
     height: '100%',
-    border: `1px solid ${theme.palette.borderColor.light}`,
+    borderRight: `1px solid ${theme.palette.borderColor.light}`,
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
       width: '4px',
@@ -65,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     float: 'left',
     width: '30%',
     height: '100%',
-    border: `1px solid ${theme.palette.borderColor.light}`,
+    borderRight: `1px solid ${theme.palette.borderColor.light}`,
     borderLeft: 'none',
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
@@ -141,7 +145,6 @@ const useStyles = makeStyles((theme) => ({
     float: 'left',
     width: 'calc(100% - 30% - 92px)',
     height: '100%',
-    border: `1px solid ${theme.palette.borderColor.light}`,
     borderLeft: 'none',
     overflowY: 'auto',
     '&::-webkit-scrollbar': {
@@ -280,7 +283,7 @@ export default function CinemaBlock() {
   };
 
   return (
-    <Container maxWidth='md'>
+    <Container maxWidth='md' className={classes.containerPadding}>
       <div className={classes.cinemaBlockContainer}>
         <div className={classes.companyList}>
           {renderCompanyList(
