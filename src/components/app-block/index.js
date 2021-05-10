@@ -4,23 +4,38 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Slider from 'react-slick';
+
+import { slideData } from './SlideData.json';
 
 const useStyles = makeStyles((theme) => ({
   appBackground: {
     background: 'url(/assets/img/user/backapp.jpg)',
     backgroundSize: 'contain',
-    padding: '100px',
+    padding: '40px 0',
+    [theme.breakpoints.up('md')]: {
+      padding: '100px 0',
+    },
   },
   appTitle: {
-    marginTop: '140px',
+    marginTop: '40px',
     fontSize: '30px',
     fontWeight: '750',
     color: theme.palette.textColor.white,
+    textAlign: 'center',
+    [theme.breakpoints.up('sm')]: {
+      textAlign: 'left',
+      marginTop: '140px',
+    },
   },
   appDescription: {
     fontSize: '16px',
     fontWeight: '500',
     color: theme.palette.textColor.white,
+    textAlign: 'center',
+    [theme.breakpoints.up('sm')]: {
+      textAlign: 'left',
+    },
   },
   appLink: {
     fontSize: '16px',
@@ -30,44 +45,44 @@ const useStyles = makeStyles((theme) => ({
     '& a': {
       color: theme.palette.textColor.white,
     },
+    textAlign: 'center',
+    [theme.breakpoints.up('sm')]: {
+      textAlign: 'left',
+    },
   },
   appButton: {
     textDecoration: 'none !important',
-    display: 'block',
-    width: '280px',
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '280px',
+    },
   },
   iphoneX: {
     position: 'relative',
     margin: '40px auto',
-    width: '230px',
+    width: '250px',
     height: '490px',
     backgroundColor: '#7371ee',
     backgroundImage: 'linear-gradient(60deg, #7371ee 1%,#a1d9d6 100%)',
     borderRadius: '40px',
-    boxShadow:
-      '0px 0px 0px 10px #1f1f1f, 0px 0px 0px 10px #191919, 0px 0px 0px 10px #111',
-    '&::before': {
-      content: '""',
-      position: 'absolute',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      top: '0px',
-      width: '56%',
-      height: '20px',
-      backgroundColor: '#1f1f1f',
-      borderRadius: '0px 0px 40px 40px',
+    border: '10px solid #1f1f1f',
+    boxShadow: '-8px 8px 100px 30px rgba(256, 256, 256, 0.2)',
+    overflow: 'hidden',
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
     },
-    '&::after': {
-      content: '""',
-      position: 'absolute',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      bottom: '7px',
-      width: '104px',
-      height: '4px',
-      backgroundColor: '#f2f2f2',
-      borderRadius: '10px',
-    },
+  },
+  iphoneXHeader: {
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    top: '0px',
+    width: '56%',
+    height: '20px',
+    backgroundColor: '#1f1f1f',
+    borderRadius: '0px 0px 40px 40px',
+    zIndex: '1',
   },
   iphoneXSpeaker: {
     position: 'absolute',
@@ -75,9 +90,9 @@ const useStyles = makeStyles((theme) => ({
     color: 'transparent',
     top: '0px',
     left: '50%',
-    transform: 'translate(-50%, 6px)',
+    transform: 'translate(-50%, 4px)',
     height: '4px',
-    width: '15%',
+    width: '36px',
     backgroundColor: '#101010',
     borderRadius: '8px',
     boxShadow: 'inset 0px -3px 3px 0px rgba(256, 256, 256, 0.2)',
@@ -86,9 +101,9 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     display: 'block',
     color: 'transparent',
-    left: '0',
+    right: '0',
     top: '0',
-    transform: 'translate(140px, 4px)',
+    transform: 'translate(-28px, 1px)',
     width: '8px',
     height: '8px',
     backgroundColor: '#101010',
@@ -106,6 +121,17 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: '4px',
       boxShadow: 'inset 0px -2px 2px rgba(0, 0, 0, 0.5)',
     },
+  },
+  iphoneXFooter: {
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    bottom: '7px',
+    width: '104px',
+    height: '4px',
+    backgroundColor: '#f2f2f2',
+    borderRadius: '10px',
+    zIndex: '1',
   },
 }));
 
@@ -128,6 +154,24 @@ const BuyTicketButton = withStyles({
     fontWeight: '500',
   },
 })(Button);
+
+const sliderSetting = {
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  rows: 1,
+  slidesPerRow: 1,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  pauseOnHover: false,
+};
+
+const renderSlideItem = (slideData) => {
+  return slideData.map((item, index) => (
+    <img src={item.imageSrc} alt={item.code} key={index}></img>
+  ));
+};
 
 export default function AppBlock() {
   const classes = useStyles();
@@ -164,8 +208,12 @@ export default function AppBlock() {
           </Grid>
           <Grid item md={6} xs={12}>
             <div className={classes.iphoneX}>
-              <i className={classes.iphoneXSpeaker}>Speaker</i>
-              <b className={classes.iphoneXCamera}>Camera</b>
+              <div className={classes.iphoneXHeader}>
+                <i className={classes.iphoneXSpeaker}>Speaker</i>
+                <b className={classes.iphoneXCamera}>Camera</b>
+              </div>
+              <Slider {...sliderSetting}>{renderSlideItem(slideData)}</Slider>
+              <div className={classes.iphoneXFooter}></div>
             </div>
           </Grid>
         </Grid>

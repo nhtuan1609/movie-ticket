@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -10,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
-import './MovieSlider.css';
+import './MovieLayout.css';
 import MovieCard from './MovieCard';
 
 const useStyles = makeStyles((theme) => ({
@@ -54,12 +52,19 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   listLoadMoreButton: {
-    width: '400px',
-    marginTop: '40px',
+    marginTop: '10px',
+  },
+  scrollMarkerContainer: {
+    position: 'relative',
+  },
+  scrollMarker: {
+    position: 'absolute',
+    top: '-70px',
+    left: '0',
   },
 }));
 
-export default function MovieCardSlider(props) {
+export default function MovieLayout(props) {
   const classes = useStyles();
   const { movieList } = props;
   const [limitItem, setLimitItem] = React.useState(3);
@@ -74,6 +79,15 @@ export default function MovieCardSlider(props) {
 
     if (setValue !== limitItem) {
       setLimitItem(setValue);
+    }
+
+    var elementMarker = document.querySelector('#movie-block-scroll');
+    if (elementMarker !== null) {
+      elementMarker.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest',
+      });
     }
   };
 
@@ -107,20 +121,22 @@ export default function MovieCardSlider(props) {
 
   const LoadMoreButton = withStyles({
     root: {
-      backgroundColor: '#888',
+      backgroundColor: 'transparent',
       borderRadius: '4px',
-      border: 0,
-      color: 'white',
-      height: '46px',
-      width: '100%',
+      border: '1px solid #aaa',
+      color: '#aaa',
+      height: '36px',
+      width: '120px',
       cursor: 'pointer',
       '&:hover': {
+        border: 'none',
         backgroundColor: '#f43f24',
+        color: 'white',
       },
     },
     label: {
       textTransform: 'upcase',
-      fontSize: '18px',
+      fontSize: '14px',
       fontWeight: '500',
     },
   })(Button);
@@ -167,6 +183,9 @@ export default function MovieCardSlider(props) {
       </Slider>
       <div className={classes.listContainer}>
         {renderItem(movieList, limitItem, '96%')}
+        <div className={classes.scrollMarkerContainer}>
+          <div className={classes.scrollMarker} id='movie-block-scroll'></div>
+        </div>
         <div
           onClick={handleLoadMoreItems(movieList.length)}
           className={classes.listLoadMoreButton}
@@ -178,11 +197,11 @@ export default function MovieCardSlider(props) {
   );
 }
 
-MovieCardSlider.propTypes = {
+MovieLayout.propTypes = {
   movieList: PropTypes.arrayOf(PropTypes.object),
 };
 
-MovieCardSlider.defaultProps = {
+MovieLayout.defaultProps = {
   movieList: [
     {
       maPhim: 4125,

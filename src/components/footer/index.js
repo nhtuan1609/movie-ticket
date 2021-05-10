@@ -147,7 +147,7 @@ export default function Footer() {
             </Grid>
           </Hidden>
           <Grid item md={4} xs={6} container className={classes.footerGroup}>
-            <Grid item xs={6} container>
+            <Grid item xs={12} sm={6} container>
               <span className={classes.footerGroupLabel}>MOBILE APP</span>
               <Grid item md={12} container>
                 <Grid item>
@@ -170,7 +170,7 @@ export default function Footer() {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <span className={classes.footerGroupLabel}>SOCIAL</span>
               <Grid item md={12} container>
                 <Grid item>

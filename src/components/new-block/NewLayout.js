@@ -189,7 +189,7 @@ export default function NewLayout(props) {
     return (
       <Fragment>
         {newListLayout.map((item, index) => (
-          <Fragment>
+          <Fragment key={index}>
             <Grid item md={6} xs={12}>
               {item[0] !== undefined && renderLargeCard(item[0])}
             </Grid>
@@ -230,7 +230,7 @@ export default function NewLayout(props) {
 }
 
 NewLayout.propTypes = {
-  newList: [
+  newList: PropTypes.arrayOf(
     PropTypes.shape({
       code: PropTypes.string,
       title: PropTypes.string,
@@ -239,8 +239,8 @@ NewLayout.propTypes = {
       comment: PropTypes.number,
       imageSrc: PropTypes.string,
       link: PropTypes.string,
-    }),
-  ],
+    })
+  ),
   maxNewDisplay: PropTypes.number,
 };
 

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import MyCarousel from '../../components/carousel';
 import MovieFilter from '../../components/movie-filter';
-import MovieCardSlider from '../../components/movie-list';
+import MovieBlock from '../../components/movie-block';
 import CinemaBlock from '../../components/cinema-block';
 import NewBlock from '../../components/new-block';
 import AppBlock from '../../components/app-block';
@@ -39,7 +39,7 @@ export default function HomePage() {
       </Box>
       <div id='lich-chieu'>
         <Container maxWidth='md'>
-          <MovieCardSlider
+          <MovieBlock
             movieRelease={movieRelease}
             movieUpcoming={movieUpcoming}
           />

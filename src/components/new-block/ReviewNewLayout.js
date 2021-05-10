@@ -55,9 +55,9 @@ export default function ReviewNewLayout(props) {
     if (newList.length > maxNewDisplay) {
       setMaxNewDisplay(maxNewDisplay + 8);
 
-      var newsContainer = document.querySelector('#news-scroll');
-      if (newsContainer !== null) {
-        newsContainer.scrollIntoView({
+      var elementMarker = document.querySelector('#new-scroll');
+      if (elementMarker !== null) {
+        elementMarker.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
           inline: 'nearest',
@@ -70,7 +70,7 @@ export default function ReviewNewLayout(props) {
     <Container maxWidth='md'>
       <NewLayout newList={newList} maxNewDisplay={maxNewDisplay} />
       <div className={classes.scrollMarkerContainer}>
-        <div className={classes.scrollMarker} id='news-scroll'></div>
+        <div className={classes.scrollMarker} id='new-scroll'></div>
       </div>
       <div className={classes.loadMoreButton}>
         {newList.length > maxNewDisplay && (
@@ -84,7 +84,7 @@ export default function ReviewNewLayout(props) {
 }
 
 ReviewNewLayout.propTypes = {
-  newList: [
+  newList: PropTypes.arrayOf(
     PropTypes.shape({
       code: PropTypes.string,
       title: PropTypes.string,
@@ -93,8 +93,8 @@ ReviewNewLayout.propTypes = {
       comment: PropTypes.number,
       imageSrc: PropTypes.string,
       link: PropTypes.string,
-    }),
-  ],
+    })
+  ),
 };
 
 ReviewNewLayout.defaultProps = {

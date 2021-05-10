@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Tabs, Tab } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import MovieSlider from './MovieSlider';
+import MovieLayout from './MovieLayout';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MovieCardSlider(props) {
+export default function MovieBlock(props) {
   const classes = useStyles();
   const { movieRelease, movieUpcoming } = props;
   const [currentTabId, setCurrentTabId] = React.useState(0);
@@ -81,13 +81,13 @@ export default function MovieCardSlider(props) {
     switch (currentTabId) {
       case 0:
         if (movieRelease.length > 0) {
-          return <MovieSlider movieList={movieRelease} />;
+          return <MovieLayout movieList={movieRelease} />;
         } else {
           return loadingTab();
         }
       case 1:
         if (movieUpcoming.length > 0) {
-          return <MovieSlider movieList={movieUpcoming} />;
+          return <MovieLayout movieList={movieUpcoming} />;
         } else {
           return loadingTab();
         }
@@ -114,11 +114,11 @@ export default function MovieCardSlider(props) {
   );
 }
 
-MovieCardSlider.propTypes = {
+MovieBlock.propTypes = {
   movieList: PropTypes.arrayOf(PropTypes.object),
 };
 
-MovieCardSlider.defaultProps = {
+MovieBlock.defaultProps = {
   movieList: [
     {
       maPhim: 4125,
