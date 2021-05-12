@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   companyList: {
     float: 'left',
-    width: '30%',
+    width: '32%',
     height: '100%',
     borderRight: `1px solid ${theme.palette.borderColor.light}`,
     overflowY: 'auto',
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
   },
   movieList: {
     float: 'left',
-    width: '70%',
+    width: '68%',
     height: '100%',
     borderLeft: 'none',
     overflowY: 'auto',
@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
   },
   pickDayContainer: {
     whiteSpace: 'nowrap',
-    height: '86px',
+    height: '90px',
     borderBottom: `1px solid ${theme.palette.borderColor.light}`,
     overflowX: 'scroll',
     overflowY: 'hidden',
@@ -110,8 +110,8 @@ const useStyles = makeStyles((theme) => ({
   },
   pickDayItem: {
     display: 'inline-block',
-    width: '82px',
-    height: '82px',
+    width: '84px',
+    height: '84px',
     textAlign: 'center',
     fontSize: '16px',
     fontWeight: '500',
@@ -121,8 +121,8 @@ const useStyles = makeStyles((theme) => ({
   },
   pickDayItemHightlight: {
     display: 'inline-block',
-    width: '82px',
-    height: '82px',
+    width: '84px',
+    height: '84px',
     textAlign: 'center',
     fontSize: '16px',
     fontWeight: '500',
@@ -206,9 +206,14 @@ export default function CinemaSchedule() {
     });
   };
 
-  const renderMovieList = () => {
+  const renderMovieList = (companyList, currentCompanyCode) => {
+    let currentCompany = companyList.find(
+      (item, index) => item.code === currentCompanyCode
+    );
     return (
-      <p className={classes.movieListNotify}>Hiện tại không có suất chiếu</p>
+      <p className={classes.movieListNotify}>
+        {currentCompany.name} hiện tại không có suất chiếu
+      </p>
     );
   };
 
@@ -277,7 +282,7 @@ export default function CinemaSchedule() {
         </div>
         <div className={classes.movieList}>
           {renderPickDay(currentDateCode, handleSelectDate)}
-          {renderMovieList()}
+          {renderMovieList(companyList, currentCompanyCode)}
         </div>
       </div>
     </Container>

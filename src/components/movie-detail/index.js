@@ -7,11 +7,15 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import MovieInfor from './MovieInfor';
 import MovieSchedule from './MovieSchedule';
+import MovieComment from './MovieComment';
 
 const useStyles = makeStyles((theme) => ({
   container: {
     position: 'relative',
     paddingTop: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   tabHeader: {
     width: '100%',
@@ -65,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MovieDetail(props) {
   const classes = useStyles();
   const { movieItem } = props;
-  const [currentTabId, setCurrentTabId] = React.useState(1);
+  const [currentTabId, setCurrentTabId] = React.useState(0);
 
   const handleChangeTab = (event, newId) => {
     setCurrentTabId(newId);
@@ -78,6 +82,8 @@ export default function MovieDetail(props) {
         return <MovieSchedule />;
       case 1:
         return <MovieInfor movieItem={movieItem} />;
+      case 2:
+        return <MovieComment />;
       default:
         return (
           <div className={classes.tabEmpty}>
