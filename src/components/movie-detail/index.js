@@ -7,7 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import MovieInfor from './MovieInfor';
 import MovieSchedule from './MovieSchedule';
-import MovieComment from './MovieComment';
+import MovieReview from './MovieReview';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -83,7 +83,7 @@ export default function MovieDetail(props) {
       case 1:
         return <MovieInfor movieItem={movieItem} />;
       case 2:
-        return <MovieComment />;
+        return <MovieReview />;
       default:
         return (
           <div className={classes.tabEmpty}>

@@ -8,10 +8,13 @@ import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 
+import { reviewList } from './ReviewList.json';
+
 const useStyles = makeStyles((theme) => ({
   oldReviewContainer: {
     backgroundColor: 'white',
-    width: '580px',
+    width: '100%',
+    maxWidth: '580px',
     borderRadius: '4px',
     overflow: 'hidden',
     marginTop: '20px',
@@ -74,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     cursor: 'pointer',
+    minWidth: '90px',
   },
   oldReviewLikeIcon: {
     fontSize: '20px',
@@ -84,12 +88,17 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '500',
     color: theme.palette.textColor.light,
     marginLeft: '8px',
+    whiteSpace: 'nowrap',
   },
   oldReviewcomment: {
     display: 'flex',
     alignItems: 'center',
     cursor: 'pointer',
-    marginLeft: '40px',
+    marginLeft: '20px',
+    minWidth: '90px',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: '40px',
+    },
   },
   oldReviewCommentIcon: {
     fontSize: '20px',
@@ -100,6 +109,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '500',
     color: theme.palette.textColor.light,
     marginLeft: '8px',
+    whiteSpace: 'nowrap',
   },
   replyReview: {
     padding: '20px',
@@ -136,9 +146,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: '4px',
-    width: '580px',
+    width: '100%',
+    maxWidth: '580px',
     padding: '8px 20px',
     cursor: 'pointer',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'flex-start',
+    },
   },
   myReviewUserAvatar: {
     width: '38px',
@@ -146,11 +162,14 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
   },
   myReviewInfor: {
-    flex: '1',
     fontSize: '16px',
     fontWeight: '500',
     color: theme.palette.textColor.light,
     marginLeft: '10px',
+    whiteSpace: 'nowrap',
+    [theme.breakpoints.up('sm')]: {
+      flex: '1',
+    },
   },
   myReviewRateStar: {
     fontSize: '30px',
@@ -158,7 +177,8 @@ const useStyles = makeStyles((theme) => ({
   },
   reviewBox: {
     position: 'relative',
-    width: '782px',
+    width: '80vw',
+    maxWidth: '782px',
     padding: '20px',
   },
   reviewBoxCloseIcon: {
@@ -209,6 +229,9 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '0',
     marginLeft: 'auto',
   },
+  loadMoreButton: {
+    marginTop: '30px',
+  },
   horizontalSeparate: {
     borderBottom: `1px solid ${theme.palette.borderColor.light}`,
   },
@@ -235,7 +258,29 @@ const PostButton = withStyles({
   },
 })(Button);
 
-function MyComment() {
+const LoadMoreButton = withStyles({
+  root: {
+    backgroundColor: 'transparent',
+    borderRadius: '4px',
+    border: '1px solid #aaa',
+    color: '#aaa',
+    height: '36px',
+    width: '120px',
+    cursor: 'pointer',
+    '&:hover': {
+      border: 'none',
+      backgroundColor: '#f43f24',
+      color: 'white',
+    },
+  },
+  label: {
+    textTransform: 'upcase',
+    fontSize: '14px',
+    fontWeight: '500',
+  },
+})(Button);
+
+function MyReview() {
   const classes = useStyles();
   const [isShowReviewBox, setIsShowReviewBox] = React.useState(false);
   const [isShowMessage, setIsShowMessage] = React.useState(false);
@@ -290,7 +335,7 @@ function MyComment() {
           }}
         />
       </div>
-      <Dialog open={isShowReviewBox} maxWidth='false'>
+      <Dialog open={isShowReviewBox} maxWidth={false}>
         <div className={classes.reviewBox}>
           <CloseIcon
             className={classes.reviewBoxCloseIcon}
@@ -305,7 +350,6 @@ function MyComment() {
               defaultValue={rateStarValue}
               precision={0.5}
               onChange={(event, newValue) => {
-                console.log(event);
                 setRateStarValue(newValue);
               }}
               classes={{
@@ -337,53 +381,57 @@ function MyComment() {
   );
 }
 
-function OldReview() {
+function OldReview(props) {
   const classes = useStyles();
+  const { reviewItem } = props;
   const [isShowReplyReview, setIsShowReplyReview] = React.useState(false);
 
   const toggleShowReplyReview = () => {
     setIsShowReplyReview(!isShowReplyReview);
   };
 
-  const renderReplyReview = () => {
-    let randomNumber = Math.floor(Math.random() * 5) + 1;
-    let replyReviewList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    replyReviewList = replyReviewList.slice(0, randomNumber);
+  const getDifferenceDate = (date) => {
+    let currentDate = new Date();
+    let replyDate = new Date(date);
+    var differenceDate = parseInt(
+      (currentDate - replyDate) / (1000 * 60 * 60 * 24),
+      10
+    );
+    return differenceDate;
+  };
 
-    return replyReviewList.map((item, index) => (
-      <div className={classes.replyReview}>
+  const renderReplyReview = () => {
+    let replyList = reviewItem.replyList;
+    return replyList.map((item, index) => (
+      <div className={classes.replyReview} key={index}>
         {/* Header */}
         <div className={classes.oldReviewHeader}>
           <div className={classes.oldReviewUser}>
             <img
-              src='/assets/img/user/default_avatar.png'
-              alt='user_avatar'
+              src={item.avatar}
+              alt={item.name}
               className={classes.replyUserAvatar}
             ></img>
             <div className={classes.oldReviewUserInfor}>
-              <div className={classes.oldReviewUserName}>Nguyễn Hoàng Tuấn</div>
-              <div className={classes.oldReviewUserActivity}>5 ngày trước</div>
+              <div className={classes.oldReviewUserName}>{item.name}</div>
+              <div className={classes.oldReviewUserActivity}>
+                {getDifferenceDate(item.date)} ngày trước
+              </div>
             </div>
           </div>
         </div>
         {/* Body */}
-        <p className={classes.replyContent}>
-          Không hay bằng các phần trước. Ai thích xem hành động thì coi, vì phim
-          chỉ chạy và chạy liên tục xong hết phim, không được logic lắm! Cảnh
-          cảm động cũng làm không tới :(((
-        </p>
+        <p className={classes.replyContent}>{item.content}</p>
         {/* Footer */}
         <div className={classes.replyFooter}>
           <div className={classes.replyLike}>
             <ThumbUpAltOutlinedIcon className={classes.oldReviewLikeIcon} />
-            <div className={classes.oldReviewLikeNumber}>12 Thích</div>
+            <div className={classes.oldReviewLikeNumber}>{item.like} Thích</div>
           </div>
         </div>
       </div>
     ));
   };
-
-  const rateStarValue = Math.floor(Math.random() * 10) + 1;
 
   return (
     <div className={classes.oldReviewContainer}>
@@ -392,20 +440,24 @@ function OldReview() {
         <div className={classes.oldReviewHeader}>
           <div className={classes.oldReviewUser}>
             <img
-              src='/assets/img/user/default_avatar.png'
-              alt='user_avatar'
+              src={reviewItem.avatar}
+              alt={reviewItem.name}
               className={classes.OldReviewUserAvatar}
             ></img>
             <div className={classes.oldReviewUserInfor}>
-              <div className={classes.oldReviewUserName}>Nguyễn Hoàng Tuấn</div>
-              <div className={classes.oldReviewUserActivity}>5 ngày trước</div>
+              <div className={classes.oldReviewUserName}>{reviewItem.name}</div>
+              <div className={classes.oldReviewUserActivity}>
+                {getDifferenceDate(reviewItem.date)} ngày trước
+              </div>
             </div>
           </div>
           <div className={classes.rate}>
-            <div className={classes.oldReviewRatePoint}>{rateStarValue}.0</div>
+            <div className={classes.oldReviewRatePoint}>
+              {reviewItem.ratePoint}.0
+            </div>
             <Rating
               defaultValue={0}
-              value={rateStarValue / 2}
+              value={reviewItem.ratePoint / 2}
               precision={0.5}
               readOnly
               classes={{
@@ -415,24 +467,26 @@ function OldReview() {
           </div>
         </div>
         {/* Body */}
-        <p className={classes.oldReviewContent}>
-          Không hay bằng các phần trước. Ai thích xem hành động thì coi, vì phim
-          chỉ chạy và chạy liên tục xong hết phim, không được logic lắm! Cảnh
-          cảm động cũng làm không tới :(((
-        </p>
+        <p className={classes.oldReviewContent}>{reviewItem.content}</p>
         {/* Footer */}
         <div className={classes.oldReviewFooter}>
           <div className={classes.oldReviewLike}>
             <ThumbUpAltOutlinedIcon className={classes.oldReviewLikeIcon} />
-            <div className={classes.oldReviewLikeNumber}>12 Thích</div>
+            <div className={classes.oldReviewLikeNumber}>
+              {reviewItem.like} Thích
+            </div>
           </div>
-          <div
-            className={classes.oldReviewcomment}
-            onClick={toggleShowReplyReview}
-          >
-            <ChatBubbleOutlineIcon className={classes.oldReviewCommentIcon} />
-            <div className={classes.oldReviewCommentNumber}>12 Bình luận</div>
-          </div>
+          {reviewItem.reply > 0 && (
+            <div
+              className={classes.oldReviewcomment}
+              onClick={toggleShowReplyReview}
+            >
+              <ChatBubbleOutlineIcon className={classes.oldReviewCommentIcon} />
+              <div className={classes.oldReviewCommentNumber}>
+                {reviewItem.reply} Bình luận
+              </div>
+            </div>
+          )}
         </div>
       </div>
       {/* Horizontal Separate */}
@@ -443,11 +497,39 @@ function OldReview() {
 }
 
 export default function CommentBlock() {
+  const classes = useStyles();
+  const [limitOldComment, setLimitOldComment] = React.useState(4);
+
+  const handleSetLimitOldComment = () => {
+    if (limitOldComment < reviewList.length) {
+      let newLimit = limitOldComment + 4;
+      if (newLimit > reviewList.length) {
+        newLimit = reviewList.length;
+      }
+      setLimitOldComment(newLimit);
+    }
+  };
+
+  const renderOldReview = (reviewList, limitOldComment) => {
+    let currentReivewList = reviewList.slice(0, limitOldComment);
+    console.log(limitOldComment);
+    console.log(currentReivewList);
+    return currentReivewList.map((item, index) => (
+      <OldReview reviewItem={item} key={index} />
+    ));
+  };
   return (
     <Fragment>
-      <MyComment />
-      <OldReview />
-      <OldReview />
+      <MyReview />
+      {renderOldReview(reviewList, limitOldComment)}
+      {limitOldComment < reviewList.length && (
+        <div
+          className={classes.loadMoreButton}
+          onClick={handleSetLimitOldComment}
+        >
+          <LoadMoreButton>Xem Thêm</LoadMoreButton>
+        </div>
+      )}
     </Fragment>
   );
 }

@@ -1,0 +1,118 @@
+{
+  "reviewList": [
+    {
+      "code": "0001",
+      "name": "Nguyễn Hoàng Tuấn",
+      "avatar": "/assets/img/user_review/nguyen-hoang-tuan.jpg",
+      "date": "2021-05-13T00:00:00",
+      "ratePoint": "9",
+      "content": "Phim như bùi mà trên FB or đúng ảo. Phim này nên làm dài tập chiếu trên TV tốt hơn. Toàn đưa những bối cánh chã lq tới cốt truyện. Cục đá thì như có định vị nên đi đâu cũng tìm ra. Cục đá chã có mẹ gì mà tí hiền ôm trong ng đễ cả nhà gần chêtz. Cảnh rớt xe vs sập nhà đễ vào cho dật gân chứ chã có mẹ gig lq. Dỡ tệ.",
+      "like": "12",
+      "reply": "1",
+      "replyList": [
+        {
+          "code": "0001-01",
+          "name": "Như Hoàng",
+          "avatar": "/assets/img/user_review/nhu-hoang.jpg",
+          "date": "2021-05-13T00:00:00",
+          "content": "Mình thấy phim hay và rất kịch tính...",
+          "like": "2"
+        }
+      ]
+    },
+    {
+      "code": "0002",
+      "name": "Phương Thảo",
+      "avatar": "/assets/img/user_review/phuong-thao.jpg",
+      "date": "2021-05-12T00:00:00",
+      "ratePoint": "8",
+      "content": "Không hay bằng các phần trước. Ai thích xem hành động thì coi, vì phim chỉ chạy và chạy liên tục xong hết phim, không được logic lắm! Cảnh cảm động cũng làm không tới :(((",
+      "like": "5",
+      "reply": "0",
+      "replyList": []
+    },
+    {
+      "code": "0003",
+      "name": "Ngọc Bích Omega",
+      "avatar": "/assets/img/user_review/ngoc-bich-omega.jpg",
+      "date": "2021-05-11T00:00:00",
+      "ratePoint": "9",
+      "content": "phim ổn nha các bạn. nên chọn hàng ghế trên, xa màn hình, coi sẽ hay hơn nhé",
+      "like": "7",
+      "reply": "0",
+      "replyList": []
+    },
+    {
+      "code": "0004",
+      "name": "Hải Tú",
+      "avatar": "/assets/img/user_review/hai-tu.jpg",
+      "date": "2021-05-11T00:00:00",
+      "ratePoint": "10",
+      "content": "Bộ phim hay nhất mình từng xem luôn, hay thật sự",
+      "like": "13",
+      "reply": "0",
+      "replyList": []
+    },
+    {
+      "code": "0005",
+      "name": "Nguyen Ngoc",
+      "avatar": "/assets/img/user_review/nguyen-ngoc.jpg",
+      "date": "2021-05-11T00:00:00",
+      "ratePoint": "8",
+      "content": "Nhiều cảnh quay hành động bị rung lắc quá, coi nhức mắt. Còn lại cũng khá ổn",
+      "like": "0",
+      "reply": "0",
+      "replyList": []
+    },
+    {
+      "code": "0006",
+      "name": "Johny Đặng Trung",
+      "avatar": "/assets/img/user_review/johny-dang-trung.jpg",
+      "date": "2021-05-09T00:00:00",
+      "ratePoint": "3",
+      "content": "Phim ko có nội dung, quá dở :)",
+      "like": "2",
+      "reply": "2",
+      "replyList": [
+        {
+          "code": "0006-01",
+          "name": "Lâm Bùi",
+          "avatar": "/assets/img/user_review/lam-bui.jpg",
+          "date": "2021-05-10T00:00:00",
+          "content": "Mày ko có não nên ko hiểu â",
+          "like": "2"
+        },
+        {
+          "code": "0006-02",
+          "name": "Quốc Thắng",
+          "avatar": "/assets/img/user_review/quoc-thang.jpg",
+          "date": "2021-05-10T00:00:00",
+          "content": "Dở mà được trăm tỉ thì bạn nên coi lại nhân phẩm của mình đi rồi phán, quen ăn bậy nên đâm ra nói bậy hả",
+          "like": "0"
+        }
+      ]
+    },
+    {
+      "code": "0007",
+      "name": "John Vu",
+      "avatar": "/assets/img/user_review/john-vu.jpg",
+      "date": "2021-05-09T00:00:00",
+      "ratePoint": "8",
+      "content": "hay lắm đó các bạn nên đi xem nhé hihi phim rất cảm xúc và gây cấn",
+      "like": "1",
+      "reply": "0",
+      "replyList": []
+    },
+    {
+      "code": "0008",
+      "name": "Hyukie Thảo",
+      "avatar": "/assets/img/user_review/hyukie-thao.jpg",
+      "date": "2021-05-08T00:00:00",
+      "ratePoint": "8",
+      "content": "Phim rất hay. Mong anh Lý Hải sớm ra thêm phần mới",
+      "like": "4",
+      "reply": "0",
+      "replyList": []
+    }
+  ]
+}

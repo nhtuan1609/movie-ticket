@@ -7,11 +7,15 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import CinemaInfor from './CinemaInfor';
 import CinemaSchedule from './CinemaSchedule';
+import CinemaReview from './CinemaReview';
 
 const useStyles = makeStyles((theme) => ({
   container: {
     position: 'relative',
     paddingTop: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   tabHeader: {
     width: '100%',
@@ -80,6 +84,8 @@ export default function CinemaDetail(props) {
         );
       case 1:
         return <CinemaInfor cinemaItem={cinemaItem} />;
+      case 2:
+        return <CinemaReview />;
       default:
         return (
           <div className={classes.tabEmpty}>

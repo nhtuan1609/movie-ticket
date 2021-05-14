@@ -186,12 +186,14 @@ export default function MovieLayout(props) {
         <div className={classes.scrollMarkerContainer}>
           <div className={classes.scrollMarker} id='movie-block-scroll'></div>
         </div>
-        <div
-          onClick={handleLoadMoreItems(movieList.length)}
-          className={classes.listLoadMoreButton}
-        >
-          <LoadMoreButton>Xem Thêm</LoadMoreButton>
-        </div>
+        {limitItem < movieList.length && (
+          <div
+            onClick={handleLoadMoreItems(movieList.length)}
+            className={classes.listLoadMoreButton}
+          >
+            <LoadMoreButton>Xem Thêm</LoadMoreButton>
+          </div>
+        )}
       </div>
     </div>
   );
