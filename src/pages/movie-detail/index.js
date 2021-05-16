@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 
 import MovieIntro from '../../components/movie-intro';
 import MovieDetail from '../../components/movie-detail';
+import FadeLoading from '../../components/fade-loading';
 
 const useStyles = makeStyles((theme) => ({
   Container: {
@@ -70,7 +71,7 @@ export default function MovieDetailPage() {
   useEffect(() => {
     dispatch(MovieAction.fetchDetail({ maPhim }));
   }, [dispatch, maPhim]);
-  if (movieDetail.maPhim !== JSON.parse(maPhim)) return <p>Loading..</p>;
+  if (movieDetail.maPhim !== JSON.parse(maPhim)) return <FadeLoading />;
 
   return (
     <div className={classes.Container}>

@@ -222,9 +222,9 @@ export default function Header() {
         <Box component='a' href='/' display='flex' alignItems='center'>
           <Box
             component='img'
-            src={'/assets/img/logo/main_logo.png'}
+            src={'/assets/img/logo/web-logo.png'}
             alt='Logo'
-            height='30px'
+            height='50px'
           ></Box>
         </Box>
         {/* Main menu */}

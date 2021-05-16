@@ -8,6 +8,7 @@ import MovieBlock from '../../components/movie-block';
 import CinemaBlock from '../../components/cinema-block';
 import NewBlock from '../../components/new-block';
 import AppBlock from '../../components/app-block';
+import FadeLoading from '../../components/fade-loading';
 
 import MovieAction from '../../redux/action/movie';
 
@@ -17,7 +18,7 @@ export default function HomePage() {
   useEffect(() => {
     dispatch(MovieAction.fetchList());
   }, [dispatch]);
-  if (movieList.length === 0) return <p>Loading..</p>;
+  if (movieList.length === 0) return <FadeLoading />;
 
   let breakDate = new Date('2020-01-01T00:00:00');
 
