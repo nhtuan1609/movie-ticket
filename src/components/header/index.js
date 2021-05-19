@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from 'react-redux';
 import { AppBar, Toolbar } from '@material-ui/core';
 import { List, ListItem } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -13,6 +14,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import LocationData from './LocationData.json';
 
 import MobileMenu from './MobileMenu';
+
+import UserAction from '../../redux/action/user';
 
 const useStyles = makeStyles((theme) => ({
   appBarContainer: {
@@ -67,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: '10px',
     color: theme.palette.textColor.light,
     fontSize: '14px',
+    minWidth: '100px',
   },
   userLoginAvatar: {
     width: '32px',
@@ -167,7 +171,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
-  const isLogin = false;
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const userInfor = useSelector((state) => state.user.userInfor);
   const [currentLocation, setCurrentLocation] = React.useState('Hồ Chí Minh');
   const [isShowLocationList, setIsShowLocationList] = React.useState(false);
   const [
@@ -176,10 +182,6 @@ export default function Header() {
   ] = React.useState(false);
   const [isShowMobileMenu, setIsShowMobileMenu] = React.useState(false);
   const [isLoginMenu, setIsShowLoginMenu] = React.useState(false);
-  const userInfor = {
-    name: 'Nguyễn Văn A',
-    avatar: '/assets/img/user/default_avatar.png',
-  };
 
   const toggleIsShowLocationList = () => {
     setIsShowLocationList(!isShowLocationList);
@@ -213,6 +215,8 @@ export default function Header() {
 
   const handleOnClickLogout = () => {
     setIsShowLoginMenu(false);
+
+    dispatch(UserAction.fetchLogout());
   };
 
   return (
@@ -254,7 +258,7 @@ export default function Header() {
         <div className={classes.subMenuList}>
           {/* User infor */}
           <div>
-            {isLogin && (
+            {isAuthenticated && (
               <Box position='relative'>
                 <div
                   onClick={toggleIsShowLoginMenu}
@@ -266,7 +270,7 @@ export default function Header() {
                     src={userInfor.avatar}
                   />
                   <span className={classes.userLoginName}>
-                    {userInfor.name}
+                    {userInfor.hoTen}
                   </span>
                 </div>
                 {isLoginMenu && (
@@ -289,7 +293,7 @@ export default function Header() {
                 )}
               </Box>
             )}
-            {!isLogin && (
+            {!isAuthenticated && (
               <LinkMui className={classes.userLoginLink} href='/login/'>
                 <Avatar
                   className={classes.userLoginAvatar}
@@ -339,7 +343,6 @@ export default function Header() {
             className={classes.mobileMenuIcon}
           />
           <MobileMenu
-            isLogin={isLogin}
             currentLocation={currentLocation}
             LocationData={LocationData}
             isShowMobileMenu={isShowMobileMenu}

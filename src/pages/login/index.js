@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import LinkMui from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
@@ -7,6 +8,8 @@ import SmsIcon from '@material-ui/icons/Sms';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import EmailIcon from '@material-ui/icons/Email';
 import TextField from '@material-ui/core/TextField';
+
+import UserAction from '../../redux/action/user';
 
 const useStyles = makeStyles((theme) => ({
   loginBackground: {
@@ -177,10 +180,13 @@ const MainButtonPrimary = withStyles(({ palette }) => ({
 
 export default function LoginPage() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const [userName, setUserName] = React.useState('');
   const [userPassword, setUserPassword] = React.useState('');
   const [userNameErrorMsg, setUserNameErrorMsg] = React.useState(false);
   const [userPasswordErrorMsg, setUserPasswordErrorMsg] = React.useState(false);
+  const [isLoginFailed, setIsLoginFailed] = React.useState(false);
 
   const onUserNameChange = (event) => {
     setUserName(event.target.value);
@@ -188,6 +194,7 @@ export default function LoginPage() {
     if (event.target.value.length > 0) {
       setUserNameErrorMsg(false);
     }
+    setIsLoginFailed(false);
   };
 
   const onUserPasswordChange = (event) => {
@@ -196,9 +203,10 @@ export default function LoginPage() {
     if (event.target.value.length > 0) {
       setUserPasswordErrorMsg(false);
     }
+    setIsLoginFailed(false);
   };
 
-  const handleLoginButton = () => {
+  const handleLoginButton = async () => {
     let EnableSubmit = true;
 
     if (userName.trim().length === 0) {
@@ -212,9 +220,15 @@ export default function LoginPage() {
     }
 
     if (EnableSubmit) {
-      console.log('Login:');
-      console.log('UserName: ', userName);
-      console.log('UserPassword: ', userPassword);
+      dispatch(
+        UserAction.fetchLogin({
+          taiKhoan: userName,
+          matKhau: userPassword,
+        })
+      );
+      setTimeout(() => {
+        setIsLoginFailed(true);
+      }, 1000);
     }
   };
 
@@ -259,6 +273,11 @@ export default function LoginPage() {
             {userPasswordErrorMsg && (
               <div className={classes.formBodyErrorMessage}>
                 Vui lòng nhập mật khẩu!
+              </div>
+            )}
+            {isLoginFailed && !isAuthenticated && (
+              <div className={classes.formBodyErrorMessage}>
+                Tài khoản hoặc mật khẩu không chính xác
               </div>
             )}
           </div>

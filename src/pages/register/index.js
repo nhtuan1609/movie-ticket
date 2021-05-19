@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import LinkMui from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
@@ -7,6 +8,8 @@ import SmsIcon from '@material-ui/icons/Sms';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import EmailIcon from '@material-ui/icons/Email';
 import TextField from '@material-ui/core/TextField';
+
+import UserAction from '../../redux/action/user';
 
 const useStyles = makeStyles((theme) => ({
   loginBackground: {
@@ -173,6 +176,7 @@ const MainButtonPrimary = withStyles(({ palette }) => ({
 
 export default function LoginPage() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [userName, setUserName] = React.useState('');
   const [userPassword, setUserPassword] = React.useState('');
   const [userPasswordConfirm, setUserPasswordConfirm] = React.useState('');
@@ -227,10 +231,17 @@ export default function LoginPage() {
     }
 
     if (EnableSubmit) {
-      console.log('Register:');
-      console.log('UserName: ', userName);
-      console.log('UserPassword: ', userPassword);
-      console.log('UserPasswordConfirm: ', userPasswordConfirm);
+      dispatch(
+        UserAction.fetchRegister({
+          taiKhoan: userName,
+          matKhau: userPassword,
+          email: '',
+          soDt: '',
+          maNhom: '',
+          maLoaiNguoiDung: '',
+          hoTen: userName,
+        })
+      );
     }
   };
 
@@ -283,7 +294,7 @@ export default function LoginPage() {
             <TextField
               onChange={onUserPasswordConfirmChange}
               className={classes.formBodyGroupInput}
-              label='Mật khẩu'
+              label='Nhập lại mật khẩu'
               variant='outlined'
               type='Password'
               value={userPasswordConfirm}

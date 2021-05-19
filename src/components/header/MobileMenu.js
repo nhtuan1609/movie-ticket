@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from 'react-redux';
 import { List, ListItem } from '@material-ui/core';
 import { Modal, Backdrop, Slide } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -8,6 +9,8 @@ import LinkMui from '@material-ui/core/Link';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import Avatar from '@material-ui/core/Avatar';
+
+import UserAction from '../../redux/action/user';
 
 const useStyles = makeStyles((theme) => ({
   mobileMenuContainer: {
@@ -51,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
     top: '48px',
     left: '0',
     width: '100%',
+    minWidth: '200px',
     borderRadius: '4px',
     backgroundColor: 'rgb(236 236 236) !important',
     padding: '10px 0',
@@ -131,8 +135,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MobileMenu(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const userInfor = useSelector((state) => state.user.userInfor);
   const {
-    isLogin,
     currentLocation,
     LocationData,
     isShowMobileMenu,
@@ -143,10 +149,6 @@ export default function MobileMenu(props) {
   } = props;
 
   const [isLoginMenu, setIsShowLoginMenu] = React.useState(false);
-  const userInfor = {
-    name: 'Nguyễn Văn A',
-    avatar: '/assets/img/user/default_avatar.png',
-  };
 
   const toggleIsShowLoginMenu = () => {
     setIsShowLoginMenu(!isLoginMenu);
@@ -154,6 +156,8 @@ export default function MobileMenu(props) {
 
   const handleOnClickLogout = () => {
     setIsShowLoginMenu(false);
+
+    dispatch(UserAction.fetchLogout());
   };
 
   return (
@@ -180,7 +184,7 @@ export default function MobileMenu(props) {
             <div className={classes.mobileMenuHeader}>
               {/* User infor */}
               <div>
-                {isLogin && (
+                {isAuthenticated && (
                   <Box position='relative'>
                     <div
                       onClick={toggleIsShowLoginMenu}
@@ -192,7 +196,7 @@ export default function MobileMenu(props) {
                         src={userInfor.avatar}
                       />
                       <span className={classes.userLoginName}>
-                        {userInfor.name}
+                        {userInfor.hoTen}
                       </span>
                     </div>
                     {isLoginMenu && (
@@ -215,7 +219,7 @@ export default function MobileMenu(props) {
                     )}
                   </Box>
                 )}
-                {!isLogin && (
+                {!isAuthenticated && (
                   <LinkMui className={classes.userLoginLink} href='/login/'>
                     <Avatar
                       className={classes.userLoginAvatar}
