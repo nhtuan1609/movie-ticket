@@ -31,7 +31,7 @@ const UserAction = {
     return async (dispatch) => {
       try {
         dispatch({
-          type: LOGIN_SUCCESS,
+          type: REGISTER,
           data: option,
         });
         window.location.href = '..';

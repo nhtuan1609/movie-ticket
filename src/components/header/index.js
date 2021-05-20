@@ -79,8 +79,8 @@ const useStyles = makeStyles((theme) => ({
   userLoginMenuList: {
     position: 'absolute',
     top: '48px',
-    left: '0',
-    width: '100%',
+    right: '0',
+    width: '140px',
     borderRadius: '4px',
     backgroundColor: 'white',
     padding: '10px 0',
@@ -277,7 +277,7 @@ export default function Header() {
                   <ClickAwayListener onClickAway={toggleIsShowLoginMenu}>
                     <div className={classes.userLoginMenuList}>
                       <LinkMui
-                        href='/personal/'
+                        href='/profile'
                         className={classes.userLoginMenuItem}
                       >
                         Thông tin cá nhân

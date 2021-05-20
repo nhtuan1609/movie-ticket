@@ -1,5 +1,6 @@
 import {
   Home,
+  Profile,
   Login,
   Register,
   MovieDetailPage,
@@ -11,6 +12,11 @@ export const mainRouter = [
     path: '/',
     exact: true,
     Component: Home,
+  },
+  {
+    path: '/profile',
+    exact: true,
+    Component: Profile,
   },
   {
     path: '/login',

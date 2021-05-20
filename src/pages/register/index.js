@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import LinkMui from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';

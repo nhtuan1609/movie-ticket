@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor.main,
     fontSize: '18px',
     fontWeight: '500',
+    overflowWrap: 'anywhere',
     '&:hover': {
       color: theme.palette.primary.main,
     },
@@ -203,7 +204,7 @@ export default function MobileMenu(props) {
                       <ClickAwayListener onClickAway={toggleIsShowLoginMenu}>
                         <div className={classes.userLoginMenuList}>
                           <LinkMui
-                            href='/personal/'
+                            href='/profile'
                             className={classes.userLoginMenuItem}
                           >
                             Thông tin cá nhân
