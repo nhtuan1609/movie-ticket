@@ -10,7 +10,65 @@
           "company": "BHD Star",
           "location": "Bitexco",
           "address": "L3-Bitexco Icon 68, 2 Hải Triều, Q.1",
-          "imageSrc": "/assets/img/cinema/bhd-star/bhd-star-bitexco.png"
+          "imageSrc": "/assets/img/cinema/bhd-star/bhd-star-bitexco.png",
+          "movieList": [
+            {
+              "lstLichChieuTheoPhim": [
+                {
+                  "maLichChieu": 40064,
+                  "maRap": "465",
+                  "tenRap": "Rạp 5",
+                  "ngayChieuGioChieu": "2019-09-07T10:10:00",
+                  "giaVe": 100000
+                },
+                {
+                  "maLichChieu": 40069,
+                  "maRap": "465",
+                  "tenRap": "Rạp 5",
+                  "ngayChieuGioChieu": "2019-01-01T10:10:00",
+                  "giaVe": 99000
+                },
+                {
+                  "maLichChieu": 40070,
+                  "maRap": "467",
+                  "tenRap": "Rạp 7",
+                  "ngayChieuGioChieu": "2019-01-01T00:10:00",
+                  "giaVe": 77000
+                }
+              ],
+              "maPhim": 1344,
+              "tenPhim": "Avenger 1",
+              "hinhAnh": "http://movie0706.cybersoft.edu.vn/hinhanh/avenger-1_gp01.jpg"
+            },
+            {
+              "lstLichChieuTheoPhim": [
+                {
+                  "maLichChieu": 40261,
+                  "maRap": "467",
+                  "tenRap": "Rạp 7",
+                  "ngayChieuGioChieu": "2910-02-01T03:03:03",
+                  "giaVe": 75000
+                }
+              ],
+              "maPhim": 2528,
+              "tenPhim": "Mắt Biếc",
+              "hinhAnh": "http://movie0706.cybersoft.edu.vn/hinhanh/mat-biec_gp01.jpg"
+            },
+            {
+              "lstLichChieuTheoPhim": [
+                {
+                  "maLichChieu": 40264,
+                  "maRap": "467",
+                  "tenRap": "Rạp 7",
+                  "ngayChieuGioChieu": "2020-03-14T12:00:00",
+                  "giaVe": 100000
+                }
+              ],
+              "maPhim": 2602,
+              "tenPhim": "Chuyến tàu may mắn",
+              "hinhAnh": "http://movie0706.cybersoft.edu.vn/hinhanh/chuyen-tau-may-man_gp01.jpg"
+            }
+          ]
         },
         {
           "code": "0001-02",
