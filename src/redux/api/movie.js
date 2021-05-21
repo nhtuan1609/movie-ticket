@@ -7,7 +7,7 @@ const MovieApi = {
     return axiosClient.get(
       url +
         (maNhom ? '?maNhom=' + maNhom : '') +
-        (tenPhim ? '?=tenPhim' + tenPhim : '')
+        (tenPhim ? '&tenPhim' + tenPhim : '')
     );
   },
 

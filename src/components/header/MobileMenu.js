@@ -138,7 +138,7 @@ export default function MobileMenu(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const userInfor = useSelector((state) => state.user.userInfor);
+  const userInfor = useSelector((state) => state.user.infor);
   const {
     currentLocation,
     LocationData,

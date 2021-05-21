@@ -173,7 +173,7 @@ export default function Header() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const userInfor = useSelector((state) => state.user.userInfor);
+  const userInfor = useSelector((state) => state.user.infor);
   const [currentLocation, setCurrentLocation] = React.useState('Hồ Chí Minh');
   const [isShowLocationList, setIsShowLocationList] = React.useState(false);
   const [

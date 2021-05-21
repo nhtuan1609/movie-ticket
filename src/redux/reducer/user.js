@@ -1,7 +1,7 @@
 import { LOGIN_SUCCESS, REGISTER, LOGOUT } from '../constant/user';
 const initialState = {
   isAuthenticated: localStorage.getItem('isAuthenticated'),
-  userInfor: JSON.parse(localStorage.getItem('userInfor')),
+  infor: JSON.parse(localStorage.getItem('userInfor')),
 };
 
 const userReducer = (state = initialState, action) => {
@@ -13,7 +13,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        userInfor: data,
+        infor: data,
       };
     }
     case REGISTER: {
@@ -22,7 +22,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        userInfor: data,
+        infor: data,
       };
     }
     case LOGOUT: {
@@ -30,7 +30,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: false,
-        userInfor: null,
+        infor: null,
       };
     }
     default:

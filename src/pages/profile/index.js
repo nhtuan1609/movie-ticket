@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProfilePage() {
   const classes = useStyles();
-  const userInfor = useSelector((state) => state.user.userInfor);
+  const userInfor = useSelector((state) => state.user.infor);
 
   return (
     <div className={classes.Container}>

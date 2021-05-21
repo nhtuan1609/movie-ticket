@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import dateFormat from 'date-format';
 import moment from 'moment';
 
-import { companyList } from './CompanyList.json';
+import CinemaAction from '../../redux/action/cinema';
 
 const useStyles = makeStyles((theme) => ({
   containerPadding: {
@@ -259,12 +260,48 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CinemaBlock() {
   const classes = useStyles();
-  const [currentCompanyCode, setCurrentCompanyCode] = React.useState('0001');
-  const [currentCinemaCode, setCurrentCinemaCode] = React.useState('0001-01');
+  const [currentCompanyCode, setCurrentCompanyCode] = React.useState('BHDStar');
+  const [currentCinemaCode, setCurrentCinemaCode] = React.useState(
+    'bhd-star-cineplex-3-2'
+  );
+
+  const companyList = useSelector((state) => state.cinema.companyList);
+  const cinemaList = useSelector((state) => state.cinema.cinemaList);
+  const scheduleList = useSelector((state) => state.cinema.scheduleList);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(CinemaAction.fetchCompanyList());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(
+      CinemaAction.fetchCinemaList({ maHeThongRap: currentCompanyCode })
+    );
+  }, [dispatch, currentCompanyCode]);
+
+  useEffect(() => {
+    dispatch(
+      CinemaAction.fetchScheduleList({ maHeThongRap: currentCompanyCode })
+    );
+  }, [dispatch, currentCompanyCode]);
+
+  useEffect(() => {
+    if (cinemaList.length > 0) {
+      setCurrentCinemaCode(cinemaList[0].maCumRap);
+    }
+  }, [cinemaList]);
+
+  if (
+    companyList.length === 0 ||
+    cinemaList.length === 0 ||
+    scheduleList.length === 0
+  )
+    return <div />;
 
   const handleSelectCompany = (companyCode) => () => {
     setCurrentCompanyCode(companyCode);
-    setCurrentCinemaCode(companyCode.concat('-01'));
   };
 
   const handleSelectCinema = (cinemaCode) => (event) => {
@@ -294,17 +331,17 @@ export default function CinemaBlock() {
       return (
         <div
           className={
-            item.code === currentCompanyCode
+            item.maHeThongRap === currentCompanyCode
               ? classes.companyItemHightligh
               : classes.companyItem
           }
           key={index}
-          onClick={handleSelectCompany(item.code)}
+          onClick={handleSelectCompany(item.maHeThongRap)}
         >
           <img
             className={classes.companyItemLogo}
-            src={item.logoSrc}
-            alt={item.name}
+            src={item.logo}
+            alt={item.maHeThongRap}
           ></img>
           <div className={classes.horizontalSeparate}></div>
         </div>
@@ -313,61 +350,54 @@ export default function CinemaBlock() {
   };
 
   const renderCinemaList = (
-    companyList,
-    currentCompanyCode,
+    cinemaList,
     currentCinemaCode,
     handleSelectCinema
   ) => {
-    let currentCompanyItem = companyList.find(
-      (item) => item.code === currentCompanyCode
-    );
-    let currentCinemaList = currentCompanyItem.cinemaList;
-
-    return currentCinemaList.map((item, index) => {
-      return (
-        <div
-          className={
-            item.code === currentCinemaCode
-              ? classes.cinemaItemContainerHighlight
-              : classes.cinemaItemContainer
-          }
-          key={index}
-          onClick={handleSelectCinema(item.code)}
-        >
-          <div className={classes.cinemaItem}>
-            <img
-              className={classes.cinemaItemImage}
-              src={item.imageSrc}
-              alt={item.name}
-            ></img>
-            <div className={classes.cinemaItemInfor}>
-              <span className={classes.cinemaItemInforName}>
-                <span className={classes.cinemaItemInforNameHighlight}>
-                  {item.company}
-                </span>{' '}
-                - {item.location}
+    return cinemaList.map((item, index) => (
+      <div
+        className={
+          item.maCumRap === currentCinemaCode
+            ? classes.cinemaItemContainerHighlight
+            : classes.cinemaItemContainer
+        }
+        key={index}
+        onClick={handleSelectCinema(item.maCumRap)}
+      >
+        <div className={classes.cinemaItem}>
+          <img
+            className={classes.cinemaItemImage}
+            src='/assets/img/cinema/bhd-star/bhd-star-bitexco.png'
+            alt='company-logo'
+          ></img>
+          <div className={classes.cinemaItemInfor}>
+            <span className={classes.cinemaItemInforName}>
+              <span className={classes.cinemaItemInforNameHighlight}>
+                {item.tenCumRap.slice(0, item.tenCumRap.search('-'))}
               </span>
-              <span className={classes.cinemaItemInforAddress}>
-                {item.address}
-              </span>
-              <a
-                className={classes.cinemaItemLink}
-                href={`/cinema/${item.code}`}
-              >
-                [chi tiết]
-              </a>
-            </div>
+              {item.tenCumRap.slice(
+                item.tenCumRap.search('-'),
+                item.tenCumRap.length
+              )}
+            </span>
+            <span className={classes.cinemaItemInforAddress}>
+              {item.diaChi}
+            </span>
+            <a className={classes.cinemaItemLink} href={`/cinema/${item.code}`}>
+              [chi tiết]
+            </a>
           </div>
-          <div className={classes.horizontalSeparate}></div>
         </div>
-      );
-    });
+        <div className={classes.horizontalSeparate}></div>
+      </div>
+    ));
   };
 
   const renderSessionList = (sessionList, movieLength) => {
     return sessionList.map((item, index) => {
       let starDate = new Date(item.ngayChieuGioChieu);
       let endDate = moment(starDate).add(movieLength, 'm').toDate();
+
       return (
         <a className={classes.sessionContainer} href='/' key={index}>
           <span className={classes.sessionStart}>
@@ -382,58 +412,66 @@ export default function CinemaBlock() {
     });
   };
 
-  const renderMovieList = (
-    companyList,
-    currentCompanyCode,
-    currentCinemaCode
-  ) => {
-    let currentCompanyItem = companyList.find(
-      (item) => item.code === currentCompanyCode
-    );
-
-    let currentCinemaItem = currentCompanyItem.cinemaList.find(
-      (item) => item.code === currentCinemaCode
-    );
-
-    let movieList = currentCinemaItem.movieList;
-
-    if (movieList === undefined || movieList.length === 0) {
-      return (
-        <p className={classes.movieListNotify}>
-          {currentCinemaItem.company} - {currentCinemaItem.location} hiện tại
-          không có suất chiếu
-        </p>
+  const renderMovieList = (scheduleList, currentCinemaCode) => {
+    let currenCinemaSchedule = undefined;
+    if (scheduleList.length > 0) {
+      currenCinemaSchedule = scheduleList[0].lstCumRap.find(
+        (item) => item.maCumRap === currentCinemaCode
       );
-    } else {
-      return movieList.map((item, index) => {
-        let movieLength = Math.floor(Math.random() * 20 + 90);
-        let movieIMDb = (Math.floor(Math.random() * 13) + 8) / 2;
-        return (
-          <div className={classes.movieItemContainer} key={index}>
-            <div className={classes.movieItemInfor}>
-              <img
-                className={classes.movieItemImage}
-                src={item.hinhAnh}
-                alt={item.tenPhim}
-              ></img>
-              <div className={classes.movieItemDetail}>
-                <div className={classes.movieItemName}>
-                  {renderMovieType()}
-                  {item.tenPhim}
-                </div>
-                <div className={classes.movieItemLength}>
-                  {movieLength} Phút - IMDb: {movieIMDb}
-                </div>
+    }
+
+    let movieList = [];
+    if (currenCinemaSchedule !== undefined) {
+      let filterDate = '2020-05';
+      let currenCinemaScheduleFiltered = currenCinemaSchedule.danhSachPhim.map(
+        (item, index) => {
+          let movieSchedule = item.lstLichChieuTheoPhim.filter(
+            (itemFilter) =>
+              itemFilter.ngayChieuGioChieu.slice(0, 7) === filterDate
+          );
+          return { ...item, lstLichChieuTheoPhim: [...movieSchedule] };
+        }
+      );
+
+      movieList = currenCinemaScheduleFiltered.filter(
+        (item) => item.lstLichChieuTheoPhim.length > 0
+      );
+    }
+
+    if (movieList.length === 0) {
+      return (
+        <p className={classes.movieListNotify}>Hiện tại không có suất chiếu</p>
+      );
+    }
+
+    return movieList.map((item, index) => {
+      let movieLength = Math.floor(Math.random() * 20 + 90);
+      let movieIMDb = (Math.floor(Math.random() * 13) + 8) / 2;
+      return (
+        <div className={classes.movieItemContainer} key={index}>
+          <div className={classes.movieItemInfor}>
+            <img
+              className={classes.movieItemImage}
+              src={item.hinhAnh}
+              alt={item.tenPhim}
+            ></img>
+            <div className={classes.movieItemDetail}>
+              <div className={classes.movieItemName}>
+                {renderMovieType()}
+                {item.tenPhim}
+              </div>
+              <div className={classes.movieItemLength}>
+                {movieLength} Phút - IMDb: {movieIMDb}
               </div>
             </div>
-            <div className={classes.movieItemSession}>
-              {' '}
-              {renderSessionList(item.lstLichChieuTheoPhim, movieLength)}
-            </div>
           </div>
-        );
-      });
-    }
+          <div className={classes.movieItemSession}>
+            {' '}
+            {renderSessionList(item.lstLichChieuTheoPhim, movieLength)}
+          </div>
+        </div>
+      );
+    });
   };
 
   return (
@@ -447,15 +485,10 @@ export default function CinemaBlock() {
           )}
         </div>
         <div className={classes.cinemaList}>
-          {renderCinemaList(
-            companyList,
-            currentCompanyCode,
-            currentCinemaCode,
-            handleSelectCinema
-          )}
+          {renderCinemaList(cinemaList, currentCinemaCode, handleSelectCinema)}
         </div>
         <div className={classes.movieList}>
-          {renderMovieList(companyList, currentCompanyCode, currentCinemaCode)}
+          {renderMovieList(scheduleList, currentCinemaCode)}
         </div>
       </div>
     </Container>
