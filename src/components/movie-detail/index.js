@@ -79,7 +79,7 @@ export default function MovieDetail(props) {
     const tabLabel = ['Lịch Chiếu', 'Thông Tin', 'Đánh Giá'];
     switch (currentTabId) {
       case 0:
-        return <MovieSchedule />;
+        return <MovieSchedule movieItem={movieItem} />;
       case 1:
         return <MovieInfor movieItem={movieItem} />;
       case 2:

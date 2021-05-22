@@ -3,8 +3,9 @@ import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import MovieAction from '../../redux/action/movie';
 import { useParams } from 'react-router-dom';
+
+import MovieAction from '../../redux/action/movie';
 
 import MovieIntro from '../../components/movie-intro';
 import MovieDetail from '../../components/movie-detail';
@@ -65,12 +66,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MovieDetailPage() {
   const classes = useStyles();
-  const movieDetail = useSelector((state) => state.movie.detail);
   const { movieId: maPhim } = useParams();
+  const movieDetail = useSelector((state) => state.movie.detail);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(MovieAction.fetchDetail({ maPhim }));
   }, [dispatch, maPhim]);
+
   if (movieDetail.maPhim !== JSON.parse(maPhim)) return <FadeLoading />;
 
   return (

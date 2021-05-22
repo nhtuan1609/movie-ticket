@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ScheduleSelection(props) {
   const classes = useStyles();
-  const { scheduleList, currentCinemaCode } = props;
+  const { scheduleList, currentCinemaCode, filterMovieCode } = props;
 
   const renderMovieType = () => {
     const ageAllow = Math.floor(Math.random() * 4);
@@ -178,6 +178,12 @@ export default function ScheduleSelection(props) {
       movieSchedule = currenCinemaScheduleFiltered.filter(
         (item) => item.lstLichChieuTheoPhim.length > 0
       );
+
+      if (filterMovieCode !== undefined) {
+        movieSchedule = movieSchedule.filter(
+          (item) => item.maPhim === filterMovieCode
+        );
+      }
     }
 
     if (movieSchedule.length === 0) {

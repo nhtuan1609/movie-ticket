@@ -1,8 +1,14 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { companyList } from './CompanyList.json';
+
+import CompanySelection from '../company-selection';
+import CinemaSelection from '../cinema-selection';
+import ScheduleSelection from '../schedule-selection';
+import DateSelection from '../date-selection';
+
+import CinemaAction from '../../redux/action/cinema';
 
 const useStyles = makeStyles((theme) => ({
   cinemaBlockContainer: {
@@ -15,156 +21,96 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
-  companyList: {
+  companySelectionContainer: {
     float: 'left',
-    width: '32%',
-    height: '100%',
-    borderRight: `1px solid ${theme.palette.borderColor.light}`,
-    overflowY: 'auto',
-    '&::-webkit-scrollbar': {
-      width: '4px',
-      backgroundColor: '#e8e3e3',
-    },
-    '&::-webkit-scrollbar-thumb': {
-      borderRadius: '10px',
-      boxShadow: 'inset 0 0 6px rgb(0 0 0 / 30%)',
-    },
-  },
-  companyItem: {
-    width: '100%',
-    height: '90px',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '0 18px',
-    cursor: 'pointer',
-    '&:hover': {
-      '& img': {
-        opacity: '1',
-      },
-      '& p': {
-        opacity: '1',
-      },
-    },
-  },
-  companyItemHightligh: {
-    width: '100%',
-    height: '90px',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '0 18px',
-    cursor: 'pointer',
-    '& img': {
-      opacity: '1',
-    },
-    '& p': {
-      opacity: '1',
-    },
-  },
-  companyItemWrap: {
-    display: 'flex',
-    alignItems: 'center',
+    width: '92px',
     height: '100%',
   },
-  companyItemLogo: {
-    width: '50px',
-    height: '50px',
-    opacity: '0.6',
-  },
-  companyItemName: {
-    marginLeft: '10px',
-    fontSize: '16px',
-    fontWeight: '500',
-    color: theme.palette.textColor.main,
-    opacity: '0.6',
-  },
-  movieList: {
+  cinemaSelectionContainer: {
     float: 'left',
-    width: '68%',
+    width: '30%',
+    height: '100%',
+  },
+  movieScheduleContainer: {
+    float: 'left',
+    width: 'calc(100% - 30% - 92px)',
     height: '100%',
     borderLeft: 'none',
-    overflowY: 'auto',
-    '&::-webkit-scrollbar': {
-      width: '4px',
-      backgroundColor: '#e8e3e3',
-    },
-    '&::-webkit-scrollbar-thumb': {
-      borderRadius: '10px',
-      boxShadow: 'inset 0 0 6px rgb(0 0 0 / 30%)',
-    },
   },
-  pickDayContainer: {
-    whiteSpace: 'nowrap',
+  dateSelectionContainer: {
     height: '90px',
-    borderBottom: `1px solid ${theme.palette.borderColor.light}`,
-    overflowX: 'scroll',
-    overflowY: 'hidden',
-    '&::-webkit-scrollbar': {
-      width: '4px',
-      height: '4px',
-      backgroundColor: '#e8e3e3',
-    },
-    '&::-webkit-scrollbar-thumb': {
-      borderRadius: '10px',
-      boxShadow: 'inset 0 0 6px rgb(0 0 0 / 30%)',
-    },
   },
-  pickDayItem: {
-    display: 'inline-block',
-    width: '84px',
-    height: '84px',
-    textAlign: 'center',
-    fontSize: '16px',
-    fontWeight: '500',
-    color: theme.palette.textColor.light,
-    cursor: 'pointer',
-    userSelect: 'none',
-  },
-  pickDayItemHightlight: {
-    display: 'inline-block',
-    width: '84px',
-    height: '84px',
-    textAlign: 'center',
-    fontSize: '16px',
-    fontWeight: '500',
-    color: theme.palette.primary.main,
-    cursor: 'pointer',
-    userSelect: 'none',
-  },
-  pickDayItemDay: {
-    fontSize: '16px',
-    marginTop: '16px',
-    marginBottom: '0',
-  },
-  pickDayItemDate: {
-    fontSize: '22px',
-    marginTop: '0',
-    marginBottom: '16px',
-  },
-  movieListNotify: {
-    fontSize: '16px',
-    fontWeight: '500',
-    color: theme.palette.textColor.main,
-    textAlign: 'center',
-  },
-  horizontalSeparate: {
-    width: '100%',
-    borderBottom: `1px solid ${theme.palette.borderColor.light}`,
+  scheduleSelectionContainer: {
+    height: 'calc(100% - 90px)',
   },
 }));
 
-export default function CinemaSchedule() {
+export default function CinemaSchedule(props) {
   const classes = useStyles();
-  const [currentCompanyCode, setCurrentCompanyCode] = React.useState('0001');
-  const [currentDateCode, setCurrentDateCode] = React.useState(() => {
-    let today = new Date();
-    return today.toJSON().slice(0, 10);
-  });
+  const { movieItem } = props;
+  const [currentCompanyCode, setCurrentCompanyCode] = React.useState('BHDStar');
+  const [currentCinemaCode, setCurrentCinemaCode] = React.useState(
+    'bhd-star-cineplex-3-2'
+  );
+  const [currentSelectedDateCode, setCurrentSelectedDateCode] = React.useState(
+    () => {
+      let today = new Date();
+      return today.toJSON().slice(0, 10);
+    }
+  );
+
+  const companyList = useSelector((state) => state.cinema.companyList);
+  const cinemaList = useSelector((state) => state.cinema.cinemaList);
+  const scheduleList = useSelector((state) => state.cinema.scheduleList);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(CinemaAction.fetchCompanyList());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(
+      CinemaAction.fetchCinemaList({ maHeThongRap: currentCompanyCode })
+    );
+  }, [dispatch, currentCompanyCode]);
+
+  useEffect(() => {
+    dispatch(
+      CinemaAction.fetchScheduleList({ maHeThongRap: currentCompanyCode })
+    );
+  }, [dispatch, currentCompanyCode]);
+
+  useEffect(() => {
+    if (cinemaList.length > 0) {
+      setCurrentCinemaCode(cinemaList[0].maCumRap);
+    }
+  }, [cinemaList]);
+
+  if (
+    companyList.length === 0 ||
+    cinemaList.length === 0 ||
+    scheduleList.length === 0
+  )
+    return <div />;
 
   const handleSelectCompany = (companyCode) => () => {
     setCurrentCompanyCode(companyCode);
 
     let today = new Date();
-    setCurrentDateCode(today.toJSON().slice(0, 10));
+    setCurrentSelectedDateCode(today.toJSON().slice(0, 10));
+
+    let slider = document.querySelector('#pick-day');
+    if (slider !== null) {
+      slider.scrollLeft = 0;
+    }
+  };
+
+  const handleSelectCinema = (cinemaCode) => () => {
+    setCurrentCinemaCode(cinemaCode);
+
+    let today = new Date();
+    setCurrentSelectedDateCode(today.toJSON().slice(0, 10));
 
     let slider = document.querySelector('#pick-day');
     if (slider !== null) {
@@ -173,116 +119,41 @@ export default function CinemaSchedule() {
   };
 
   const handleSelectDate = (dateCode) => (event) => {
-    setCurrentDateCode(dateCode);
-  };
-
-  const renderCompanyList = (
-    companyList,
-    currentCompanyCode,
-    handleSelectCompany
-  ) => {
-    return companyList.map((item, index) => {
-      return (
-        <div
-          className={
-            item.code === currentCompanyCode
-              ? classes.companyItemHightligh
-              : classes.companyItem
-          }
-          key={index}
-          onClick={handleSelectCompany(item.code)}
-        >
-          <div className={classes.companyItemWrap}>
-            <img
-              className={classes.companyItemLogo}
-              src={item.logoSrc}
-              alt={item.name}
-            ></img>
-            <p className={classes.companyItemName}>{item.name}</p>
-          </div>
-          <div className={classes.horizontalSeparate}></div>
-        </div>
-      );
-    });
-  };
-
-  const renderMovieList = (companyList, currentCompanyCode) => {
-    let currentCompany = companyList.find(
-      (item, index) => item.code === currentCompanyCode
-    );
-    return (
-      <p className={classes.movieListNotify}>
-        {currentCompany.name} hiện tại không có suất chiếu
-      </p>
-    );
-  };
-
-  const renderPickDay = (currentDateCode, handleSelectDate) => {
-    const dayOfWeek = [
-      'Chủ nhật',
-      'Thứ 2',
-      'Thứ 3',
-      'Thứ 4',
-      'Thứ 5',
-      'Thứ 6',
-      'Thứ 7',
-    ];
-    let today = new Date();
-    let dateList = [];
-    for (var i = 0; i < 14; i++) {
-      let jsonDate = today.toJSON().slice(0, 10);
-      dateList.push(jsonDate);
-      today.setDate(today.getDate() + 1);
-    }
-
-    const getVNDay = (dateString) => {
-      let date = new Date(dateString);
-      return dayOfWeek[date.getDay()];
-    };
-
-    const getDate = (dateString) => {
-      let date = new Date(dateString);
-      let dateNumber = date.getDate();
-      if (dateNumber < 10) {
-        return '0'.concat(dateNumber.toString());
-      } else {
-        return dateNumber.toString();
-      }
-    };
-
-    return (
-      <div className={classes.pickDayContainer} id='pick-day'>
-        {dateList.map((item, index) => (
-          <div
-            className={
-              item === currentDateCode
-                ? classes.pickDayItemHightlight
-                : classes.pickDayItem
-            }
-            onClick={handleSelectDate(item)}
-            key={index}
-          >
-            <p className={classes.pickDayItemDay}>{getVNDay(item)}</p>
-            <p className={classes.pickDayItemDate}>{getDate(item)}</p>
-          </div>
-        ))}
-      </div>
-    );
+    setCurrentSelectedDateCode(dateCode);
   };
 
   return (
     <Container maxWidth='md'>
       <div className={classes.cinemaBlockContainer}>
-        <div className={classes.companyList}>
-          {renderCompanyList(
-            companyList,
-            currentCompanyCode,
-            handleSelectCompany
-          )}
+        <div className={classes.companySelectionContainer}>
+          <CompanySelection
+            companyList={companyList}
+            currentCompanyCode={currentCompanyCode}
+            handleSelectCompany={handleSelectCompany}
+          />
         </div>
-        <div className={classes.movieList}>
-          {renderPickDay(currentDateCode, handleSelectDate)}
-          {renderMovieList(companyList, currentCompanyCode)}
+        <div className={classes.cinemaSelectionContainer}>
+          <CinemaSelection
+            cinemaList={cinemaList}
+            currentCompanyCode={currentCompanyCode}
+            currentCinemaCode={currentCinemaCode}
+            handleSelectCinema={handleSelectCinema}
+          />
+        </div>
+        <div className={classes.movieScheduleContainer}>
+          <div className={classes.dateSelectionContainer}>
+            <DateSelection
+              currentSelectedDateCode={currentSelectedDateCode}
+              handleSelectDate={handleSelectDate}
+            />
+          </div>
+          <div className={classes.scheduleSelectionContainer}>
+            <ScheduleSelection
+              scheduleList={scheduleList}
+              currentCinemaCode={currentCinemaCode}
+              filterMovieCode={movieItem.maPhim}
+            />
+          </div>
         </div>
       </div>
     </Container>
