@@ -166,9 +166,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CinemaSchedule(props) {
   const classes = useStyles();
-  const { companyItem, cinemaItem } = props;
+  const { cinemaList, cinemaItem } = props;
   const [currentCinemaCode, setCurrentCinemaCode] = React.useState(
-    cinemaItem.code
+    cinemaItem.maCumRap
   );
   const [currentDateCode, setCurrentDateCode] = React.useState(() => {
     let today = new Date();
@@ -192,45 +192,48 @@ export default function CinemaSchedule(props) {
   };
 
   const renderCinemaList = (
-    companyItem,
+    cinemaList,
     currentCinemaCode,
     handleSelectCinema
   ) => {
-    let firstCinemaItem = companyItem.cinemaList.find((item) => {
-      return item.code === currentCinemaCode;
+    let firstCinemaItem = cinemaList.find((item) => {
+      return item.maCumRap === currentCinemaCode;
     });
-    let othersCinemaItem = companyItem.cinemaList.filter(
-      (item) => item.code !== currentCinemaCode
+    let othersCinemaItem = cinemaList.filter(
+      (item) => item.maCumRap !== currentCinemaCode
     );
 
-    let cinemaList = [firstCinemaItem, ...othersCinemaItem];
+    let cinemaListResorted = [firstCinemaItem, ...othersCinemaItem];
 
-    return cinemaList.map((item, index) => {
+    return cinemaListResorted.map((item, index) => {
       return (
         <div
           className={
-            item.code === currentCinemaCode
+            item.maCumRap === currentCinemaCode
               ? classes.cinemaItemContainerHighlight
               : classes.cinemaItemContainer
           }
           key={index}
-          onClick={handleSelectCinema(item.code)}
+          onClick={handleSelectCinema(item.maCumRap)}
         >
           <div className={classes.cinemaItem}>
             <img
               className={classes.cinemaItemImage}
-              src={item.imageSrc}
-              alt={item.name}
+              src='/assets/img/cinema/lotte/lotte-cinema-cantavil.jpg'
+              alt={item.maCumRap}
             ></img>
             <div className={classes.cinemaItemInfor}>
               <span className={classes.cinemaItemInforName}>
                 <span className={classes.cinemaItemInforNameHighlight}>
-                  {item.company}
+                  {item.tenCumRap.slice(0, item.tenCumRap.search('-'))}
                 </span>
-                - {item.location}
+                {item.tenCumRap.slice(
+                  item.tenCumRap.search('-'),
+                  item.tenCumRap.length
+                )}
               </span>
               <span className={classes.cinemaItemInforAddress}>
-                {item.address}
+                {item.diaChi}
               </span>
             </div>
           </div>
@@ -240,15 +243,10 @@ export default function CinemaSchedule(props) {
     });
   };
 
-  const renderMovieList = (companyItem, currentCinemaCode) => {
-    let currentCinemaItem = companyItem.cinemaList.find(
-      (item) => item.code === currentCinemaCode
-    );
-
+  const renderMovieList = (companyItem) => {
     return (
       <p className={classes.movieListNotify}>
-        {currentCinemaItem.company} - {currentCinemaItem.location} hiện tại
-        không có suất chiếu
+        {companyItem.tenCumRap} hiện tại không có suất chiếu
       </p>
     );
   };
@@ -310,11 +308,11 @@ export default function CinemaSchedule(props) {
     <Container maxWidth='md'>
       <div className={classes.cinemaBlockContainer}>
         <div className={classes.cinemaList}>
-          {renderCinemaList(companyItem, currentCinemaCode, handleSelectCinema)}
+          {renderCinemaList(cinemaList, currentCinemaCode, handleSelectCinema)}
         </div>
         <div className={classes.movieList}>
           {renderPickDay(currentDateCode, handleSelectDate)}
-          {renderMovieList(companyItem, currentCinemaCode)}
+          {renderMovieList(cinemaItem)}
         </div>
       </div>
     </Container>

@@ -144,11 +144,16 @@ export default function CinemaIntro(props) {
         <div className={classes.cinemaInforGroup}>
           <div className={classes.cinemaInforName}>
             <span className={classes.cinemaInforNameHighlight}>
-              {cinemaItem.company}
+              {cinemaItem.tenCumRap.slice(0, cinemaItem.tenCumRap.search('-'))}
             </span>
-            <span> - {cinemaItem.location}</span>
+            <span>
+              {cinemaItem.tenCumRap.slice(
+                cinemaItem.tenCumRap.search('-'),
+                cinemaItem.tenCumRap.length
+              )}
+            </span>
           </div>
-          <div className={classes.cinemaInforAddress}>{cinemaItem.address}</div>
+          <div className={classes.cinemaInforAddress}>{cinemaItem.diaChi}</div>
           <div className={classes.cinemaInforButton}>
             <BuyTicketButton>
               <a
@@ -191,20 +196,18 @@ export default function CinemaIntro(props) {
 
 CinemaIntro.propTypes = {
   cinemaItem: PropTypes.shape({
-    code: PropTypes.string,
-    company: PropTypes.string,
-    location: PropTypes.string,
-    address: PropTypes.string,
-    imageSrc: PropTypes.string,
+    maCumRap: PropTypes.string,
+    tenCumRap: PropTypes.string,
+    diaChi: PropTypes.string,
+    danhSachRap: PropTypes.array,
   }),
 };
 
 CinemaIntro.defaultProps = {
   cinemaItem: {
-    code: '0001-01',
-    company: 'BHD Star',
-    location: 'Bitexco',
-    address: 'L3-Bitexco Icon 68, 2 Hải Triều, Q.1',
-    imageSrc: '/assets/img/cinema/bhd-star/bhd-star-bitexco.png',
+    maCumRap: 'bhd-star-cineplex-3-2',
+    tenCumRap: 'BHD Star Cineplex - 3/2',
+    diaChi: 'L5-Vincom 3/2, 3C Đường 3/2, Q.10',
+    danhSachRap: [],
   },
 };

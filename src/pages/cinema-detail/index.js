@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core';
 import { Container } from '@material-ui/core';
@@ -6,7 +7,9 @@ import { useParams } from 'react-router-dom';
 
 import CinemaIntro from '../../components/cinema-intro';
 import CinemaDetail from '../../components/cinema-detail';
-import { companyList } from './CompanyList.json';
+import FadeLoading from '../../components/fade-loading';
+
+import CinemaAction from '../../redux/action/cinema';
 
 const useStyles = makeStyles((theme) => ({
   Container: {
@@ -63,15 +66,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CinemaDetailPage() {
   const classes = useStyles();
-  const { cinemaId: cinemaCode } = useParams();
+  const { maHeThongRap, maCumRap } = useParams();
+  const companyList = useSelector((state) => state.cinema.companyList);
+  const cinemaList = useSelector((state) => state.cinema.cinemaList);
 
-  const companyItem = companyList.find(
-    (item) => item.code === cinemaCode.slice(0, 4)
-  );
+  const dispatch = useDispatch();
 
-  const cinemaItem = companyItem.cinemaList.find(
-    (item) => item.code === cinemaCode
-  );
+  useEffect(() => {
+    dispatch(CinemaAction.fetchCinemaList({ maHeThongRap: maHeThongRap }));
+  }, [dispatch, maHeThongRap]);
+
+  if (cinemaList.length === 0) return <FadeLoading />;
+
+  const cinemaItem = cinemaList.find((item) => item.maCumRap === maCumRap);
 
   return (
     <div className={classes.Container}>
@@ -79,8 +86,8 @@ export default function CinemaDetailPage() {
       <div className={classes.BackgroundContainer}>
         <img
           className={classes.Background}
-          src={cinemaItem.imageSrc}
-          alt={cinemaItem.location}
+          src='/assets/img/cinema/lotte/lotte-cinema-cantavil.jpg'
+          alt={cinemaItem.maCumRap}
         ></img>
         <div className={classes.BackgroundGradiant}></div>
       </div>
@@ -90,7 +97,7 @@ export default function CinemaDetailPage() {
       </Container>
       {/* Cinema detail */}
       <Container maxWidth='md' className={classes.filmInforSub}>
-        <CinemaDetail companyItem={companyItem} cinemaItem={cinemaItem} />
+        <CinemaDetail cinemaList={cinemaList} cinemaItem={cinemaItem} />
       </Container>
     </div>
   );

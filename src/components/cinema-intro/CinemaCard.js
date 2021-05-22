@@ -37,8 +37,8 @@ export default function CinemaCard(props) {
         <div className={classes.cardImageContainer}>
           <img
             className={classes.cardImage}
-            src={cinemaItem.imageSrc}
-            alt={cinemaItem.company}
+            src='/assets/img/cinema/lotte/lotte-cinema-cantavil.jpg'
+            alt={cinemaItem.maCumRap}
           ></img>
         </div>
       </div>

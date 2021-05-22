@@ -48,7 +48,7 @@ export default function CinemaInfor(props) {
       <Grid item md={6} xs={12}>
         <div className={classes.inforContainer}>
           <p className={classes.inforLabel}>Địa điểm</p>
-          <p className={classes.inforContent}>{cinemaItem.address}</p>
+          <p className={classes.inforContent}>{cinemaItem.diaChi}</p>
         </div>
         <div className={classes.inforContainer}>
           <p className={classes.inforLabel}>Điện thoại</p>
@@ -71,13 +71,12 @@ export default function CinemaInfor(props) {
         <div className={classes.plotContainer}>
           <p className={classes.plotLabel}>Giới thiệu</p>
           <p className={classes.plotContent}>
-            {cinemaItem.company} - {cinemaItem.location} là một trong những cụm
-            rạp được đầu tư quy mô nhất hiện nay tại Việt Nam, với tổng diện
-            tích hơn 2.000 m2, bao gồm 7 phòng chiếu được trang bị theo tiêu
-            chuẩn quốc tế. Âm thanh đạt chuẩn Dolby 7.1 với hệ thống cách âm
-            hiện đại, trong đó có 4 phòng 3D, cùng hơn 1.000 ghế ngồi được thiết
-            kế theo kiểu dáng đẹp mắt và tiện dụng để mang lại sự thoải mái nhất
-            cho khán giả.
+            {cinemaItem.tenCumRap} là một trong những cụm rạp được đầu tư quy mô
+            nhất hiện nay tại Việt Nam, với tổng diện tích hơn 2.000 m2, bao gồm
+            7 phòng chiếu được trang bị theo tiêu chuẩn quốc tế. Âm thanh đạt
+            chuẩn Dolby 7.1 với hệ thống cách âm hiện đại, trong đó có 4 phòng
+            3D, cùng hơn 1.000 ghế ngồi được thiết kế theo kiểu dáng đẹp mắt và
+            tiện dụng để mang lại sự thoải mái nhất cho khán giả.
           </p>
         </div>
       </Grid>

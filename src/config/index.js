@@ -34,7 +34,7 @@ export const mainRouter = [
     Component: MovieDetailPage,
   },
   {
-    path: '/cinema/:cinemaId',
+    path: '/cinema/:maHeThongRap/:maCumRap',
     exact: false,
     Component: CinemaDetailPage,
   },

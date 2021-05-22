@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CinemaDetail(props) {
   const classes = useStyles();
-  const { companyItem, cinemaItem } = props;
+  const { cinemaList, cinemaItem } = props;
   const [currentTabId, setCurrentTabId] = React.useState(0);
 
   const handleChangeTab = (event, newId) => {
@@ -80,7 +80,7 @@ export default function CinemaDetail(props) {
     switch (currentTabId) {
       case 0:
         return (
-          <CinemaSchedule companyItem={companyItem} cinemaItem={cinemaItem} />
+          <CinemaSchedule cinemaList={cinemaList} cinemaItem={cinemaItem} />
         );
       case 1:
         return <CinemaInfor cinemaItem={cinemaItem} />;
