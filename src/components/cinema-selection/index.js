@@ -3,8 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    float: 'left',
-    width: '30%',
+    width: '100%',
     height: '100%',
     borderRight: `1px solid ${theme.palette.borderColor.light}`,
     borderLeft: 'none',

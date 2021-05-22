@@ -67,18 +67,29 @@ const useStyles = makeStyles((theme) => ({
 export default function CinemaDetailPage() {
   const classes = useStyles();
   const { maHeThongRap, maCumRap } = useParams();
-  const companyList = useSelector((state) => state.cinema.companyList);
   const cinemaList = useSelector((state) => state.cinema.cinemaList);
+  const scheduleList = useSelector((state) => state.cinema.scheduleList);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(CinemaAction.fetchCinemaList({ maHeThongRap: maHeThongRap }));
+    dispatch(CinemaAction.fetchScheduleList({ maHeThongRap: maHeThongRap }));
   }, [dispatch, maHeThongRap]);
 
-  if (cinemaList.length === 0) return <FadeLoading />;
+  if (cinemaList.length === 0 || scheduleList.length === 0)
+    return <FadeLoading />;
 
   const cinemaItem = cinemaList.find((item) => item.maCumRap === maCumRap);
+
+  let cinemaListResorted = [];
+  let firstCinemaItem = cinemaList.find((item) => {
+    return item.maCumRap === maCumRap;
+  });
+  let othersCinemaItem = cinemaList.filter(
+    (item) => item.maCumRap !== maCumRap
+  );
+  cinemaListResorted = [firstCinemaItem, ...othersCinemaItem];
 
   return (
     <div className={classes.Container}>
@@ -97,7 +108,12 @@ export default function CinemaDetailPage() {
       </Container>
       {/* Cinema detail */}
       <Container maxWidth='md' className={classes.filmInforSub}>
-        <CinemaDetail cinemaList={cinemaList} cinemaItem={cinemaItem} />
+        <CinemaDetail
+          cinemaList={cinemaListResorted}
+          cinemaItem={cinemaItem}
+          scheduleList={scheduleList}
+          currentCompanyCode={maHeThongRap}
+        />
       </Container>
     </div>
   );

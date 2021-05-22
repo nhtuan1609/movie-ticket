@@ -512,8 +512,6 @@ export default function CommentBlock() {
 
   const renderOldReview = (reviewList, limitOldComment) => {
     let currentReivewList = reviewList.slice(0, limitOldComment);
-    console.log(limitOldComment);
-    console.log(currentReivewList);
     return currentReivewList.map((item, index) => (
       <OldReview reviewItem={item} key={index} />
     ));

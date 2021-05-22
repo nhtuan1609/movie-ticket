@@ -5,8 +5,7 @@ import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    float: 'left',
-    width: 'calc(100% - 30% - 92px)',
+    width: '100%',
     height: '100%',
     borderLeft: 'none',
     overflowY: 'auto',

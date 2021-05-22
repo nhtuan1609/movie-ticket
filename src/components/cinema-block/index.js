@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import CompanySelection from './CompanySelection';
-import CinemaSelection from './CinemaSelection';
-import ScheduleSelection from './ScheduleSelection';
+import CompanySelection from '../company-selection';
+import CinemaSelection from '../cinema-selection';
+import ScheduleSelection from '../schedule-selection';
 
 import CinemaAction from '../../redux/action/cinema';
 
@@ -24,6 +24,21 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       display: 'block',
     },
+  },
+  companySelectionContainer: {
+    float: 'left',
+    width: '92px',
+    height: '100%',
+  },
+  cinemaSelectionContainer: {
+    float: 'left',
+    width: '30%',
+    height: '100%',
+  },
+  scheduleSelectionContainer: {
+    float: 'left',
+    width: 'calc(100% - 30% - 92px)',
+    height: '100%',
   },
 }));
 
@@ -80,21 +95,27 @@ export default function CinemaBlock() {
   return (
     <Container maxWidth='md' className={classes.containerPadding}>
       <div className={classes.cinemaBlockContainer}>
-        <CompanySelection
-          companyList={companyList}
-          currentCompanyCode={currentCompanyCode}
-          handleSelectCompany={handleSelectCompany}
-        />
-        <CinemaSelection
-          cinemaList={cinemaList}
-          currentCompanyCode={currentCompanyCode}
-          currentCinemaCode={currentCinemaCode}
-          handleSelectCinema={handleSelectCinema}
-        />
-        <ScheduleSelection
-          scheduleList={scheduleList}
-          currentCinemaCode={currentCinemaCode}
-        />
+        <div className={classes.companySelectionContainer}>
+          <CompanySelection
+            companyList={companyList}
+            currentCompanyCode={currentCompanyCode}
+            handleSelectCompany={handleSelectCompany}
+          />
+        </div>
+        <div className={classes.cinemaSelectionContainer}>
+          <CinemaSelection
+            cinemaList={cinemaList}
+            currentCompanyCode={currentCompanyCode}
+            currentCinemaCode={currentCinemaCode}
+            handleSelectCinema={handleSelectCinema}
+          />
+        </div>
+        <div className={classes.scheduleSelectionContainer}>
+          <ScheduleSelection
+            scheduleList={scheduleList}
+            currentCinemaCode={currentCinemaCode}
+          />
+        </div>
       </div>
     </Container>
   );
