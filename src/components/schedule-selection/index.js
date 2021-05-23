@@ -141,7 +141,11 @@ export default function ScheduleSelection(props) {
       let endDate = moment(starDate).add(movieLength, 'm').toDate();
 
       return (
-        <a className={classes.sessionContainer} href='/' key={index}>
+        <a
+          className={classes.sessionContainer}
+          href={`/book/${item.maLichChieu}`}
+          key={index}
+        >
           <span className={classes.sessionStart}>
             {dateFormat('hh:mm', starDate)}
           </span>

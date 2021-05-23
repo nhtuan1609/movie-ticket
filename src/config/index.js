@@ -5,6 +5,7 @@ import {
   Register,
   MovieDetailPage,
   CinemaDetailPage,
+  Booking,
 } from '../pages';
 
 export const mainRouter = [
@@ -37,5 +38,10 @@ export const mainRouter = [
     path: '/cinema/:maHeThongRap/:maCumRap',
     exact: false,
     Component: CinemaDetailPage,
+  },
+  {
+    path: '/book/:maLichChieu',
+    exact: false,
+    Component: Booking,
   },
 ];

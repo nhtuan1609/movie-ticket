@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core';
 import { Container } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
 import MovieAction from '../../redux/action/movie';
 
