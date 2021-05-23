@@ -302,11 +302,13 @@ export default function MovieCard(props) {
           {renderFilmInfor()}
         </div>
         {/* Buy button */}
-        <BuyTicketButton
-          className={`movie-card__buy-button hover-display ${classes.cardBuyButton}`}
-        >
-          MUA VÉ
-        </BuyTicketButton>
+        <LinkMui href={`/movie/${movieItem.maPhim}`}>
+          <BuyTicketButton
+            className={`movie-card__buy-button hover-display ${classes.cardBuyButton}`}
+          >
+            MUA VÉ
+          </BuyTicketButton>
+        </LinkMui>
       </div>
       {/* Trailer */}
       <Modal

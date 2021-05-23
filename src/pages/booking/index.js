@@ -5,6 +5,9 @@ import { makeStyles, withStyles } from '@material-ui/core';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import FadeLoading from '../../components/fade-loading';
 
@@ -261,6 +264,19 @@ const useStyles = makeStyles((theme) => ({
   },
   bookingInforButton: {
     width: '100%',
+    height: '52px',
+  },
+  dialogTitle: {
+    fontSize: '20px',
+    fontWeight: '500',
+    color: theme.palette.textColor.main,
+    padding: '40px 20px',
+    minWidth: '460px',
+  },
+  dialogButton: {
+    width: '120px',
+    height: '40px',
+    margin: '10px',
   },
   horizontalSeparate: {
     margin: '0 20px',
@@ -269,21 +285,51 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BookingButton = withStyles({
+const PrimaryButton = withStyles({
   root: {
     backgroundColor: '#f43f24',
     borderRadius: '4px',
     border: 0,
-    color: 'white',
+    color: '#eee',
     width: '100%',
-    height: '52px',
+    height: '100%',
     cursor: 'pointer',
     '&:hover': {
       backgroundColor: '#f43f24',
     },
+    '&:disabled': {
+      backgroundColor: '#bbb',
+      color: '555',
+      cursor: 'default',
+    },
   },
   label: {
-    textTransform: 'upcase',
+    textTransform: 'none',
+    fontSize: '20px',
+    fontWeight: '500',
+  },
+})(Button);
+
+const NormalButton = withStyles({
+  root: {
+    backgroundColor: 'transparent',
+    borderRadius: '4px',
+    border: 0,
+    color: '#333',
+    width: '100%',
+    height: '100%',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+    '&:disabled': {
+      backgroundColor: '#bbb',
+      color: '555',
+      cursor: 'default',
+    },
+  },
+  label: {
+    textTransform: 'none',
     fontSize: '20px',
     fontWeight: '500',
   },
@@ -293,7 +339,10 @@ export default function LoginPage() {
   const classes = useStyles();
   const { maLichChieu } = useParams();
   const seatList = useSelector((state) => state.booking.seatList);
+  const userInfor = useSelector((state) => state.user.infor);
   const [selectedSeatList, setSelectedSeatList] = React.useState([]);
+  const [isShowTimoutDialog, setIsShowTimeoutDialog] = React.useState(false);
+  const [isShowBookingDialog, setIsShowBookingDialog] = React.useState(false);
 
   const dispatch = useDispatch();
 
@@ -306,7 +355,7 @@ export default function LoginPage() {
     let timer = duration,
       minutes,
       seconds;
-    setInterval(function () {
+    let interval = setInterval(function () {
       let display = document.querySelector('#booking-timer');
 
       if (display !== null) {
@@ -319,13 +368,22 @@ export default function LoginPage() {
         display.textContent = minutes + ':' + seconds;
 
         if (--timer < 0) {
-          window.location.href = '..';
+          setIsShowTimeoutDialog(true);
+          clearInterval(interval);
         }
       }
     }, 1000);
   }, []);
 
   if (seatList.length === 0) return <FadeLoading />;
+
+  const handleTimeoutDialogConfirm = () => {
+    window.location.href = '..';
+  };
+
+  const handleBookingDialogConfirm = () => {
+    window.location.href = '..';
+  };
 
   const handleSelectSeat = (index) => () => {
     let newSelectedSeatList = [];
@@ -626,7 +684,7 @@ export default function LoginPage() {
                     Tên tài khoản:
                   </span>
                   <span className={classes.bookingInforUserGroupContent}>
-                    nguentuan
+                    {userInfor.taiKhoan}
                   </span>
                 </div>
                 <div className={classes.bookingInforUserGroup}>
@@ -634,7 +692,7 @@ export default function LoginPage() {
                     Họ và tên:
                   </span>
                   <span className={classes.bookingInforUserGroupContent}>
-                    Nguyễn Hoàng Tuấn
+                    {userInfor.hoTen}
                   </span>
                 </div>
                 <div className={classes.bookingInforUserGroup}>
@@ -642,7 +700,7 @@ export default function LoginPage() {
                     Email:
                   </span>
                   <span className={classes.bookingInforUserGroupContent}>
-                    nguentuan@gmail.com
+                    {userInfor.email}
                   </span>
                 </div>
                 <div className={classes.bookingInforUserGroup}>
@@ -650,17 +708,53 @@ export default function LoginPage() {
                     SĐT:
                   </span>
                   <span className={classes.bookingInforUserGroupContent}>
-                    079 775 0056
+                    {userInfor.soDT}
                   </span>
                 </div>
               </div>
               <div className={classes.bookingInforButton}>
-                <BookingButton>Đặt vé</BookingButton>
+                <PrimaryButton
+                  disabled={selectedSeatList.length === 0 && 'disabled'}
+                  onClick={() => setIsShowBookingDialog(true)}
+                >
+                  Đặt vé
+                </PrimaryButton>
               </div>
             </div>
           </Grid>
         </Grid>
       </Grid>
+      {/* Timeout dialog */}
+      <Dialog open={isShowTimoutDialog} className={classes.dialogContainer}>
+        <DialogTitle className={classes.dialogTitle}>
+          Thời gian giữ ghế đã hết, xin vui lòng đặt vé lại!
+        </DialogTitle>
+        <DialogActions>
+          <div className={classes.dialogButton}>
+            <PrimaryButton onClick={handleTimeoutDialogConfirm}>
+              Xác nhận
+            </PrimaryButton>
+          </div>
+        </DialogActions>
+      </Dialog>
+      {/* Booking dialog */}
+      <Dialog open={isShowBookingDialog} className={classes.dialogContainer}>
+        <DialogTitle className={classes.dialogTitle}>
+          Bạn đã kiểm tra thông tin và xác nhận thông tin đặt vé?
+        </DialogTitle>
+        <DialogActions>
+          <div className={classes.dialogButton}>
+            <NormalButton onClick={() => setIsShowBookingDialog(false)}>
+              Quay lại
+            </NormalButton>
+          </div>
+          <div className={classes.dialogButton}>
+            <PrimaryButton onClick={handleBookingDialogConfirm}>
+              Xác nhận
+            </PrimaryButton>
+          </div>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
