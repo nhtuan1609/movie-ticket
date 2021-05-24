@@ -1,7 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux';
 import dateFormat from 'date-format';
 import moment from 'moment';
+
+import RequestLogin from '../request-login';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -97,6 +100,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     marginTop: '10px',
     marginRight: '10px',
+    cursor: 'pointer',
     '&:hover': {
       border: `1px solid ${theme.palette.primary.main}`,
     },
@@ -120,6 +124,16 @@ const useStyles = makeStyles((theme) => ({
 export default function ScheduleSelection(props) {
   const classes = useStyles();
   const { scheduleList, currentCinemaCode, filterMovieCode } = props;
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const [isShowRequestDialog, setIsShowRequestDialog] = React.useState(false);
+
+  const handleSelectSession = (maLichChieu) => () => {
+    if (isAuthenticated) {
+      window.location.href = `/book/${maLichChieu}`;
+    } else {
+      setIsShowRequestDialog(true);
+    }
+  };
 
   const renderMovieType = () => {
     const ageAllow = Math.floor(Math.random() * 4);
@@ -141,9 +155,10 @@ export default function ScheduleSelection(props) {
       let endDate = moment(starDate).add(movieLength, 'm').toDate();
 
       return (
-        <a
+        <div
+          onClick={handleSelectSession(item.maLichChieu)}
           className={classes.sessionContainer}
-          href={`/book/${item.maLichChieu}`}
+          // href={`/book/${item.maLichChieu}`}
           key={index}
         >
           <span className={classes.sessionStart}>
@@ -153,7 +168,7 @@ export default function ScheduleSelection(props) {
           <span className={classes.sessionEnd}>
             ~ {dateFormat('hh:mm', endDate)}
           </span>
-        </a>
+        </div>
       );
     });
   };
@@ -229,6 +244,10 @@ export default function ScheduleSelection(props) {
   return (
     <div className={classes.container}>
       {renderScheduleList(scheduleList, currentCinemaCode)}
+      <RequestLogin
+        isShowRequestDialog={isShowRequestDialog}
+        setIsShowRequestDialog={setIsShowRequestDialog}
+      />
     </div>
   );
 }

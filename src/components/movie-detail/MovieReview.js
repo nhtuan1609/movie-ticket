@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-
+import { useSelector } from 'react-redux';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
@@ -9,6 +9,7 @@ import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 
 import { reviewList } from './ReviewList.json';
+import RequestLogin from '../request-login';
 
 const useStyles = makeStyles((theme) => ({
   oldReviewContainer: {
@@ -282,16 +283,22 @@ const LoadMoreButton = withStyles({
 
 function MyReview() {
   const classes = useStyles();
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const [isShowRequestDialog, setIsShowRequestDialog] = React.useState(false);
   const [isShowReviewBox, setIsShowReviewBox] = React.useState(false);
   const [isShowMessage, setIsShowMessage] = React.useState(false);
   const [rateStarValue, setRateStarValue] = React.useState(3);
   const [reviewContent, setReviewContent] = React.useState('');
 
   const openIsShowReviewBox = () => {
-    setRateStarValue(3);
-    setReviewContent('');
-    setIsShowMessage(false);
-    setIsShowReviewBox(true);
+    if (isAuthenticated) {
+      setRateStarValue(3);
+      setReviewContent('');
+      setIsShowMessage(false);
+      setIsShowReviewBox(true);
+    } else {
+      setIsShowRequestDialog(true);
+    }
   };
 
   const closeIsShowReviewBox = () => {
@@ -377,6 +384,10 @@ function MyReview() {
           </div>
         </div>
       </Dialog>
+      <RequestLogin
+        isShowRequestDialog={isShowRequestDialog}
+        setIsShowRequestDialog={setIsShowRequestDialog}
+      />
     </Fragment>
   );
 }
