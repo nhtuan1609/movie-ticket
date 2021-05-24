@@ -118,7 +118,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '20px',
   },
   seatContainer: {
-    padding: '0 160px',
+    padding: '0',
+    [theme.breakpoints.up('md')]: {
+      padding: '0 160px',
+    },
   },
   referenceSeatItemContainer: {
     display: 'flex',
@@ -188,7 +191,10 @@ const useStyles = makeStyles((theme) => ({
   },
   seatNoteContainer: {
     marginTop: '40px',
-    padding: '0 160px',
+    padding: '0',
+    [theme.breakpoints.up('md')]: {
+      padding: '0 160px',
+    },
   },
   seatItemNote: {
     fontSize: '14px',
