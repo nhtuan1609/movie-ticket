@@ -277,7 +277,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '500',
     color: theme.palette.textColor.main,
     padding: '40px 20px',
-    minWidth: '460px',
+    maxWidth: '100%',
   },
   dialogButton: {
     width: '120px',

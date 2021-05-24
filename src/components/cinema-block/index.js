@@ -16,29 +16,50 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: '60px',
   },
   cinemaBlockContainer: {
-    height: '800px',
+    height: 'fit-content',
     backgroundColor: 'white',
     borderRadius: '4px',
     border: `1px solid ${theme.palette.borderColor.light}`,
-    display: 'none',
+    display: 'flex',
+    flexWrap: 'wrap',
     [theme.breakpoints.up('md')]: {
       display: 'block',
+      height: '800px',
     },
   },
   companySelectionContainer: {
     float: 'left',
     width: '92px',
-    height: '100%',
+    height: '800px',
+    borderRight: `1px solid ${theme.palette.borderColor.light}`,
+    borderBottom: `1px solid ${theme.palette.borderColor.light}`,
+    [theme.breakpoints.up('md')]: {
+      width: '92px',
+      height: '100%',
+      borderBottom: 'none',
+    },
   },
   cinemaSelectionContainer: {
     float: 'left',
-    width: '30%',
-    height: '100%',
+    width: 'calc(100% - 92px)',
+    height: '800px',
+    borderRight: 'none',
+    borderBottom: `1px solid ${theme.palette.borderColor.light}`,
+    [theme.breakpoints.up('md')]: {
+      width: '30%',
+      height: '100%',
+      borderRight: `1px solid ${theme.palette.borderColor.light}`,
+      borderBottom: 'none',
+    },
   },
   scheduleSelectionContainer: {
     float: 'left',
-    width: 'calc(100% - 30% - 92px)',
-    height: '100%',
+    width: '100%',
+    height: '800px',
+    [theme.breakpoints.up('md')]: {
+      width: 'calc(100% - 30% - 92px)',
+      height: '100%',
+    },
   },
 }));
 

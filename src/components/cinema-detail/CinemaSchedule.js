@@ -10,24 +10,37 @@ import DateSelection from '../date-selection';
 const useStyles = makeStyles((theme) => ({
   cinemaBlockContainer: {
     backgroundColor: 'white',
-    height: '600px',
+    height: 'fit-content',
     borderRadius: '4px',
     border: `1px solid ${theme.palette.borderColor.light}`,
-    display: 'none',
+    display: 'flex',
+    flexWrap: 'wrap',
     [theme.breakpoints.up('md')]: {
       display: 'block',
+      height: '700px',
     },
   },
   cinemaSelectionContainer: {
     float: 'left',
-    width: '30%',
-    height: '100%',
+    width: '100%',
+    height: '700px',
+    borderRight: 'none',
+    borderBottom: `1px solid ${theme.palette.borderColor.light}`,
+    [theme.breakpoints.up('md')]: {
+      width: '30%',
+      height: '100%',
+      borderRight: `1px solid ${theme.palette.borderColor.light}`,
+      borderBottom: 'none',
+    },
   },
   movieScheduleContainer: {
     float: 'left',
-    width: '70%',
-    height: '100%',
-    borderLeft: 'none',
+    width: '100%',
+    height: '700px',
+    [theme.breakpoints.up('md')]: {
+      width: 'calc(100% - 30% - 92px)',
+      height: '100%',
+    },
   },
   dateSelectionContainer: {
     height: '90px',
