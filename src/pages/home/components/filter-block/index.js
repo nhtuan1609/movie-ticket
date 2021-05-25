@@ -5,9 +5,10 @@ import KeyboardArrowDownOutlinedIcon from '@material-ui/icons/KeyboardArrowDownO
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import { useSelector, useDispatch } from 'react-redux';
+import dateFormat from 'date-format';
 
 import SelectionList from './SelectionList';
-import MovieAction from '../../redux/action/movie';
+import MovieAction from '../../../../redux/action/movie';
 
 const useStyles = makeStyles((theme) => ({
   filterContainer: {
@@ -140,6 +141,7 @@ export default function FilterBlock(props) {
     if (currentDate !== '') {
       let sessionCode = event.target.dataset.id;
       setCurrentSession(sessionCode);
+      console.log(sessionCode);
     }
   };
 
@@ -159,11 +161,20 @@ export default function FilterBlock(props) {
       currentDate !== '' &&
       currentSession !== ''
     ) {
-      console.log('Buy Ticket:');
-      console.log('Film Code: ', currentMovie);
-      console.log('Cinema Code:', currentCinema);
-      console.log('Date Code: ', currentDate);
-      console.log('Session Code: ', currentSession);
+      let sessionList = filterSessionList(
+        movieDetail,
+        currentMovie,
+        currentCinema,
+        currentDate
+      );
+
+      let sessionListFiltered = sessionList.find(
+        (item) => item.code === currentSession
+      );
+
+      if (sessionListFiltered !== undefined) {
+        window.location.href = `/book/${sessionListFiltered.maLichChieu}`;
+      }
     }
   };
 
@@ -207,7 +218,7 @@ export default function FilterBlock(props) {
     });
 
     let dateListRaw = scheduleCinemaFiltered.map((item, index) => ({
-      name: item.ngayChieuGioChieu.slice(0, 10),
+      name: dateFormat('dd-MM-yyyy', new Date(item.ngayChieuGioChieu)),
       code: item.ngayChieuGioChieu.slice(0, 10),
     }));
 
@@ -240,9 +251,10 @@ export default function FilterBlock(props) {
       return item.ngayChieuGioChieu.slice(0, 10) === currentDate;
     });
 
-    let sessionList = scheduleDateFilter.map((item, index) => ({
-      name: item.ngayChieuGioChieu.slice(11, 20),
+    let sessionList = scheduleDateFilter.map((item) => ({
+      name: dateFormat('hh:mm', new Date(item.ngayChieuGioChieu)),
       code: item.ngayChieuGioChieu.slice(11, 20),
+      maLichChieu: item.maLichChieu,
     }));
 
     return sessionList;

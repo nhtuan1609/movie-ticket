@@ -1,11 +1,14 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import CinemaSelection from '../cinema-selection';
-import ScheduleSelection from '../schedule-selection';
-import DateSelection from '../date-selection';
+import CompanySelection from '../../../../components/company-selection';
+import CinemaSelection from '../../../../components/cinema-selection';
+import ScheduleSelection from '../../../../components/schedule-selection';
+import DateSelection from '../../../../components/date-selection';
+
+import CinemaAction from '../../../../redux/action/cinema';
 
 const useStyles = makeStyles((theme) => ({
   cinemaBlockContainer: {
@@ -20,9 +23,21 @@ const useStyles = makeStyles((theme) => ({
       height: '700px',
     },
   },
+  companySelectionContainer: {
+    float: 'left',
+    width: '92px',
+    height: '700px',
+    borderRight: `1px solid ${theme.palette.borderColor.light}`,
+    borderBottom: `1px solid ${theme.palette.borderColor.light}`,
+    [theme.breakpoints.up('md')]: {
+      width: '92px',
+      height: '100%',
+      borderBottom: 'none',
+    },
+  },
   cinemaSelectionContainer: {
     float: 'left',
-    width: '100%',
+    width: 'calc(100% - 92px)',
     height: '700px',
     borderRight: 'none',
     borderBottom: `1px solid ${theme.palette.borderColor.light}`,
@@ -52,9 +67,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CinemaSchedule(props) {
   const classes = useStyles();
-  const { cinemaList, cinemaItem, scheduleList, currentCompanyCode } = props;
+  const { movieItem } = props;
+  const [currentCompanyCode, setCurrentCompanyCode] = React.useState('BHDStar');
   const [currentCinemaCode, setCurrentCinemaCode] = React.useState(
-    cinemaItem.maCumRap
+    'bhd-star-cineplex-3-2'
   );
   const [currentSelectedDateCode, setCurrentSelectedDateCode] = React.useState(
     () => {
@@ -62,6 +78,53 @@ export default function CinemaSchedule(props) {
       return today.toJSON().slice(0, 10);
     }
   );
+
+  const companyList = useSelector((state) => state.cinema.companyList);
+  const cinemaList = useSelector((state) => state.cinema.cinemaList);
+  const scheduleList = useSelector((state) => state.cinema.scheduleList);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(CinemaAction.fetchCompanyList());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(
+      CinemaAction.fetchCinemaList({ maHeThongRap: currentCompanyCode })
+    );
+  }, [dispatch, currentCompanyCode]);
+
+  useEffect(() => {
+    dispatch(
+      CinemaAction.fetchScheduleList({ maHeThongRap: currentCompanyCode })
+    );
+  }, [dispatch, currentCompanyCode]);
+
+  useEffect(() => {
+    if (cinemaList.length > 0) {
+      setCurrentCinemaCode(cinemaList[0].maCumRap);
+    }
+  }, [cinemaList]);
+
+  if (
+    companyList.length === 0 ||
+    cinemaList.length === 0 ||
+    scheduleList.length === 0
+  )
+    return <div />;
+
+  const handleSelectCompany = (companyCode) => () => {
+    setCurrentCompanyCode(companyCode);
+
+    let today = new Date();
+    setCurrentSelectedDateCode(today.toJSON().slice(0, 10));
+
+    let slider = document.querySelector('#pick-day');
+    if (slider !== null) {
+      slider.scrollLeft = 0;
+    }
+  };
 
   const handleSelectCinema = (cinemaCode) => () => {
     setCurrentCinemaCode(cinemaCode);
@@ -82,6 +145,13 @@ export default function CinemaSchedule(props) {
   return (
     <Container maxWidth='md'>
       <div className={classes.cinemaBlockContainer}>
+        <div className={classes.companySelectionContainer}>
+          <CompanySelection
+            companyList={companyList}
+            currentCompanyCode={currentCompanyCode}
+            handleSelectCompany={handleSelectCompany}
+          />
+        </div>
         <div className={classes.cinemaSelectionContainer}>
           <CinemaSelection
             cinemaList={cinemaList}
@@ -101,6 +171,7 @@ export default function CinemaSchedule(props) {
             <ScheduleSelection
               scheduleList={scheduleList}
               currentCinemaCode={currentCinemaCode}
+              filterMovieCode={movieItem.maPhim}
             />
           </div>
         </div>

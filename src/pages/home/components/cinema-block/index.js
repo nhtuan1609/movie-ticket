@@ -4,11 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import CompanySelection from '../company-selection';
-import CinemaSelection from '../cinema-selection';
-import ScheduleSelection from '../schedule-selection';
+import CompanySelection from '../../../../components/company-selection';
+import CinemaSelection from '../../../../components/cinema-selection';
+import ScheduleSelection from '../../../../components/schedule-selection';
 
-import CinemaAction from '../../redux/action/cinema';
+import CinemaAction from '../../../../redux/action/cinema';
 
 const useStyles = makeStyles((theme) => ({
   containerPadding: {

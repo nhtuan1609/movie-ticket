@@ -9,7 +9,7 @@ import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 
 import { reviewList } from './ReviewList.json';
-import RequestLogin from '../request-login';
+import RequestLogin from '../../../../components/request-login';
 
 const useStyles = makeStyles((theme) => ({
   oldReviewContainer: {

@@ -5,8 +5,8 @@ import { makeStyles } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 
-import CinemaIntro from '../../components/cinema-intro';
-import CinemaDetail from '../../components/cinema-detail';
+import CinemaIntro from './components/cinema-intro';
+import CinemaDetail from './components/cinema-detail';
 import FadeLoading from '../../components/fade-loading';
 
 import CinemaAction from '../../redux/action/cinema';

@@ -7,8 +7,8 @@ import { Container } from '@material-ui/core';
 
 import MovieAction from '../../redux/action/movie';
 
-import MovieIntro from '../../components/movie-intro';
-import MovieDetail from '../../components/movie-detail';
+import MovieIntro from './components/movie-intro';
+import MovieDetail from './components/movie-detail';
 import FadeLoading from '../../components/fade-loading';
 
 const useStyles = makeStyles((theme) => ({

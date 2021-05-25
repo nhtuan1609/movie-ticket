@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { Box, Container } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 
-import MyCarousel from '../../components/carousel';
-import FilterBlock from '../../components/filter-block';
-import MovieBlock from '../../components/movie-block';
-import CinemaBlock from '../../components/cinema-block';
-import NewBlock from '../../components/new-block';
-import AppBlock from '../../components/app-block';
+import MyCarousel from './components/carousel';
+import FilterBlock from './components/filter-block';
+import MovieBlock from './components/movie-block';
+import CinemaBlock from './components/cinema-block';
+import NewBlock from './components/new-block';
+import AppBlock from './components/app-block';
 import FadeLoading from '../../components/fade-loading';
 
 import MovieAction from '../../redux/action/movie';
