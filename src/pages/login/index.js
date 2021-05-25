@@ -135,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     height: '36px',
-    minWidth: '140px',
+    width: '46%',
     padding: '0 10px',
     borderRadius: '4px',
     cursor: 'pointer',
@@ -304,10 +304,10 @@ export default function LoginPage() {
         {/* Form footer */}
         <div className={classes.formFooterList}>
           {/* SMS button */}
-          <Box className={classes.formFooterItem} bgcolor='#13a10d'>
+          {/* <Box className={classes.formFooterItem} bgcolor='#13a10d'>
             <SmsIcon style={{ color: 'white' }} />
             <div className={classes.formFooterItemLabel}>SMS</div>
-          </Box>
+          </Box> */}
           {/* Facebook button */}
           <Box className={classes.formFooterItem} bgcolor='#314b86'>
             <FacebookIcon style={{ color: 'white' }} />
